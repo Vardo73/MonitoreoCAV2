@@ -1,0 +1,54 @@
+<section>
+    <nav id="MyNavbar" class="navbar navbar-expand-lg navbar-dark " style="background-color: #0050B5;">
+        @if(auth.isLoggedIn)
+        <a class="navbar-brand"  href="" style="margin-left:8%">
+            <img src="img/Logotipo-Amarillo.svg" alt="0" width="150" height="52" class="img-fluid d-inline-block align-text-top">
+        </a>
+
+        <!--Botón menú -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarToggleExternalContent" style="margin-left:8%">
+          <ul class="navbar-nav ms-auto">
+              <!-- CSV -->
+              <li class="nav-item">
+                <a class="nav-link" href="">CVS</a>
+              </li>
+              <!-- Elementos-->
+              <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Elementos
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: #00A3E1;">
+                      <li><a class="dropdown-item" href="">Estaciones</a></li>
+                      <li><a class="dropdown-item" href="">Contaminantes</a></li>
+                      <li><a class="dropdown-item" href="">Clima</a></li>
+                  </ul>
+              </li>
+              <!-- Reportes -->
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Reportes
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: #00A3E1;">
+                    <li><a class="dropdown-item" href="">Anuales</a></li>
+                    <li><a class="dropdown-item" href="">Mensuales</a></li>
+                    <li><a class="dropdown-item" href="">Diarios</a></li>
+                </ul>
+              </li>
+              <!-- Logout -->
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    {{ auth.user.username }}
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: #00A3E1;">
+                    <li><a class="dropdown-item" href="{{route('logout')}}">Logout</a></li>
+                </ul>
+            </li>
+          </ul>
+        </div>
+        @end
+    </nav>
+</section>
