@@ -1,0 +1,180 @@
+@layout('master')
+
+@section('contaminantes')
+
+<div class="container">
+    <hr/>
+        <h2 style="text-align: center;"><span style="color: #2aa5d6;">Contaminantes</span></h2>
+    <hr/>
+</div>
+
+<br>
+<div class="container">
+    <!--SELECT -->
+    <div class="row mx-auto justify-content-around">
+        <div class="col col-6 align-self-end">
+            <div class="d-grid gap-2  mx-auto">
+                    <div class="row">
+                        <div class="col ">
+                            <label class="form-label fs-4" for="SelEstacionE" id='lbltitulo'>Contaminante:</label>
+                            <select class="form-control" name="SelContaminanteC" id="SelContaminanteC" required>
+                                <option value='0' selected disabled>Seleccione un contaminante</option>
+                                @each(contaminante in contaminantes)
+                                    <option  value='{{ contaminante.id }}'>{{ contaminante.name }}</option>
+                                @endeach
+                            </select>
+                        </div>
+                        <div class="col  align-self-end ">
+                            <button  class="form-control btn btn-primary " id="btnConsultar">Consultar</button>
+                        </div>
+                    </div>
+            </div>
+        </div>
+
+        <!-- BOTON -->
+        <div class="col col-4 align-self-end">
+            <div class="d-grid gap-2 mx-auto ">
+                <button class="btn btn-primary" id="modalNuevoContaminante" data-bs-toggle="modal" data-bs-target="#ContaminanteModal">Agregar Nuevo</button>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    
+    <div class="collapse" id="ColTabContaminante">
+        <hr> 
+        <div class="row mx-auto">
+            <div class="col col-6 align-self-center">
+                <div class="d-grid gap-2 mx-auto ">
+                    <hr/>
+                        <label class="text-center fs-4" name="lblContaminante" id="lblContaminante" >Nombre contaminante</label>    
+                    <hr/>
+                </div>
+            </div>
+
+            <div class="col col-3 align-self-center">
+                <div class="d-grid gap-2 mx-auto">
+                    <button id="modalEditContaminante" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#ContaminanteEditModal">Editar</button>
+                </div>
+            </div>
+            <div class="col col-3 align-self-center">
+                <div class="d-grid gap-2 mx-auto">
+                    <button id="btnEliminarContaminante" class="btn btn-danger">Eliminar</button>
+                </div>
+            </div>
+        </div>
+    
+     <br>
+     <!--TABLA BANDERAS-->
+        <div class="row mx-auto">
+            <div>
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered" name="tabAnual" id="tabAnual">
+                        <thead>
+                        <tr>
+                            <th scope="col">Bandera <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#BanderaModal2">+</button></th>
+                            <th scope="col">Tipo</th>
+                            <th scope="col">Descripción</th>
+                            <th scope="col">OMS</th>
+                            <th scope="col">NOM</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                        </thead>
+                        <tbody id="TabBodyC">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+        <!-- MODAL CONTAMINANTE -->
+        <div class="container-fluid">
+            <div class="modal fade" id="ContaminanteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2>Agregar Contaminante</h2>
+                        </div>
+                        <div class="modal-body">
+                            <div>
+                                <label for="txtNombreContaminante">Nombre:</label>
+                                <input class="form-control" type="text" name="txtNomContaminante" id="txtNomContaminante" required min="1" max="25">
+                            </div>
+                        </div>
+                        
+                        <div class="modal-footer">
+                            <button class="btn btn-outline-primary" data-bs-target="#BanderaModal" data-bs-toggle="modal" data-bs-dismiss="modal">Aceptar</button>
+                            <button class="btn btn-outline-primary" name="btnCancelarContaminante" id="btnCancelarContaminante" data-bs-dismiss="modal">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- MODAL BANDERA -->
+        <div class="container-fluid">
+            <div class="modal fade" id="BanderaModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2>Agregar Bandera</h2>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col">
+                                    <div>
+                                        <label  class="form-label" for="txtNombreBandera">Nombre:</label>
+                                        <input class="form-control" type="text" name="txtNomBandera" id="txtNomBandera" required  min="1" max="25">
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div>
+                                        <label class="form-label" for="SelTipoBan">Tipo:</label>
+                                        <select class="form-control" name="SelTipoBan" id="SelTipoBan" required>
+                                            <option value='0' selected disabled>Seleccione un tipo</option>
+                                            @each(tipo in tipos)
+                                                <option  value='{{ tipo.id }}'>{{ tipo.name }}</option>
+                                            @endeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" >
+                                <div>
+                                    <label  class="form-label" for="txtDesBandera">Descripción:</label>
+                                    <textarea class="form-control" name="txtDesBandera" id="txtDesBandera" style="height: 100px" max="50"></textarea>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div > 
+                                        <label class="form-label" for="txtLimOMS">Limite OMS:</label>
+                                        <input class="form-control" type="number" name="txtLimOMS" id="txtLimOMS" required min="1" max="99999999">
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div > 
+                                        <label class="form-label" for="txtLimNOM">Limite NOM:</label>
+                                        <input class="form-control" type="number" name="txtLimNOM" id="txtLimNOM" required min="1" max="99999999">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="modal-footer">
+                            <input type="button" class="btn btn-outline-primary" value="Aceptar" id="btnCrearContaminante" name="btnCrearContaminante" data-bs-dismiss="modal">
+                            <button class="btn btn-outline-primary" name="btnCancelarBandera" id="btnCancelarBandera" data-bs-dismiss="modal">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+@entryPointScripts('contaminantes')
+
+@end

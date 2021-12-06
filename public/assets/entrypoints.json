@@ -1,11 +1,13 @@
 {
   "entrypoints": {
     "app": {
-      "css": [
-        "http://localhost:8080/assets/app.css"
-      ],
       "js": [
         "http://localhost:8080/assets/app.js"
+      ]
+    },
+    "contaminantes": {
+      "js": [
+        "http://localhost:8080/assets/contaminantes.js"
       ]
     }
   }

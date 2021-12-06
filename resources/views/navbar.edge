@@ -1,8 +1,8 @@
 <section>
-    <nav id="MyNavbar" class="navbar navbar-expand-lg navbar-dark " style="background-color: #0050B5;">
+    <nav id="MyNavbar" class="navbar navbar-expand-lg navbar-dark bg-dark" >
         @if(auth.isLoggedIn)
-        <a class="navbar-brand"  href="" style="margin-left:8%">
-            <img src="img/Logotipo-Amarillo.svg" alt="0" width="150" height="52" class="img-fluid d-inline-block align-text-top">
+        <a class="navbar-brand"  href="{{route('home')}}" style="margin-left:8%">
+            <img src="img/Logotipo-Blanco.svg" alt="0" width="150" height="52" class="img-fluid d-inline-block align-text-top">
         </a>
 
         <!--Botón menú -->
@@ -21,9 +21,9 @@
                   <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                       Elementos
                   </a>
-                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: #00A3E1;">
-                      <li><a class="dropdown-item" href="">Estaciones</a></li>
-                      <li><a class="dropdown-item" href="">Contaminantes</a></li>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown" >
+                      <li><a class="dropdown-item" href="{{route('estaciones')}}">Estaciones</a></li>
+                      <li><a class="dropdown-item" href="{{route('contaminantes')}}">Contaminantes</a></li>
                       <li><a class="dropdown-item" href="">Clima</a></li>
                   </ul>
               </li>
@@ -32,7 +32,7 @@
                 <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Reportes
                 </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: #00A3E1;">
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown" >
                     <li><a class="dropdown-item" href="">Anuales</a></li>
                     <li><a class="dropdown-item" href="">Mensuales</a></li>
                     <li><a class="dropdown-item" href="">Diarios</a></li>
@@ -43,7 +43,7 @@
                 <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     {{ auth.user.username }}
                 </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: #00A3E1;">
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown" >
                     <li><a class="dropdown-item" href="{{route('logout')}}">Logout</a></li>
                 </ul>
             </li>

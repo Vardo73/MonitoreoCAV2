@@ -3,7 +3,9 @@ import Route from '@ioc:Adonis/Core/Route'
 //CONTROLLER VISTAS
 Route.group(()=>{
   Route.get('/login','VistasController.Login').middleware('guest')
-  Route.get('/','VistasController.Home').middleware('auth')
+  Route.get('/','VistasController.Home').as('home').middleware('auth')
+  Route.get('/estaciones','VistasController.Estaciones').as('estaciones').middleware('auth');
+  Route.get('/contaminantes','VistasController.Contaminantes').as('contaminantes').middleware('auth');
 });
 
 //Controller User
@@ -12,8 +14,43 @@ Route.group(()=>{
   Route.post('auth/login','UsersController.login').as('login');
 
   Route.get('/all','UsersController.index');
-  Route.post('/add','UsersController.store');
+  Route.post('/store','UsersController.store')
   Route.post('/delete','UsersController.delete');
   Route.post('/alguien','UsersController.alguien');
 }).prefix('/user');
 
+//Controller Tipo Bandera
+Route.group(()=>{
+  Route.get('/all','TipoBsController.index');
+  Route.post('/store','TipoBsController.store');
+  Route.post('/delete','TipoBsController.delete');
+}).prefix('/tipob');
+
+//Controller Tipo datos
+Route.group(()=>{
+  Route.get('/all','TiposController.index');
+  Route.post('/store','TiposController.store');
+  Route.post('/delete','TiposController.delete');
+}).prefix('/tipo');
+
+//Controller Localidad
+Route.group(()=>{
+  Route.get('/all','LocalidadsController.index');
+  Route.post('/store','LocalidadsController.store');
+  Route.post('/delete','LocalidadsController.delete');
+}).prefix('/localidad');
+
+//Controller Modelo
+Route.group(()=>{
+  Route.get('/all','ModelosController.index');
+  Route.post('/store','ModelosController.store');
+  Route.post('/delete','ModelosController.delete');
+}).prefix('/modelo');
+
+//Controller Contaminante
+Route.group(()=>{
+  Route.get('/all','ContaminantesController.index');
+  Route.get('/consulta/:id','ContaminantesController.consulta');
+  Route.post('/store','ContaminantesController.store');
+  Route.post('/delete','ContaminantesController.delete');
+}).prefix('/contaminante');

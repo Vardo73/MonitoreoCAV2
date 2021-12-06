@@ -1,27 +1,25 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import TipoB from 'App/Models/TipoB'
+import Localidad from 'App/Models/Localidad'
 
-export default class TipoBsController {
-
+export default class LocalidadsController {
     public async index(ctx:HttpContextContract){
-        return await TipoB.all();
+        return await Localidad.all();
     }
 
     public async store({request}:HttpContextContract){
-        const tipoB = await TipoB.create({
+        const localidad= await Localidad.create({
             name: request.input('name')
         });
 
         
-       return tipoB;
+       return localidad;
     }
 
      //Elimina un registro de Tipo
     public async destroy({params}:HttpContextContract){
         const {id}=params;
-        const tipo=await TipoB.find(id);
-        await tipo?.delete();
-        return tipo;
+        const localidad=await Localidad.find(id);
+        await localidad?.delete();
+        return localidad;
     }
-
 }
