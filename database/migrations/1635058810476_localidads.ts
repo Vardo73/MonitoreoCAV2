@@ -8,7 +8,6 @@ export default class Localidads extends BaseSchema {
       table.integer('id',10).primary();
       table.string('name',25).notNullable().unique();
       table.timestamp('created_at', { useTz: true })
-      table.timestamp('updated_at', { useTz: true })
     })
   }
 

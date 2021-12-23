@@ -13,7 +13,6 @@ export default class Datoes extends BaseSchema {
       table.float('humedad_s',10,2)
       table.float('promedio',10,2)
       table.timestamp('created_at', { useTz: true })
-      table.timestamp('updated_at', { useTz: true })
     })
   }
 

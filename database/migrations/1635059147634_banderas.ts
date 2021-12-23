@@ -13,7 +13,6 @@ export default class Banderas extends BaseSchema {
       table.float('limOMS').notNullable();
       table.float('limNOM').notNullable();
       table.timestamp('created_at', { useTz: true })
-      table.timestamp('updated_at', { useTz: true })
     })
   }
 

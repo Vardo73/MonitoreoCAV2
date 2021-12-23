@@ -8,7 +8,6 @@ export default class Modelos extends BaseSchema {
       table.increments('id')
       table.string('name',25).notNullable().unique();
       table.timestamp('created_at', { useTz: true })
-      table.timestamp('updated_at', { useTz: true })
     })
   }
 

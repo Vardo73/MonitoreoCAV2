@@ -10,7 +10,6 @@ export default class Reportes extends BaseSchema {
       table.integer('contaminante_estacion_id').unsigned().references('id').inTable('contaminante_estacions')
       table.string('name',80).notNullable().unique();
       table.timestamp('created_at', { useTz: true })
-      table.timestamp('updated_at', { useTz: true })
     })
   }
 

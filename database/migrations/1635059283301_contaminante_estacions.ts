@@ -9,7 +9,6 @@ export default class ContaminanteEstacions extends BaseSchema {
       table.integer('contaminante_id').unsigned().references('id').inTable('contaminantes');
       table.integer('estacion_id').references('id').inTable('estacions');
       table.timestamp('created_at', { useTz: true })
-      table.timestamp('updated_at', { useTz: true })
     })
   }
 

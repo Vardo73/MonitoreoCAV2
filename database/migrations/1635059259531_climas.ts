@@ -14,7 +14,6 @@ export default class Climas extends BaseSchema {
       table.float('hPa',8,2)
       table.float('radiacion',8,2)
       table.timestamp('created_at', { useTz: true })
-      table.timestamp('updated_at', { useTz: true })
     })
   }
 

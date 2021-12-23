@@ -11,7 +11,6 @@ export default class Estacions extends BaseSchema {
       table.integer('channel',15).unique().notNullable();
       table.string('apikey',50).unique().notNullable();
       table.timestamp('created_at', { useTz: true })
-      table.timestamp('updated_at', { useTz: true })
     })
   }
 

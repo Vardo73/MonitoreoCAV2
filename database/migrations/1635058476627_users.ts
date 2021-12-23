@@ -10,7 +10,6 @@ export default class Users extends BaseSchema {
       table.string('email',80).notNullable().unique();
       table.string('password').notNullable();
       table.timestamp('created_at', { useTz: true })
-      table.timestamp('updated_at', { useTz: true })
     })
   }
 
