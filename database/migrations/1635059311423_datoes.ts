@@ -7,7 +7,7 @@ export default class Datoes extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
       table.integer('tipo_id').unsigned().references('id').inTable('tipos');
-      table.integer('contaminante_estacion_id').unsigned().references('id').inTable('contaminante_estacions');
+      table.integer('estacion_id').references('id').inTable('estacions');
       table.integer('clima_id').unsigned().references('id').inTable('climas');
       table.float('temperatura_s',10,2)
       table.float('humedad_s',10,2)

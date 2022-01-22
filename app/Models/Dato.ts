@@ -9,7 +9,7 @@ export default class Dato extends BaseModel {
   public tipo_id: number
 
   @column()
-  public contaminante_estacion_id: number
+  public estacion_id: number
 
   @column()
   public clima_id: number

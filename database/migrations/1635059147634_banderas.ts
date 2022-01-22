@@ -10,8 +10,8 @@ export default class Banderas extends BaseSchema {
       table.integer('contaminante_id').unsigned().references('id').inTable('contaminantes');
       table.string('name',25).unique().notNullable();
       table.string('description').notNullable();
-      table.float('limOMS').notNullable();
-      table.float('limNOM').notNullable();
+      table.float('lim_oms').notNullable();
+      table.float('lim_nom').notNullable();
       table.timestamp('created_at', { useTz: true })
     })
   }

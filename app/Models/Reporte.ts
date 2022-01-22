@@ -12,7 +12,7 @@ export default class Reporte extends BaseModel {
   public tipo_id: number
 
   @column()
-  public contaminante_estacion_id: number
+  public estacion_id: number
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

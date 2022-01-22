@@ -13,7 +13,7 @@ export default class BanderasController {
             tipo_id:schema.string({},[
                 rules.required()
             ]),
-            contaminante_id:schema.string({},[
+            contaminante_id:schema.number([
                 rules.required()
             ]),
             name:schema.string({},[
@@ -34,7 +34,7 @@ export default class BanderasController {
             const payload = await request.validate({
                 schema: newUserSchema,
                 messages: {
-                  required: 'El campo {{ field }} es requerido para crear una cuenta.'
+                  required: 'El campo {{ field }} es requerido para crear una bandera.'
                 }
             })
 
@@ -47,17 +47,23 @@ export default class BanderasController {
                 limNOM:request.input('limNOM')
             });
             
-            return bandera;
+            return [true,'Bandera registrada con exito.'];
         } catch (error) {
-            return error;
+            console.log(error)
+            return [false,error];
         }
     }
 
-     //Elimina un registro de Tipo
-    public async destroy({params}:HttpContextContract){
-        const {id}=params;
-        const bandera=await Bandera.find(id);
-        await bandera?.delete();
-        return bandera;
+     //Elimina un registro de Bandera
+    public async delete({request}:HttpContextContract){
+        const id=request.input('id');
+        try {
+            const bandera=await Bandera.findOrFail(id);
+            await bandera.delete();
+            return [true,'Bandera(s) eliminada(s) con exito.']
+        } catch (error) {
+            console.log(error);
+            return [false,error]
+        }
     }
 }

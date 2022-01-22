@@ -79,8 +79,8 @@ export default class UsersController {
         return auth.use('web').isLoggedIn
     }
 
-    public async delete({params}:HttpContextContract){
-        const {id}=params;
+    public async delete({request}:HttpContextContract){
+        const id=request.input('id');
         const user=await User.find(id);
         await user?.delete();
         return user;

@@ -24,9 +24,6 @@
                                 @endeach
                             </select>
                         </div>
-                        <div class="col  align-self-end ">
-                            <button  class="form-control btn btn-primary " id="btnConsultar">Consultar</button>
-                        </div>
                     </div>
             </div>
         </div>
@@ -40,31 +37,32 @@
     </div>
 
     <br>
-
-    
     <div class="collapse" id="ColTabContaminante">
         <hr> 
         <div class="row mx-auto">
             <div class="col col-6 align-self-center">
                 <div class="d-grid gap-2 mx-auto ">
                     <hr/>
-                        <label class="text-center fs-4" name="lblContaminante" id="lblContaminante" >Nombre contaminante</label>    
+                        <label class="text-center fs-4" name="lblContaminante" id="lblContaminante" >Nombre de contaminante</label>        
                     <hr/>
                 </div>
             </div>
-
-            <div class="col col-3 align-self-center">
-                <div class="d-grid gap-2 mx-auto">
-                    <button id="modalEditContaminante" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#ContaminanteEditModal">Editar</button>
+                <div class="col col-2 align-self-center">
+                    <div class="d-grid gap-2 mx-auto">
+                        <button id="btnBandera" class="btn btn-success" data-bs-target="#BanderaModal" data-bs-toggle="modal" data-bs-dismiss="modal">Agregar Bandera</button>
+                    </div>
                 </div>
-            </div>
-            <div class="col col-3 align-self-center">
-                <div class="d-grid gap-2 mx-auto">
-                    <button id="btnEliminarContaminante" class="btn btn-danger">Eliminar</button>
+                <div class="col col-2 align-self-center">
+                    <div class="d-grid gap-2 mx-auto">
+                        <button id="modalEditContaminante" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#ContaminanteEditModal">Editar</button>
+                    </div>
                 </div>
-            </div>
+                <div class="col col-2 align-self-center">
+                    <div class="d-grid gap-2 mx-auto">
+                        <button id="btnEliminarContaminante" class="btn btn-danger">Eliminar</button>
+                    </div>
+                </div>
         </div>
-    
      <br>
      <!--TABLA BANDERAS-->
         <div class="row mx-auto">
@@ -73,7 +71,7 @@
                     <table class="table table-hover table-bordered" name="tabAnual" id="tabAnual">
                         <thead>
                         <tr>
-                            <th scope="col">Bandera <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#BanderaModal2">+</button></th>
+                            <th scope="col">Bandera</th>
                             <th scope="col">Tipo</th>
                             <th scope="col">Descripción</th>
                             <th scope="col">OMS</th>
@@ -84,6 +82,11 @@
                         <tbody id="TabBodyC">
                         </tbody>
                     </table>
+                    <div class="col col-2 align-self-center">
+                        <div class="d-grid gap-2 mx-auto">
+                            <button id="btnEliminarBandera" class="btn btn-danger">Eliminar Bandera(s)</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -106,7 +109,30 @@
                         </div>
                         
                         <div class="modal-footer">
-                            <button class="btn btn-outline-primary" data-bs-target="#BanderaModal" data-bs-toggle="modal" data-bs-dismiss="modal">Aceptar</button>
+                            <button class="btn btn-outline-primary" data-bs-dismiss="modal" id="btnCrearContaminante" name="btnCrearContaminante">Aceptar</button>
+                            <button class="btn btn-outline-primary" name="btnCancelarContaminante" id="btnCancelarContaminante" data-bs-dismiss="modal">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- MODAL EDITAR CONTAMINANTE -->
+        <div class="container-fluid">
+            <div class="modal fade" id="ContaminanteEditModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2>Editar Nombre Contaminante</h2>
+                        </div>
+                        <div class="modal-body">
+                            <div>
+                                <label for="txtNomContaminanteEdit">Nombre:</label>
+                                <input class="form-control" type="text" name="txtNomContaminanteEdit" id="txtNomContaminanteEdit" required min="1" max="25">
+                            </div>
+                        </div>
+                        
+                        <div class="modal-footer">
+                            <button class="btn btn-outline-primary" data-bs-dismiss="modal" id="btnEditarContaminante" name="btnEditarContaminante">Aceptar</button>
                             <button class="btn btn-outline-primary" name="btnCancelarContaminante" id="btnCancelarContaminante" data-bs-dismiss="modal">Cancelar</button>
                         </div>
                     </div>
@@ -166,7 +192,67 @@
                         </div>
                         
                         <div class="modal-footer">
-                            <input type="button" class="btn btn-outline-primary" value="Aceptar" id="btnCrearContaminante" name="btnCrearContaminante" data-bs-dismiss="modal">
+                            <input type="button" class="btn btn-outline-primary" value="Aceptar" id="btnAgregarBandera" name="btnAgregarBandera" >
+                            <button class="btn btn-outline-primary" name="btnCancelarBandera" id="btnCancelarBandera" data-bs-dismiss="modal">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        <!-- MODAL BANDERA -->
+        <div class="container-fluid">
+            <div class="modal fade" id="BanderaModalEdit" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2>Agregar Bandera</h2>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col">
+                                    <div>
+                                        <label  class="form-label" for="txtNombreBandera">Nombre:</label>
+                                        <input class="form-control" type="text" name="txtNomBandera" id="txtNomBandera" required  min="1" max="25">
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div>
+                                        <label class="form-label" for="SelTipoBan">Tipo:</label>
+                                        <select class="form-control" name="SelTipoBan" id="SelTipoBan" required>
+                                            <option value='0' selected disabled>Seleccione un tipo</option>
+                                            @each(tipo in tipos)
+                                                <option  value='{{ tipo.id }}'>{{ tipo.name }}</option>
+                                            @endeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" >
+                                <div>
+                                    <label  class="form-label" for="txtDesBandera">Descripción:</label>
+                                    <textarea class="form-control" name="txtDesBandera" id="txtDesBandera" style="height: 100px" max="50"></textarea>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div > 
+                                        <label class="form-label" for="txtLimOMS">Limite OMS:</label>
+                                        <input class="form-control" type="number" name="txtLimOMS" id="txtLimOMS" required min="1" max="99999999">
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div > 
+                                        <label class="form-label" for="txtLimNOM">Limite NOM:</label>
+                                        <input class="form-control" type="number" name="txtLimNOM" id="txtLimNOM" required min="1" max="99999999">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="modal-footer">
+                            <input type="button" class="btn btn-outline-primary" value="Aceptar" id="btnAgregarBandera" name="btnAgregarBandera" >
                             <button class="btn btn-outline-primary" name="btnCancelarBandera" id="btnCancelarBandera" data-bs-dismiss="modal">Cancelar</button>
                         </div>
                     </div>

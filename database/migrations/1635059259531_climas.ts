@@ -7,8 +7,8 @@ export default class Climas extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
       table.integer('localidad_id').references('id').inTable('localidads')
-      table.float('velViento',8,2)
-      table.integer('dirViento',5)
+      table.float('vel_viento',8,2)
+      table.integer('dir_viento',5)
       table.float('temperatura',8,2)
       table.float('humedad',8,2)
       table.float('hPa',8,2)

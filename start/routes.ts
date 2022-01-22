@@ -51,6 +51,18 @@ Route.group(()=>{
 Route.group(()=>{
   Route.get('/all','ContaminantesController.index');
   Route.get('/consulta/:id','ContaminantesController.consulta');
-  Route.post('/store','ContaminantesController.store');
+  Route.post('/store','ContaminantesController.store').as('AgregaContaminante');
+  Route.post('/edit','ContaminantesController.edit');
   Route.post('/delete','ContaminantesController.delete');
+  
+  Route.post('/bandera/store','BanderasController.store');
+  Route.post('/bandera/delete','BanderasController.delete');
 }).prefix('/contaminante');
+
+//Controller Estaciones
+Route.group(()=>{
+  Route.get('/all','EstacionesController.index');
+  Route.get('/consulta/:id','EstacionesController.consulta');
+  Route.post('/store','EstacionesController.store');
+  Route.post('/delete','EstacionesController.delete');
+}).prefix('/estacion');

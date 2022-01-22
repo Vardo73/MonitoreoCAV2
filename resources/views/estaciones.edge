@@ -7,5 +7,138 @@
         <h2 style="text-align: center;"><span style="color: #2aa5d6;">Estaciones</span></h2>
     <hr/>
 </div>
+<br>
+<div class="container">
+    <div class="row mx-auto justify-content-around">
+        <!--SELECT -->
+        <div class="col col-6 align-self-end">
+            <div class="d-grid gap-2  mx-auto">
+                    <div class="row">
+                        <div class="col ">
+                            <label class="form-label fs-4" for="SelEstacionE" id='lbltitulo'>Estaciones:</label>
+                            <select class="form-control" name="SelEstaciones" id="SelEstaciones" required>
+                                <option value='0' selected disabled>Seleccione una estación</option>
+                                @each(estacion in estaciones)
+                                    <option  value='{{ estacion.id }}'>{{ estacion.name }}</option>
+                                @endeach
+                            </select>
+                        </div>
+                        <div class="col  align-self-end ">
+                            <button  class="form-control btn btn-primary " id="btnConsultarE">Consultar</button>
+                        </div>
+                    </div>
+            </div>
+        </div>
 
+        <!-- BOTON -->
+        <div class="col col-4 align-self-end">
+            <div class="d-grid gap-2 mx-auto ">
+                <button class="btn btn-primary" id="modalNuevaEstación" data-bs-toggle="modal" data-bs-target="#EstacionModal">Nueva estación</button>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="collapse" id="ColTabEstaciones">
+        <hr> 
+        <div class="row mx-auto">
+            <div class="col col-6 align-self-center">
+                <div class="d-grid gap-2 mx-auto ">
+                    <hr/>
+                        <label class="text-center fs-4" name="lblEstacion" id="lblEstacion" >Nombre estacion</label>    
+                    <hr/>
+                </div>
+            </div>
+
+            <div class="col col-3 align-self-center">
+                <div class="d-grid gap-2 mx-auto">
+                    <button id="modalEditEstacion" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#EstacionEditModal">Editar</button>
+                </div>
+            </div>
+            <div class="col col-3 align-self-center">
+                <div class="d-grid gap-2 mx-auto">
+                    <button id="btnEliminarEstacion" class="btn btn-danger">Eliminar</button>
+                </div>
+            </div>
+        </div>
+    
+     <br>
+     <!--TABLA DATOS ESTACIÓN-->
+        <div class="row mx-auto">
+            <div>
+                <div class=" container-fluid table-responsive">
+                    <table class="table table-hover table-bordered" name="tabAnual" id="tabAnual">
+                        <thead>
+                            <tr>
+                                <th scope="col">Canal</th>
+                                <th scope="col">ApiKey</th>
+                                <th scope="col">Modelo</th>
+                                <th scope="col">Contaminates Monitoreados</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td id="tdCanal"></td>
+                                <td id="tdApKiey"></td>
+                                <td id="tdModelo"></td>
+                                <td id="tdContaminantesE"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        
+    </div>
+
+    <!--MODAL REGISTRO DE ESTACION-->
+    <div class="container-fluid">
+        <div class="modal fade" id="EstacionModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>Agregar Estación</h2>
+                    </div>
+                    <div class="modal-body">
+                        
+                        <div>
+                            <label class="form-label" for="IdEstacion">ID:</label>
+                            <input class="form-control" type="number" name="IdEstacion" id="IdEstacion" required min="1" max="99999999">
+                        </div>
+                        <div>
+                            <label class="form-label" for="NomEstacion">Nombre:</label>
+                            <input class="form-control" type="text" name="NomEstacion" id="NomEstacion" required min="1" max="25">
+                        </div>
+                        <div >
+                            <label class="form-label" for="SelModelo">Modelo de monitor:</label>
+                            <select class="form-control" name="SelModelo" id="SelModelo" required>
+                                <option  value='0' selected disabled>Modelo de monitor</option>
+                                @each(modelo in modelos)
+                                  <option  value='{{ modelo.id }}'>{{ modelo.name }}</option>
+                                @endeach
+                            </select>
+                        </div>
+                        <div>
+                            <label class="form-label" for="IdCanal">ID Canal:</label>
+                            <input class="form-control" class="form-control" type="number" name="IdCanal" id="IdCanal"required min="1" max="99999999">
+                        </div>
+                        <div >
+                            <label class="form-label" for="ApiKeyCanal">ApiKey:</label>
+                            <input class="form-control" type="text" name="ApiKeyCanal" id="ApiKeyCanal" required min="1" max="25">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" class="btn btn-outline-primary" value="Crear" id="btnCrearEstacion" name="btnCrearEstacion" data-bs-dismiss="modal">
+                        <button class="btn btn-outline-primary" id="btnCancelarEstacion" name="btnCancelarEstacion" data-bs-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@entryPointScripts('estaciones')
 @end

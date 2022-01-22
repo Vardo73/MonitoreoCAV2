@@ -9,6 +9,11 @@
       "js": [
         "http://localhost:8080/assets/contaminantes.js"
       ]
+    },
+    "estaciones": {
+      "js": [
+        "http://localhost:8080/assets/estaciones.js"
+      ]
     }
   }
 }
