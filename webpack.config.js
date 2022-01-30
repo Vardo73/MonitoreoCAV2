@@ -46,7 +46,6 @@ Encore.setPublicPath('/assets')
 |
 */
 Encore.addEntry('app', './resources/js/app.js'),
-
 Encore.addEntry('contaminantes', './resources/js/contaminantes.js'),
 Encore.addEntry('estaciones', './resources/js/estaciones.js')
 

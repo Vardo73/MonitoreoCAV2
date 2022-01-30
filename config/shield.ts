@@ -40,7 +40,7 @@ export const csp: ShieldConfig['csp'] = {
   |
   | @example
   | directives: {
-  |   defaultSrc: ['self', '@nonce', 'cdnjs.cloudflare.com']
+  |   defaultSrc: ["'self'", '@nonce', 'cdnjs.cloudflare.com']
   | }
   |
   */
@@ -116,9 +116,9 @@ export const csrf: ShieldConfig['csrf'] = {
   |--------------------------------------------------------------------------
   |
   | Define an array of HTTP methods to be validated for a valid CSRF token.
-  | Agregar 'POST', se eliminó para hacer pruebas
+  |
   */
-  methods: [ 'PUT', 'PATCH', 'DELETE'],
+  methods: ['POST', 'PUT', 'PATCH', 'DELETE'],
 }
 
 /*

@@ -82,10 +82,15 @@ export default class EstacionesController {
     }
 
      //Elimina un registro de Contaminante
-    public async destroy({request}:HttpContextContract){
+    public async delete({request}:HttpContextContract){
         const id=request.input('id');
-        const estacion=await Estacion.find(id);
-        await estacion?.delete();
-        return estacion;
+        try {
+            const estacion=await Estacion.findOrFail(id);
+            await estacion.delete();
+            return [true,'Estación eliminado con exito.'];
+        } catch (error) {
+            console.log(error);
+            return [false,error]
+        }
     }
 }

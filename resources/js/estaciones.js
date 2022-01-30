@@ -3,7 +3,6 @@
 const ruta='http://127.0.0.1:3333/estacion';
 //Select de estaciones
 let SelEstaciones=document.getElementById('SelEstaciones');
-let btnConsultar=document.getElementById('btnConsultarE');
 //etiqueta nombre del contaminante
 let lblEstacion=document.getElementById('lblEstacion');
 let btnEliminarEstacion=document.getElementById('btnEliminarEstacion');
@@ -12,7 +11,9 @@ let btnCrearEstacion=document.getElementById('btnCrearEstacion');
 
 function InicioContaminantePage(){
     btnCrearEstacion.addEventListener('click', NuevaEstacion);
-    btnConsultar.addEventListener('click', Consulta);
+    SelEstaciones.addEventListener('change', Consulta);
+    btnEliminarEstacion.addEventListener('click',Eliminar);
+
 }
 
 function NoVacio(elementos){
@@ -125,6 +126,49 @@ function NuevaEstacion(){
             });
         });
     }
+}
+function Eliminar(){
+    Swal.fire({
+        title: 'Está seguro de eliminar esta estación?',
+        showCancelButton: true,
+        confirmButtonText: `Eliminar`,
+        denyButtonText: `Cancelar`,
+    }).then((result)=>{
+        if (result.isConfirmed){
+            axios({
+                method: 'post',
+                url: ruta+'/delete/',
+                data: {
+                    id:SelEstaciones.value
+                }
+              })
+              .then(function (response) {
+                if(response.data[0]==true){
+                  Swal.fire({
+                      text:response.data[1],
+                      icon: "success",
+                      timer:1000,
+                      timerProgressBar: true
+                  }).then((result)=>{
+                      location.reload();
+                  });
+                }
+                if(response.data[0]==false){
+                  Swal.fire({
+                      text:response.data[1].messages.errors[0].message,
+                      icon: "error",
+                      timer:5000,
+                      timerProgressBar: true
+                  }).then((result)=>{
+                     location.reload();
+                  });
+                }
+              })
+              .catch(function (error) {
+                  return [false, error]
+              });
+        }
+    })
 }
 
 window.onload = InicioContaminantePage;

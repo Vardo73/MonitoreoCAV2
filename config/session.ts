@@ -57,7 +57,7 @@ const sessionConfig: SessionConfig = {
   | this value to `true` will ignore the `age`.
   |
   */
-  clearWithBrowser: true,
+  clearWithBrowser: false,
 
   /*
   |--------------------------------------------------------------------------
