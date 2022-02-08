@@ -1,0 +1,36 @@
+@layout('master')
+
+@section('csv')
+
+<div class="container">
+    <hr/>
+        <h2 style="text-align: center;"><span style="color: #2aa5d6;">Lectura de CSV</span></h2>
+    <hr/>
+</div>
+
+<br>
+
+<div class="container">
+    <div>
+            <div class="row">
+                <div class="col">
+                    <label class="form-label" for="csvfile">Suba el archivo en formato csv:</label>
+                    <input class="form-control" type="file" name="csvfile" id="csvfile" accept=".xls,.xlsx,.csv">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col">
+                    <button class='form-control btn btn-primary' id="LeerCSV">Aceptar</button>
+                </div>
+            </div>
+    </div>
+    <br>
+    <div style="m">
+        <pre id="jsondata"></pre>
+    </div>
+</div>
+
+@entryPointScripts('csv')
+
+@end

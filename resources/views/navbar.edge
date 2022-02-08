@@ -14,7 +14,7 @@
           <ul class="navbar-nav ms-auto">
               <!-- CSV -->
               <li class="nav-item">
-                <a class="nav-link" href="">CVS</a>
+                <a class="nav-link" href="{{route('csv')}}">CVS</a>
               </li>
               <!-- Elementos-->
               <li class="nav-item dropdown">
@@ -22,9 +22,10 @@
                       Elementos
                   </a>
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdown" >
-                      <li><a class="dropdown-item" href="{{route('estaciones')}}">Estaciones</a></li>
                       <li><a class="dropdown-item" href="{{route('contaminantes')}}">Contaminantes</a></li>
-                      <li><a class="dropdown-item" href="">Clima</a></li>
+                      <li><a class="dropdown-item" href="{{route('estaciones')}}">Estaciones</a></li>
+                      <li><a class="dropdown-item" href="{{route('modelos')}}">Modelos</a></li>
+                      <li><a class="dropdown-item" href="{{route('clima')}}">Clima</a></li>
                   </ul>
               </li>
               <!-- Reportes -->

@@ -8,6 +8,7 @@ export default class BanderasController {
     }
 
     public async store({request}:HttpContextContract){
+        
 
         const newUserSchema = schema.create({
             tipo_id:schema.string({},[
@@ -30,6 +31,7 @@ export default class BanderasController {
             ])
         })
 
+
         try {
             const payload = await request.validate({
                 schema: newUserSchema,
@@ -43,8 +45,8 @@ export default class BanderasController {
                 contaminante_id: request.input('contaminante_id'),
                 name:request.input('name'),
                 description: request.input('description'),
-                limOMS: request.input('limOMS'),
-                limNOM:request.input('limNOM')
+                lim_oms: request.input('limOMS'),
+                lim_nom:request.input('limNOM')
             });
             
             return [true,'Bandera registrada con exito.'];
@@ -54,13 +56,41 @@ export default class BanderasController {
         }
     }
 
+    public async edit({request}:HttpContextContract){
+        const id=request.input('id');
+        const name=request.input('name');
+        const tipo_id=request.input('tipo_id');
+        const description=request.input('description');
+        const limOMS=request.input('limOMS');
+        const limNOM=request.input('limNOM');
+
+        try {
+            
+            const bandera=await Bandera.findOrFail(id);
+
+            bandera.name=name;
+            bandera.description=description;
+            bandera.tipo_id=tipo_id;
+            bandera.lim_oms=limOMS;
+            bandera.lim_nom=limNOM;
+
+            
+            await bandera.save();
+            
+            return [true,'Estación actualizada con exito.'];
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
      //Elimina un registro de Bandera
     public async delete({request}:HttpContextContract){
         const id=request.input('id');
         try {
             const bandera=await Bandera.findOrFail(id);
             await bandera.delete();
-            return [true,'Bandera(s) eliminada(s) con exito.']
+            return [true,'Bandera eliminada con exito.']
         } catch (error) {
             console.log(error);
             return [false,error]

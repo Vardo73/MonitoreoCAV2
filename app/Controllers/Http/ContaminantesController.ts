@@ -106,6 +106,11 @@ export default class ContaminantesController {
         const id=request.input('id');
         try {
             const contaminante=await Contaminante.findOrFail(id);
+            
+
+            await Database.from('banderas')
+            .whereRaw('banderas.contaminante_id=? ',[id]).delete();
+            
             await contaminante.delete();
             return [true,'Contaminante eliminado con exito.'];
         } catch (error) {

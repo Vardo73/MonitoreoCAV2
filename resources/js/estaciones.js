@@ -1,18 +1,47 @@
 //Declaración de Elementos
 //URL
-const ruta='http://127.0.0.1:3333/estacion';
-//Select de estaciones
-let SelEstaciones=document.getElementById('SelEstaciones');
-//etiqueta nombre del contaminante
-let lblEstacion=document.getElementById('lblEstacion');
-let btnEliminarEstacion=document.getElementById('btnEliminarEstacion');
-//Seccion Modal
+const ruta=yourGlobalVariable+'/estacion';
+let SelModelos=document.getElementById('SelModelos')
 let btnCrearEstacion=document.getElementById('btnCrearEstacion');
+let btnCancelarEditEstacion=document.getElementById('btnCancelarEditEstacion');
+let btnCancelarEstacion=document.getElementById('btnCancelarEstacion');
+let btnEditEstacion=document.getElementById('btnEditEstacion');
 
 function InicioContaminantePage(){
     btnCrearEstacion.addEventListener('click', NuevaEstacion);
-    SelEstaciones.addEventListener('change', Consulta);
-    btnEliminarEstacion.addEventListener('click',Eliminar);
+    SelModelos.addEventListener('change',Filtro);
+    btnCancelarEditEstacion.addEventListener('click', Limpiar);
+    btnCancelarEstacion.addEventListener('click', Limpiar);
+    btnEditEstacion.addEventListener('click',EditarEstacion)
+
+}
+
+function Limpiar(){
+    let txtIdEstacion=document.getElementById('IdEstacion').value.trim();
+    let txtNomEstacion=document.getElementById('NomEstacion').value.trim();
+    let SelModelo=document.getElementById('SelModelo').value;
+    let txtIdCanal=document.getElementById('IdCanal').value.trim();
+    let txtApiKeyCanal=document.getElementById('ApiKeyCanal').value.trim();
+    
+    
+    let IdEditEstacion=document.getElementById('IdEditEstacion');
+    let NomEditEstacion=document.getElementById('NomEditEstacion');
+    let SelEditModelo=document.getElementById('SelEditModelo');
+    let IdEditCanal=document.getElementById('IdEditCanal');
+    let ApiKeyCanalEdit=document.getElementById('ApiKeyCanalEdit');
+
+    txtIdEstacion.value='';
+    txtNomEstacion.value='';
+    SelModelo.value=0;
+    txtIdCanal.value='';
+    txtApiKeyCanal.value='';
+
+    IdEditEstacion.value='';
+    NomEditEstacion.value='';
+    SelEditModelo.value=0;
+    IdEditCanal.value='';
+    ApiKeyCanalEdit.value='';
+
 
 }
 
@@ -34,35 +63,6 @@ function NoVacio(elementos){
         return false;
     }
     return true;
-}
-
-function Consulta(){
-        
-    let divInf=document.getElementById('ColTabEstaciones');
-    let lblE=document.getElementById('lblEstacion');
-    let tdCanal=document.getElementById('tdCanal');
-    let tdModelo=document.getElementById('tdModelo');
-    let tdApiKEy=document.getElementById('tdApKiey');
-
-    axios({
-        method: 'get',
-        url: ruta+'/consulta/'+SelEstaciones.value,
-        responseType: 'json'
-      })
-    .then(function (response) {
-      console.log(response.data);
-      if(response.data[0]==true){
-        divInf.classList.remove("collapse");
-        console.log(response.data[1][0])
-        lblE.innerHTML=response.data[1][0].name
-        tdApiKEy.innerHTML=response.data[1][0].apikey;
-        tdCanal.innerHTML=response.data[1][0].channel;
-        tdModelo.innerHTML=response.data[1][0].nomM;
-      }
-    })
-    .catch(function (error) {
-        alert(error);
-    });
 }
 
 function NuevaEstacion(){  
@@ -127,48 +127,21 @@ function NuevaEstacion(){
         });
     }
 }
-function Eliminar(){
-    Swal.fire({
-        title: 'Está seguro de eliminar esta estación?',
-        showCancelButton: true,
-        confirmButtonText: `Eliminar`,
-        denyButtonText: `Cancelar`,
-    }).then((result)=>{
-        if (result.isConfirmed){
-            axios({
-                method: 'post',
-                url: ruta+'/delete/',
-                data: {
-                    id:SelEstaciones.value
-                }
-              })
-              .then(function (response) {
-                if(response.data[0]==true){
-                  Swal.fire({
-                      text:response.data[1],
-                      icon: "success",
-                      timer:1000,
-                      timerProgressBar: true
-                  }).then((result)=>{
-                      location.reload();
-                  });
-                }
-                if(response.data[0]==false){
-                  Swal.fire({
-                      text:response.data[1].messages.errors[0].message,
-                      icon: "error",
-                      timer:5000,
-                      timerProgressBar: true
-                  }).then((result)=>{
-                     location.reload();
-                  });
-                }
-              })
-              .catch(function (error) {
-                  return [false, error]
-              });
+
+function Filtro(){
+    let cards=document.getElementsByName('tarjeta')
+    let filtro=SelModelos.options[SelModelos.selectedIndex].text;
+
+    cards.forEach(element => {
+        if(SelModelos.value==0){
+            element.classList.remove('collapse');
         }
-    })
+        else if(!element.classList.contains(filtro)){
+            element.classList.add('collapse');
+        }else{
+            element.classList.remove('collapse');
+        }
+    });
 }
 
 window.onload = InicioContaminantePage;

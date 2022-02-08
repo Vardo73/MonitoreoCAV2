@@ -1,19 +1,14 @@
 //Declaración de Elementos
 //URL
-const ruta='http://127.0.0.1:3333/contaminante';
+const ruta=yourGlobalVariable+'/contaminante';
 //Select de contaminantes
 let SelContaminanteC=document.getElementById('SelContaminanteC');
-
-let idContaminante=0;
-var TabBodyC=document.getElementById('TabBodyC');
-
-//etiqueta nombre del contaminante
-let lblContaminante=document.getElementById('lblContaminante');
 let btnEliminarContaminante=document.getElementById('btnEliminarContaminante');
 let btnEditarContaminante=document.getElementById('btnEditarContaminante');
+let btnCancelarContaminante=document.getElementById('btnCancelarContaminante');
+let btnCancelarBandera=document.getElementById('btnCancelarBandera');
 
-//Banderas 
-let btnEliminarBandera=document.getElementById('btnEliminarBandera');
+let idContaminante=0;
 
 //Seccion Modal
 let btnCrearContaminante=document.getElementById('btnCrearContaminante');
@@ -40,171 +35,10 @@ function NoVacio(elementos){
 }
 
 function InicioContaminantePage(){
+    SelContaminanteC.addEventListener('change', Filtro);
     btnCrearContaminante.addEventListener('click', NuevoContamiante);
-    SelContaminanteC.addEventListener('change', Consulta);
-    btnAgregarBandera.addEventListener('click',NuevaBandera);
-    btnEliminarBandera.addEventListener('click',EliminarBandera);
-    btnEliminarContaminante.addEventListener('click',EliminarContaminante);
-    btnEditarContaminante.addEventListener('click',EditarContaminante);
-}
-
-function Consulta(){
-    if (SelContaminanteC.value) {
-        
-    }
-        
-    let divInf=document.getElementById('ColTabContaminante');
-    let lblC=document.getElementById('lblContaminante');
-    axios({
-        method: 'get',
-        url: ruta+'/consulta/'+SelContaminanteC.value,
-        responseType: 'json'
-      })
-    .then(function (response) {
-      if(response.data[0]==true){
-        divInf.classList.remove("collapse");
-        lblC.innerHTML=response.data[1][0].NomC
-        idContaminante=response.data[1][0].idC
-        console.log(response.data[2])
-        if(response.data[2]){
-            AgregarTabBodyC(response.data[2])
-        }
-      }
-    })
-    .catch(function (error) {
-        alert(error);
-    });
-}
-
-function AgregarTabBodyC(elementos){
-    var renglones="";
-    elementos.forEach(bandera => {
-        renglones+="<tr>"+
-        "<td><input class='form-check-input' type='checkbox' value='"+bandera.IdBan+"' id='CheckBan-"+bandera.IdBan+"'>"+ bandera.NomB+"</td>"+
-        "<td>"+bandera.NomT+"</td>"+
-        "<td>"+bandera.Des+"</td>"+
-        "<td>"+bandera.LimOMS+"</td>"+
-        "<td>"+bandera.LimNOM+"</td>"+
-        "<td>"+
-            "<button name='btnEdiBan' class='btn btnEdiBan'  data-bs-toggle='modal' data-bs-target='#BanderaModalEdit'>Ediar</button>"+
-        "</td>"+
-    "</tr>"
-    });
-    TabBodyC.innerHTML=renglones;
-}
-
-function  EliminarBandera(){
-    let inp=document.getElementsByTagName('input');
-    let i=0;
-    for(x=0;x<inp.length;x++){
-        if(inp[x].checked){
-            i++;
-        }
-    }
-    if(i<1){
-        Swal.fire({
-            text:'No ha seleccionado ninguna bandera.',
-            icon: "error",
-            timer:5000,
-            timerProgressBar: true
-        })
-    }else{
-        let err=0;
-        Swal.fire({
-            title: 'Está seguro de eliminar esta(s) bander(as)?',
-            showCancelButton: true,
-            confirmButtonText: `Eliminar`,
-            denyButtonText: `Cancelar`,
-        }).then((result)=>{
-            if (result.isConfirmed){
-                for(x=0;x<inp.length;x++){
-                    if(inp[x].checked){
-                        axios({
-                            method: 'post',
-                            url: ruta+'/bandera/delete/',
-                            data: {
-                                id:inp[x].value
-                            }
-                          })
-                        .then(function (response) {
-                            if(response.data[0]==false){
-                                err++;
-                            }
-                        })
-                        .catch(function (error) {
-                            err++;
-                            return [false, error]
-                        });
-                    }
-                }
-        
-                if(err>0){
-                    Swal.fire({
-                        text:error,
-                        icon: "error",
-                        timer:5000,
-                        timerProgressBar: true
-                    }).then((result)=>{
-                        location.reload();
-                    });
-                }else{
-                    Swal.fire({
-                        text:'Bandera(s) elimida(s) exitosamente.',
-                        icon: "success",
-                        timer:1000,
-                        timerProgressBar: true
-                    }).then((result)=>{
-                        location.reload();
-                    });
-                }
-            }
-        });
-    }
-}
-
-function EliminarContaminante(){
-    Swal.fire({
-        title: 'Está seguro de eliminar esta bandera?',
-        showCancelButton: true,
-        confirmButtonText: `Eliminar`,
-        denyButtonText: `Cancelar`,
-    }).then((result)=>{
-        if (result.isConfirmed){
-            axios({
-                method: 'post',
-                url: ruta+'/delete/',
-                data: {
-                    id:SelContaminanteC.value
-                }
-              })
-              .then(function (response) {
-                if(response.data[0]==true){
-                  Swal.fire({
-                      text:response.data[1],
-                      icon: "success",
-                      timer:1000,
-                      timerProgressBar: true
-                  }).then((result)=>{
-                      location.reload();
-                  });
-                }
-                if(response.data[0]==false){
-                  Swal.fire({
-                      text:response.data[1].messages.errors[0].message,
-                      icon: "error",
-                      timer:5000,
-                      timerProgressBar: true
-                  }).then((result)=>{
-                     location.reload();
-                  });
-                }
-              })
-              .catch(function (error) {
-                  err++;
-                  return [false, error]
-              });
-        }
-    })
+    btnCancelarContaminante.addEventListener('click',Limpiar);
+    btnCancelarBandera.addEventListener('click',Limpiar);
 }
 
 function NuevoContamiante(){
@@ -253,124 +87,39 @@ function NuevoContamiante(){
 
 }
 
-function EditarContaminante(){
-    let txtNomContaminanteEdit=document.getElementById('txtNomContaminanteEdit');
-    
-    if(txtNomContaminanteEdit.value!=''){
+function Filtro(){
+    let cards=document.getElementsByName('tarjeta')
+    let filtro=SelContaminanteC.value;
 
-        alert(SelContaminanteC.value+' - '+txtNomContaminanteEdit.value)
-        axios({
-            method: 'post',
-            url: ruta+'/edit/',
-            data: {
-                id:SelContaminanteC.value,
-                name:txtNomContaminanteEdit.value
-            }
-          })
-        .then(function (response) {
-          if(response.data[0]==true){
-            Swal.fire({
-                text:response.data[1],
-                icon: "success",
-                timer:1000,
-                timerProgressBar: true
-            }).then((result)=>{
-                location.reload();
-            });
-          }
-          if(response.data[0]==false){
-            Swal.fire({
-                text:response.data[1].messages.errors[0].message,
-                icon: "error",
-                timer:5000,
-                timerProgressBar: true
-            }).then((result)=>{
-               location.reload();
-            });
-          }
-        })
-        .catch(function (error) {
-            console.log(error);
-            Swal.fire({
-                text:error,
-                icon: "error",
-                timer:5000,
-                timerProgressBar: true
-            }).then((result)=>{
-            });
-        });
-    }else{
-        Swal.fire({
-            text:'No ha ingresado un nombre.',
-            icon: "error",
-            timer:5000,
-            timerProgressBar: true
-        })
-    }
+    cards.forEach(element => {
+        if(SelContaminanteC.value==0){
+            element.classList.remove('collapse');
+        }
+        else if(!element.classList.contains(filtro)){
+            element.classList.add('collapse');
+        }else{
+            element.classList.remove('collapse');
+        }
+    });
 }
 
-function NuevaBandera(){  
-    let txtNomBandera=document.getElementById('txtNomBandera').value.trim();
-    let SelTipoBan=document.getElementById('SelTipoBan').value;
-    let txtDesBandera=document.getElementById('txtDesBandera').value.trim();
-    let txtLimOMS=document.getElementById('txtLimOMS').value.trim();
-    let txtLimNOM=document.getElementById('txtLimNOM').value.trim();
+function Limpiar(){
     
-    const ele=[
-        txtNomBandera,
-        txtDesBandera,
-        txtLimOMS,
-        txtLimNOM,
-        SelTipoBan
-    ]
+    let txtNomContaminante=document.getElementById('txtNomContaminante')
+    
+    let txtNomBandera=document.getElementById('txtNomBandera')
+    let SelTipoBan=document.getElementById('SelTipoBan')
+    let txtDesBandera=document.getElementById('txtDesBandera')
+    let txtLimOMS=document.getElementById('txtLimOMS')
+    let txtLimNOM=document.getElementById('txtLimNOM')
 
-    if(NoVacio(ele)){
-        axios({
-            method: 'post',
-            url: ruta+'/bandera/store/',
-            data: {
-                name: txtNomBandera,
-                contaminante_id:idContaminante,
-                tipo_id:SelTipoBan,
-                description:txtDesBandera,
-                limOMS:txtLimOMS,
-                limNOM:txtLimNOM
-            }
-          })
-        .then(function (response) {
-          if(response.data[0]==true){
-            Swal.fire({
-                text:response.data[1],
-                icon: "success",
-                timer:1000,
-                timerProgressBar: true
-            }).then((result)=>{
-                location.reload();
-            });
-          }
-          if(response.data[0]==false){
-            Swal.fire({
-                text:response.data[1].messages.errors[0].message,
-                icon: "error",
-                timer:5000,
-                timerProgressBar: true
-            }).then((result)=>{
-               location.reload();
-            });
-          }
-        })
-        .catch(function (error) {
-            console.log(error);
-            Swal.fire({
-                text:error,
-                icon: "error",
-                timer:5000,
-                timerProgressBar: true
-            }).then((result)=>{
-                //location.reload();
-            });
-        });
-    }
+    txtNomContaminante.value='';
+    txtNomBandera.value='';
+    SelTipoBan.value=0;
+    txtDesBandera.value='';
+    txtLimOMS.value='';
+    txtLimNOM.value='';
 }
+
 
 window.onload = InicioContaminantePage;

@@ -1,13 +1,13 @@
 import BaseSchema from '@ioc:Adonis/Lucid/Schema'
 
-export default class ContaminanteEstacions extends BaseSchema {
-  protected tableName = 'contaminante_estacions'
+export default class ContaminanteModelos extends BaseSchema {
+  protected tableName = 'contaminante_modelos'
 
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
       table.integer('contaminante_id').unsigned().references('id').inTable('contaminantes');
-      table.integer('estacion_id').references('id').inTable('estacions');
+      table.integer('modelo_id').unsigned().references('id').inTable('modelos');
       table.timestamp('created_at', { useTz: true })
     })
   }

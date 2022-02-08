@@ -1,7 +1,7 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 
-export default class ContaminanteEstacion extends BaseModel {
+export default class ContaminanteModelo extends BaseModel {
   @column({ isPrimary: true })
   public id: number
   
@@ -9,9 +9,8 @@ export default class ContaminanteEstacion extends BaseModel {
   public contaminante_id: number
 
   @column()
-  public estacion_id: number
+  public modelo_id: number
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
-
 }

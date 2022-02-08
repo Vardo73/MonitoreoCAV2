@@ -6,6 +6,9 @@ Route.group(()=>{
   Route.get('/','VistasController.Home').as('home').middleware('auth')
   Route.get('/estaciones','VistasController.Estaciones').as('estaciones').middleware('auth');
   Route.get('/contaminantes','VistasController.Contaminantes').as('contaminantes').middleware('auth');
+  Route.get('/modelos','VistasController.Modelos').as('modelos').middleware('auth');
+  Route.get('/csv','VistasController.Csv').as('csv').middleware('auth');
+  Route.get('/clima','VistasController.Clima').as('clima').middleware('auth');
 });
 
 //Controller User
@@ -44,6 +47,8 @@ Route.group(()=>{
 Route.group(()=>{
   Route.get('/all','ModelosController.index');
   Route.post('/store','ModelosController.store');
+  Route.post('/consulta','ModelosController.consulta');
+  Route.post('/edit','ModelosController.edit');
   Route.post('/delete','ModelosController.delete');
 }).prefix('/modelo');
 
@@ -57,12 +62,14 @@ Route.group(()=>{
   
   Route.post('/bandera/store','BanderasController.store');
   Route.post('/bandera/delete','BanderasController.delete');
+  Route.post('/bandera/edit','BanderasController.edit');
 }).prefix('/contaminante');
 
 //Controller Estaciones
 Route.group(()=>{
   Route.get('/all','EstacionesController.index');
-  Route.get('/consulta/:id','EstacionesController.consulta');
+  Route.post('/consulta/','EstacionesController.consulta');
   Route.post('/store','EstacionesController.store');
+  Route.post('/edit','EstacionesController.edit');
   Route.post('/delete','EstacionesController.delete');
 }).prefix('/estacion');

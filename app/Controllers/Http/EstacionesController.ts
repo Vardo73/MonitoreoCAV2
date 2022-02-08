@@ -2,7 +2,6 @@ import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import { schema, rules } from '@ioc:Adonis/Core/Validator'
 import Database from '@ioc:Adonis/Lucid/Database'
 import Estacion from 'App/Models/Estacion'
-import EstaCont from 'App/Models/ContaminanteEstacion'
 
 export default class EstacionesController {
     public async index(ctx:HttpContextContract){
@@ -49,18 +48,69 @@ export default class EstacionesController {
             return [true,'Estación registrado con exito.'];
 
         } catch (error) {
-            console.log(error);
+            console.log(error)
             return [false,error];
         }
 
     }
 
-    public async consulta({request, response,session}:HttpContextContract){
+    public async consulta({request}:HttpContextContract){
+        const id=request.input('id');
+        try {
+            
+            const estacion=await Database
+            .from('estacions')
+            .join('modelos', (query) => {
+                query
+                .on('estacions.modelo_id', '=', 'modelos.id')
+            })
+            .select('estacions.id')
+            .select('estacions.name ')
+            .select('estacions.channel')
+            .select('estacions.apikey')
+            .select('modelos.name as nameM')
+            .select('modelos.id as idM')
+            .whereRaw('estacions.id=? ',[id])
+           
+            return estacion;
+
+        } catch (error) {
+            return [error,'error'];
+        }
+    }
+
+    public async edit({request}:HttpContextContract){
+        const id=request.input('id');
+        const name=request.input('name');
+        const modelo_id=request.input('modelo_id');
+        const channel=request.input('channel');
+        const apikey=request.input('apikey');
+
+        try {
+            
+            const estacion=await Estacion.findOrFail(id);
+
+            estacion.name=name;
+            estacion.modelo_id=modelo_id;
+            estacion.channel=channel;
+            estacion.apikey=apikey;
+
+            
+            await estacion.save();
+            
+            return [true,'Estación actualizada con exito.'];
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    public async consultaM({request}:HttpContextContract){
         const id:number=request.param('id');
         try {
             //const estacion=await Estacion.find(id);
             
-            const estacion=await Database
+            const estaciones=await Database
             .from('estacions')
             .join('modelos', (query) => {
                 query
@@ -71,9 +121,9 @@ export default class EstacionesController {
             .select('estacions.channel as channel')
             .select('estacions.apikey as apikey')
             .select('modelos.name as nomM')
-            .whereRaw('estacions.id=? ',[id])
+            .whereRaw('modelos.id=? ',[id])
            
-            return [true,estacion];
+            return estaciones;
 
         } catch (error) {
             //console.log(error)
@@ -81,12 +131,14 @@ export default class EstacionesController {
         }
     }
 
+
      //Elimina un registro de Contaminante
     public async delete({request}:HttpContextContract){
         const id=request.input('id');
         try {
             const estacion=await Estacion.findOrFail(id);
             await estacion.delete();
+            //Recuerda aquí hacer algo al respecto de los datos obtenidos al eliminar la estación
             return [true,'Estación eliminado con exito.'];
         } catch (error) {
             console.log(error);

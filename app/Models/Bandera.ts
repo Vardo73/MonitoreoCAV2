@@ -12,10 +12,10 @@ export default class Bandera extends BaseModel {
   public description: string
   
   @column()
-  public limOMS: number
+  public lim_oms: number
   
   @column()
-  public limNOM: number
+  public lim_nom: number
   
   @column()
   public tipo_id: number
