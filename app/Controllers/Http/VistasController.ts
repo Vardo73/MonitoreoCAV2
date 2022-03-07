@@ -3,7 +3,8 @@ import Contaminante from 'App/Models/Contaminante'
 import Database from '@ioc:Adonis/Lucid/Database'
 import Estacion from 'App/Models/Estacion';
 import Modelo from 'App/Models/Modelo';
-import TipoB from 'App/Models/TipoB'
+import TipoB from 'App/Models/TipoB';
+import Localidad from 'App/Models/Localidad';
 
 export default class VistasController {
     public async Login ({view}:HttpContextContract){
@@ -16,6 +17,9 @@ export default class VistasController {
 
     public async Estaciones({view}:HttpContextContract){
         const modelos=await Modelo.all();
+
+        const localidades=await Localidad.all();
+
         const estaciones=await Database
             .from('estacions')
             .join('modelos', (query) => {
@@ -28,6 +32,7 @@ export default class VistasController {
             .select('estacions.apikey as apikey')
             .select('modelos.name as nomM')
             .select('modelos.id as idM')
+            .select('estacions.localidad_id as idL')
         
         const relacion=await Database
         .from('contaminante_modelos')
@@ -39,7 +44,7 @@ export default class VistasController {
         .select('contaminantes.name')
         .select('contaminante_modelos.modelo_id')
            
-        return view.render('estaciones',{modelos,estaciones,relacion});
+        return view.render('estaciones',{modelos,estaciones,relacion,localidades});
     }
 
     public async Contaminantes({view}:HttpContextContract){
@@ -92,7 +97,20 @@ export default class VistasController {
     }
     
     public async Clima({view}:HttpContextContract){
+        const localidades= await Localidad.all();
+        /*let lim=localidades.length*20;
+				
+        const climas = await Database
+        .from('climas')
+        .select('climas.localidad_id')
+        .select('climas.velViento')
+        .select('climas.dirViento')
+        .select('climas.temperatura')
+        .select('climas.humedad')
+        .select('climas.hpa')
+        .limit(lim);*/
+        
 
-        return view.render('clima');
+        return view.render('clima',{localidades});
     }
 }

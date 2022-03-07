@@ -8,7 +8,7 @@ export default class Datoes extends BaseSchema {
       table.increments('id')
       table.integer('tipo_id').unsigned().references('id').inTable('tipos');
       table.integer('estacion_id').references('id').inTable('estacions');
-      table.integer('clima_id').unsigned().references('id').inTable('climas');
+      table.integer('contaminante_id').unsigned().references('id').inTable('contaminantes');
       table.float('temperatura_s',10,2)
       table.float('humedad_s',10,2)
       table.float('promedio',10,2)

@@ -74,7 +74,6 @@ function NuevoContamiante(){
       }
     })
     .catch(function (error) {
-        console.log(error);
         Swal.fire({
             text:error,
             icon: "error",

@@ -71,13 +71,15 @@ function NuevaEstacion(){
     let SelModelo=document.getElementById('SelModelo').value;
     let txtIdCanal=document.getElementById('IdCanal').value.trim();
     let txtApiKeyCanal=document.getElementById('ApiKeyCanal').value.trim();
+    let SelLocalidad=document.getElementById('SelLocalidad').value;
     
     const ele=[
         txtIdEstacion,
         txtNomEstacion,
         SelModelo,
         txtIdCanal,
-        txtApiKeyCanal
+        txtApiKeyCanal,
+        SelLocalidad
     ]
 
     if(NoVacio(ele)){
@@ -89,7 +91,8 @@ function NuevaEstacion(){
                 name:txtNomEstacion,
                 modelo_id:SelModelo,
                 channel:txtIdCanal,
-                apikey:txtApiKeyCanal
+                apikey:txtApiKeyCanal,
+                localidad_id:SelLocalidad
             }
           })
         .then(function (response) {

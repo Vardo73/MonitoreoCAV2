@@ -12,7 +12,7 @@ export default class Dato extends BaseModel {
   public estacion_id: number
 
   @column()
-  public clima_id: number
+  public contaminante_id: string
 
   @column()
   public temperatura_s: number
@@ -23,7 +23,7 @@ export default class Dato extends BaseModel {
   @column()
   public promedio: number
 
-  @column.dateTime({ autoCreate: true })
+  @column.dateTime()
   public createdAt: DateTime
 
 }

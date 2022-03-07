@@ -51,6 +51,7 @@
                                 <th scope="col">Canal</th>
                                 <th scope="col">ApiKey</th>
                                 <th scope="col">Modelo</th>
+                                <th scope="col">Localidad</th>
                                 <th scope="col">Contaminates Monitoreados</th>
                             </tr>
                         </thead>
@@ -60,6 +61,12 @@
                                 <td >{{ estacion.channel}}</td>
                                 <td >{{ estacion.apikey }}</td>
                                 <td >{{ estacion.nomM }}</td>
+                                <td >{{ estacion.apikey }}</td>
+                                @each(localidad in localidades)
+                                    @if(localidad.id== estacion.idL)
+                                    <td >{{ localidad.name }}</td>
+                                    @endif
+                                @endeach
                                 <td >
                                     <div class="inline">
                                       @each(rel in relacion)
@@ -79,7 +86,7 @@
                 
             <div class="row mx-auto">
                 <div class="col col-6 d-grid gap-2 mx-auto">
-                    <button  class="btn btn-info" onclick="MostrarEstacion({{ estacion.id }},'{{ estacion.name }}',{{ estacion.channel}},'{{ estacion.apikey }}',{{ estacion.idM }})" data-bs-toggle="modal" data-bs-target="#EstacionEditModal">Editar</button>
+                    <button  class="btn btn-info" onclick="MostrarEstacion({{ estacion.id }},'{{ estacion.name }}',{{ estacion.channel}},'{{ estacion.apikey }}',{{ estacion.idM }},{{estacion.idL}})" data-bs-toggle="modal" data-bs-target="#EstacionEditModal">Editar</button>
                 </div>
                 <div class="col col-6 d-grid gap-2 mx-auto">
                     <button  class="btn btn-danger" onclick='EliminarEstacion({{ estacion.id }})'>Eliminar</button>
@@ -116,6 +123,15 @@
                                 <option  value='0' selected disabled>Modelo de monitor</option>
                                 @each(modelo in modelos)
                                   <option  value='{{ modelo.id }}'>{{ modelo.name }}</option>
+                                @endeach
+                            </select>
+                        </div>
+                        <div >
+                            <label class="form-label" for="SelLocalidad">Localidad del monitor:</label>
+                            <select class="form-control" name="SelLocalidad" id="SelLocalidad" required>
+                                <option  value='0' selected disabled>Localidad del monitor</option>
+                                @each(localidad in localidades)
+                                  <option  value='{{ localidad.id }}'>{{ localidad.name }}</option>
                                 @endeach
                             </select>
                         </div>
@@ -161,6 +177,15 @@
                                 <option  value='0' selected disabled>Modelo de monitor</option>
                                 @each(modelo in modelos)
                                   <option  value='{{ modelo.id }}'>{{ modelo.name }}</option>
+                                @endeach
+                            </select>
+                        </div>
+                        <div >
+                            <label class="form-label" for="SelEditLocalidad">Localidad del monitor:</label>
+                            <select class="form-control" name="SelEditLocalidad" id="SelEditLocalidad" required>
+                                <option  value='0' selected disabled>Localidad del monitor</option>
+                                @each(localidad in localidades)
+                                  <option  value='{{ localidad.id }}'>{{ localidad.name }}</option>
                                 @endeach
                             </select>
                         </div>
@@ -254,13 +279,14 @@
         })
     }
 
-    function MostrarEstacion(id,name, channel,apikey,idM){
+    function MostrarEstacion(id,name, channel,apikey,idM,idL){
         idEdit=id;
         let IdEditEstacion=document.getElementById('IdEditEstacion');
         let NomEditEstacion=document.getElementById('NomEditEstacion');
         let SelEditModelo=document.getElementById('SelEditModelo');
         let IdEditCanal=document.getElementById('IdEditCanal');
         let ApiKeyCanalEdit=document.getElementById('ApiKeyCanalEdit');
+        let SelEditLocalidad=document.getElementById('SelEditLocalidad');
         
         
         IdEditEstacion.value=id;
@@ -268,6 +294,7 @@
         SelEditModelo.value=idM;
         IdEditCanal.value=channel;
         ApiKeyCanalEdit.value=apikey;
+        SelEditLocalidad.value=idL;
         
     }
 
@@ -278,6 +305,7 @@
         let SelEditModelo=document.getElementById('SelEditModelo').value;
         let IdEditCanal=document.getElementById('IdEditCanal').value.trim();
         let ApiKeyCanalEdit=document.getElementById('ApiKeyCanalEdit').value.trim();
+        let SelEditLocalidad=document.getElementById('SelEditLocalidad').value;
 
         
         const ele=[
@@ -285,7 +313,8 @@
             NomEditEstacion,
             SelEditModelo,
             IdEditCanal,
-            ApiKeyCanalEdit
+            ApiKeyCanalEdit,
+            SelEditLocalidad
         ]
 
             
@@ -299,6 +328,7 @@
                     modelo_id:SelEditModelo,
                     channel:IdEditCanal,
                     apikey:ApiKeyCanalEdit
+                    localidad_id:SelEditLocalidad
                 }
             })
             .then(function (response) {

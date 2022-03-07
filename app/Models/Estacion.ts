@@ -17,6 +17,9 @@ export default class Estacion extends BaseModel {
   @column()
   public modelo_id: number
 
+  @column()
+  public localidad_id: number
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 

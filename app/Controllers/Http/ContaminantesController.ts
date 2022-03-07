@@ -6,6 +6,7 @@ import Contaminante from 'App/Models/Contaminante'
 
 export default class ContaminantesController {
     
+    
     public async index(ctx:HttpContextContract){
         return await Contaminante.all();
     }

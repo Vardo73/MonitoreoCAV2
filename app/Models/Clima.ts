@@ -21,7 +21,7 @@ export default class Clima extends BaseModel {
   public humedad: number
 
   @column()
-  public hPa: number
+  public hpa: number
 
   @column()
   public radiacion: number

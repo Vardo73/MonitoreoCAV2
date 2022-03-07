@@ -3,6 +3,14 @@ import { schema, rules } from '@ioc:Adonis/Core/Validator'
 import Database from '@ioc:Adonis/Lucid/Database'
 import Estacion from 'App/Models/Estacion'
 
+
+//https://www.purpleair.com/json?key=[Apikey]&show=[id]
+
+/*
+    https://api.thingspeak.com/channels/[channel]/feeds.json?api_key=
+    [apikey]&average=60&timezone=America/Mazatlan&start=2022-02-07%2000:00:00
+    &end=2022-02-07%2024:00:00&round=2
+*/
 export default class EstacionesController {
     public async index(ctx:HttpContextContract){
         return await Estacion.all();
@@ -41,14 +49,15 @@ export default class EstacionesController {
                 name: request.input('name'),
                 modelo_id: request.input('modelo_id'),
                 channel: request.input('channel'),
-                apikey: request.input('apikey')
+                apikey: request.input('apikey'),
+                localidad_id: request.input('localidad_id')
             });
             
 
             return [true,'Estación registrado con exito.'];
 
         } catch (error) {
-            console.log(error)
+           // console.log(error)
             return [false,error];
         }
 
@@ -85,6 +94,7 @@ export default class EstacionesController {
         const modelo_id=request.input('modelo_id');
         const channel=request.input('channel');
         const apikey=request.input('apikey');
+        const localidad_id=request.input('localidad_id');
 
         try {
             
@@ -94,6 +104,7 @@ export default class EstacionesController {
             estacion.modelo_id=modelo_id;
             estacion.channel=channel;
             estacion.apikey=apikey;
+            estacion.localidad_id=localidad_id
 
             
             await estacion.save();
@@ -136,6 +147,9 @@ export default class EstacionesController {
     public async delete({request}:HttpContextContract){
         const id=request.input('id');
         try {
+            await Database.from('datoes')
+            .whereRaw('datoes.estacion_id=? ',[id]).delete();
+
             const estacion=await Estacion.findOrFail(id);
             await estacion.delete();
             //Recuerda aquí hacer algo al respecto de los datos obtenidos al eliminar la estación

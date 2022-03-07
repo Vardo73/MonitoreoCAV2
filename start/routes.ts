@@ -38,10 +38,12 @@ Route.group(()=>{
 
 //Controller Localidad
 Route.group(()=>{
-  Route.get('/all','LocalidadsController.index');
-  Route.post('/store','LocalidadsController.store');
-  Route.post('/delete','LocalidadsController.delete');
-}).prefix('/localidad');
+  Route.get('/localidad/all','LocalidadsController.index');
+  Route.post('/localidad/store','LocalidadsController.store');
+  Route.post('/localidad/edit','LocalidadsController.edit');
+  Route.post('/localidad/delete','LocalidadsController.delete');
+  Route.post('/localidad/consulta','LocalidadsController.consultaClima');
+}).prefix('/clima');
 
 //Controller Modelo
 Route.group(()=>{
