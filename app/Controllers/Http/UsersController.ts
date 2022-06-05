@@ -1,4 +1,4 @@
-import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import { schema, rules } from '@ioc:Adonis/Core/Validator'
 import User from 'App/Models/User'
 
@@ -49,6 +49,7 @@ export default class UsersController {
             return error;
         }
     }
+    
 
     public async login({auth, request, response,session}:HttpContextContract){
         const email = request.input('email');
@@ -57,7 +58,7 @@ export default class UsersController {
         try {
             await auth.use('web').attempt(email, password);
 
-            return response.redirect('/');
+            return response.redirect('/station');
             
         } catch (error){
             session.flash('notification','No pudimos verificar sus credenciales.')
@@ -74,7 +75,7 @@ export default class UsersController {
         }
     }
     
-    public async alguien({ auth, response }:HttpContextContract){
+    public async someone({ auth, response }:HttpContextContract){
         await auth.use('web').authenticate()
         return auth.use('web').isLoggedIn
     }
@@ -85,4 +86,8 @@ export default class UsersController {
         await user?.delete();
         return user;
     }
+    public async showLogin ({view}:HttpContextContract){
+        return view.render('auth/login');
+    }
+
 }

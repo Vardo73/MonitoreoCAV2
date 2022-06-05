@@ -235,7 +235,7 @@ export const assets: AssetsManagerConfig = {
   | in the future
   |
   */
-  driver: 'encore',
+  driver: Env.get('ASSETS_DRIVER'),
 
   /*
   |--------------------------------------------------------------------------

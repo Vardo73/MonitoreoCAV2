@@ -7,31 +7,6 @@
       "js": [
         "http://localhost:8080/assets/app.js"
       ]
-    },
-    "contaminantes": {
-      "js": [
-        "http://localhost:8080/assets/contaminantes.js"
-      ]
-    },
-    "estaciones": {
-      "js": [
-        "http://localhost:8080/assets/estaciones.js"
-      ]
-    },
-    "modelos": {
-      "js": [
-        "http://localhost:8080/assets/modelos.js"
-      ]
-    },
-    "csv": {
-      "js": [
-        "http://localhost:8080/assets/csv.js"
-      ]
-    },
-    "clima": {
-      "js": [
-        "http://localhost:8080/assets/clima.js"
-      ]
     }
   }
 }

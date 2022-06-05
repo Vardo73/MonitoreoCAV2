@@ -1,7 +1,7 @@
 <section>
     <nav id="MyNavbar" class="navbar navbar-expand-lg navbar-dark bg-dark" >
         @if(auth.isLoggedIn)
-        <a class="navbar-brand"  href="{{route('home')}}" style="margin-left:8%">
+        <a class="navbar-brand"  href="{{route('station')}}" style="margin-left:8%">
             <img src="img/Logotipo-Blanco.svg" alt="0" width="150" height="52" class="img-fluid d-inline-block align-text-top">
         </a>
 
@@ -14,7 +14,7 @@
           <ul class="navbar-nav ms-auto">
               <!-- CSV -->
               <li class="nav-item">
-                <a class="nav-link" href="{{route('csv')}}">CSV</a>
+                <a class="nav-link" href="">CSV</a>
               </li>
               <!-- Elementos-->
               <li class="nav-item dropdown">
@@ -22,22 +22,14 @@
                       Elementos
                   </a>
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdown" >
-                      <li><a class="dropdown-item" href="{{route('contaminantes')}}">Contaminantes</a></li>
-                      <li><a class="dropdown-item" href="{{route('estaciones')}}">Estaciones</a></li>
-                      <li><a class="dropdown-item" href="{{route('modelos')}}">Modelos</a></li>
-                      <li><a class="dropdown-item" href="{{route('clima')}}">Clima</a></li>
+                      <li><a class="dropdown-item" href="{{route('pollutant')}}">Contaminantes</a></li>
+                      <li><a class="dropdown-item" href="{{route('station')}}">Estaciones</a></li>
+                      <li><a class="dropdown-item" href="{{route('model')}}">Modelos</a></li>
                   </ul>
               </li>
               <!-- Reportes -->
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Reportes
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown" >
-                    <li><a class="dropdown-item" href="">Anuales</a></li>
-                    <li><a class="dropdown-item" href="">Mensuales</a></li>
-                    <li><a class="dropdown-item" href="">Diarios</a></li>
-                </ul>
+              <li class="nav-item">
+                <a class="nav-link" href="{{route('report')}}">Reportes</a>
               </li>
               <!-- Logout -->
               <li class="nav-item dropdown">

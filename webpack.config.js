@@ -45,12 +45,7 @@ Encore.setPublicPath('/assets')
 | entrypoints.
 |
 */
-Encore.addEntry('app', './resources/js/app.js'),
-Encore.addEntry('contaminantes', './resources/js/contaminantes.js'),
-Encore.addEntry('estaciones', './resources/js/estaciones.js'),
-Encore.addEntry('modelos', './resources/js/modelos.js'),
-Encore.addEntry('csv', './resources/js/csv.js'),
-Encore.addEntry('clima', './resources/js/clima.js')
+Encore.addEntry('app', './resources/js/app.js')
 
 /*
 |--------------------------------------------------------------------------

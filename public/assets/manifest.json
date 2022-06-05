@@ -1,9 +1,4 @@
 {
   "assets/app.css": "http://localhost:8080/assets/app.css",
-  "assets/app.js": "http://localhost:8080/assets/app.js",
-  "assets/contaminantes.js": "http://localhost:8080/assets/contaminantes.js",
-  "assets/estaciones.js": "http://localhost:8080/assets/estaciones.js",
-  "assets/modelos.js": "http://localhost:8080/assets/modelos.js",
-  "assets/csv.js": "http://localhost:8080/assets/csv.js",
-  "assets/clima.js": "http://localhost:8080/assets/clima.js"
+  "assets/app.js": "http://localhost:8080/assets/app.js"
 }
