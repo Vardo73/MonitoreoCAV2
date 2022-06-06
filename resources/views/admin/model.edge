@@ -4,8 +4,240 @@
 
 <div class="container">
     <hr/>
-        <h2 style="text-align: center;"><span style="color: #2aa5d6;">Modelos</span></h2>
+    <div class="row mx-auto justify-content-around">
+        <div class="col col-9 align-self-center">
+            <h2 style="text-align: center;"><span style="color: #2aa5d6;">Modelos</span></h2>
+        </div>
+        <div class="col col-3 align-self-end">
+            <div class="d-grid gap-2 mx-auto ">
+                <button class="btn btn-primary" id="modalNuevoModelo" data-bs-toggle="modal" data-bs-target="#ModeloModal">Agregar</button>
+            </div>
+        </div>  
+    </div>
+
     <hr/>
 </div>
 
+<br>
+<div class="container">
+
+    <div class="row row-cols-3  ">
+        @each(model in models)
+        <div class="col">
+        <div class="card" style="margin-bottom:2rem">
+            <h5 class="card-header">{{ model.name }}</h5>
+            <div class="card-body">
+            <p class="card-text">{{ model.description }}</p>
+            
+            <h4 for="">Contaminantes que monitorea:</h4>
+            <div class="inline">
+                @each(rel in relacion)
+                @if(rel.model_id==model.id)
+                
+                <span class="badge rounded-pill bg-warning text-dark">{{ rel.name }}</span>
+                    
+                @endif
+                    
+                @endeach
+            </div>
+            <br>
+            <div class="row mx-auto">
+                <div class="col col-6 d-grid gap-2 mx-auto">
+                    <button  class="btn btn-info" id="btnEdit" onclick="showModel({{ model.id }})" data-bs-toggle="modal" data-bs-target="#ModeloModalEdit">Editar</button>
+                </div>
+                <div class="col col-6 d-grid gap-2 mx-auto">
+                    <button  class="btn btn-danger" onclick='deleteModel({{ model.id }})'>Eliminar</button>
+                </div>
+            </div>
+            </div>
+        </div>
+        <br>
+        </div>
+        @endeach
+    </div>
+
+    
+    <!-- MODAL NUEVO MODELO -->
+    <div class="container-fluid">
+        <div class="modal fade" id="ModeloModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                        <div class="modal-header">
+                            <h2>Agregar Modelo</h2>
+                        </div>
+                        <div class="modal-body">
+                            <div>
+                                <label class="form-label" for="NomModelo">Nombre:</label>
+                                <input class="form-control" type="text" name="NomModelo" id="NomModelo" required min="1" max="25">
+                            </div>
+                            <div>
+                                <label  class="form-label" for="txtDesModelo">Descripción:</label>
+                                <textarea class="form-control" name="txtDesModelo" id="txtDesModelo" style="height: 100px" max="50"></textarea>
+                            </div>        
+                            <label  class="form-label" >¿Qué contaminantes monitorea?:</label><br>
+                            @each(pollutant in pollutants)
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" name='check' type="checkbox"  value={{ pollutant.id }}>
+                                    <label class="form-check-label" for="inlineCheckbox1">{{ pollutant.name }}</label>
+                                </div>
+                            @endeach            
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-outline-primary" id="btnCreateModel" name="btnCreateModel" data-bs-dismiss="modal">Crear</button>
+                            <button class="btn btn-outline-primary" id="btnCancelModel" name="btnCancelModel" data-bs-dismiss="modal">Cancelar</button>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    
+    <div class="container-fluid">
+        <div class="modal fade" id="ModeloModalEdit" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>Editar Modelo</h2>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <label class="form-label" for="NomModeloEdit">Nombre:</label>
+                            <input class="form-control" type="text" name="NomModeloEdit" id="NomModeloEdit" required min="1" max="25">
+                        </div>
+                        <div>
+                            <label  class="form-label" for="txtDesModeloEdit">Descripción:</label>
+                            <textarea class="form-control" name="txtDesModeloEdit" id="txtDesModeloEdit" style="height: 100px" max="50"></textarea>
+                        </div>        
+                        <label  class="form-label" >¿Qué contaminantes monitorea?:</label><br>
+                        @each(pollutant in pollutants)
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" name='checkEdit' type="checkbox" value={{ pollutant.id }}>
+                                <label class="form-check-label" for="inlineCheckbox1">{{ pollutant.name }}</label>
+                            </div>
+                        @endeach            
+                    </div>
+                    <div class="modal-footer">
+                        <button  class="btn btn-outline-primary"  id="btnEditarModelo" name="btnCrearModelo" data-bs-dismiss="modal" onclick="editModel()">Editar</button>
+                        <button class="btn btn-outline-primary" id="btnCancelarEditModelo" name="btnCancelarModelo" data-bs-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@entryPointScripts('model')
+
+<script>
+    let idMod=0;
+
+    function notificationSwal(message,type){
+        Swal.fire({
+            text:message,
+            icon: type,
+            timer:1000,
+            timerProgressBar: true
+        }).then((result)=>{
+            location.reload();
+        });
+    }
+    function requestAxios(url,method,data){
+        axios({
+            url:url,
+            method:method,
+            data:data
+        })
+        .then(response=>{
+            console.log(response.data)
+            this.notificationSwal(response.data,'success')
+        })
+        .catch(error=>{
+            console.log(error)
+            this.notificationSwal(error,'error')
+        })
+    }
+
+    function deleteModel(id){
+        if(id!=0){
+            Swal.fire({
+                title: 'Está seguro de eliminar este elemento?',
+                showCancelButton: true,
+                confirmButtonText: `Eliminar`,
+                denyButtonText: `Cancelar`,
+            }).then((result)=>{
+                if (result.isConfirmed){
+                    let url='model/delete'
+                    let method='POST'
+                    let dat={
+                        id:id
+                    }
+                    this.requestAxios(url,method,dat)
+                }
+            })
+        }
+    }
+    
+    function showModel(id){
+        idMod=id;
+        let NomModeloEdit=document.getElementById('NomModeloEdit');
+        let txtDesModeloEdit =document.getElementById('txtDesModeloEdit')
+        let checks=document.getElementsByName('checkEdit');
+        axios({
+            method: 'POST',
+            url: '/model/showModel',
+            data: {
+                id:id
+            }
+        })
+        .then(function (response) {
+            NomModeloEdit.value=response.data[0].name
+            txtDesModeloEdit.value=response.data[0].description
+
+            checks.forEach(element => {
+                response.data[1].forEach(element2 => {
+                    if(element.value==element2.pollutant_id){
+                        element.checked = true
+                    }
+                });
+            });
+        })
+        .catch(function (error) {
+            return [false, error]
+        });
+
+    }
+
+    function editModel(){
+        let checks=document.getElementsByName('checkEdit');
+        let idCont=[]
+        let i=0;
+        checks.forEach(element => {
+            if(element.checked){
+                idCont.push(element.value)
+                i++;
+            }
+        });
+
+        if(i<1){
+            let msg="Debe seleccionar al menos un contaminante."
+            let typ="warning"
+            services.notificationSwal(msg,typ)
+            return false;
+        }
+
+        
+        let url='/model/edit'
+        let method='POST'
+        let dat={
+            id:idMod,
+            name:document.getElementById('NomModeloEdit').value.trim(),
+            description:document.getElementById('txtDesModeloEdit').value.trim(),
+            pollutants:idCont
+        }
+ 
+        //alert(JSON.stringify(dat))
+        this.requestAxios(url,method,dat)
+    }
+
+</script>
 @end

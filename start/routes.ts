@@ -4,7 +4,7 @@ Route.get('/', async ({ view }) => {
   return view.render('airelimpio/map')
 })
 
-//Vistas
+//Views
 Route.get('/station', 'StationsController.show').as('station').middleware('auth')
 Route.get('/model', 'ModelsController.show').as('model').middleware('auth')
 Route.get('/pollutant', 'PollutantsController.show').as('pollutant').middleware('auth')
@@ -21,3 +21,19 @@ Route.group(() => {
   Route.post('/delete', 'UsersController.delete')
   Route.post('/someone', 'UsersController.someone')
 }).prefix('/user')
+
+//Controller Pollutant
+Route.group(() => {
+  Route.post('/store', 'PollutantsController.store')
+  Route.post('/edit', 'PollutantsController.edit')
+  Route.post('/delete', 'PollutantsController.delete')
+}).prefix('/pollutant')
+
+
+//Controller Pollutant
+Route.group(() => {
+  Route.post('/store', 'ModelsController.store')
+  Route.post('/delete', 'ModelsController.delete')
+  Route.post('/edit', 'ModelsController.edit')
+  Route.post('/showModel', 'ModelsController.showModel')
+}).prefix('/model')

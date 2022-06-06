@@ -45,7 +45,9 @@ Encore.setPublicPath('/assets')
 | entrypoints.
 |
 */
-Encore.addEntry('app', './resources/js/app.js')
+Encore.addEntry('app', './resources/js/app.js'),
+Encore.addEntry('pollutant', './resources/js/pollutant.js'),
+Encore.addEntry('model', './resources/js/model.js')
 
 /*
 |--------------------------------------------------------------------------

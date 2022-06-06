@@ -1,11 +1,18 @@
 {
   "entrypoints": {
     "app": {
-      "css": [
-        "http://localhost:8080/assets/app.css"
-      ],
       "js": [
         "http://localhost:8080/assets/app.js"
+      ]
+    },
+    "pollutant": {
+      "js": [
+        "http://localhost:8080/assets/pollutant.js"
+      ]
+    },
+    "model": {
+      "js": [
+        "http://localhost:8080/assets/model.js"
       ]
     }
   }
