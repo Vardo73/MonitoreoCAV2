@@ -30,4 +30,11 @@ export default class AppGlobal {
             this.notificationSwal(error,'error')
         })
     }
+
+    validator(element){
+        if(element!='' && element!=0){
+            return true;
+        }
+        return false
+    }
 }

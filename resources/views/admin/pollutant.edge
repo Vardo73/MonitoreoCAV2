@@ -29,10 +29,10 @@
                         
                         <div class="row mx-auto">
                             <div class="col col-6 d-grid gap-2 mx-auto">
-                                <button id="modalEditContaminante" onclick="showPollutant({{ pollutant.id }},'{{pollutant.name}}','{{pollutant.description}}')" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#ContaminanteEditModal">Editar</button>
+                                <button name="{{ pollutant.id }}" onclick="showPollutant({{ pollutant.id }},'{{pollutant.name}}','{{pollutant.description}}')" class="btn btn-info btnEdit" data-bs-toggle="modal" data-bs-target="#ContaminanteEditModal" >Editar</button>
                             </div>
                             <div class="col col-6 d-grid gap-2 mx-auto">
-                                <button id="btnEliminarContaminante" class="btn btn-danger" onclick="deletePollutant({{ pollutant.id }})">Eliminar</button>
+                                <button class="btn btn-danger btnDelete" name="{{ pollutant.id }}">Eliminar</button>
                             </div>
                         </div>
                     </div>
@@ -49,7 +49,6 @@
         <div class="modal fade" id="ContaminanteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
-                    <form  method="POST" id="formStorePullatant">
                         <div class="modal-header">
                             <h2>Agregar Contaminante</h2>
                         </div>
@@ -63,12 +62,10 @@
                                 <textarea class="form-control" name="description" id="description" style="height: 100px" max="50"></textarea>
                             </div>
                         </div>
-                        
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-outline-primary" data-bs-dismiss="modal" id="btnCreatePollutant" name="btnCreatePollutant">Aceptar</button>
-                            <button class="btn btn-outline-primary" name="btnCancelPollutant" id="btnCancelPollutant" data-bs-dismiss="modal">Cancelar</button>
+                            <button class="btn btn-outline-primary" data-bs-dismiss="modal" id="btnCreatePollutant" name="btnCreatePollutant">Aceptar</button>
+                            <button class="btn btn-outline-primary btnCancel" name="btnCancelPollutant" id="btnCancelPollutant" data-bs-dismiss="modal">Cancelar</button>
                         </div>
-                    </form>
                 </div>
             </div>
         </div>
@@ -79,11 +76,14 @@
         <div class="modal fade" id="ContaminanteEditModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
-                    <form  method="POST" id="formEditPullatant">
                         <div class="modal-header">
                             <h2>Editar Nombre Contaminante</h2>
                         </div>
                         <div class="modal-body">
+                            <div>
+                                <label for="txtIDPollutantEdit">ID:</label>
+                                <input class="form-control" type="text" name="txtIDPollutantEdit" id="txtIDPollutantEdit" required min="1" max="25" disabled>
+                            </div>
                             <div>
                                 <label for="txtNamePollutant">Nombre:</label>
                                 <input class="form-control" type="text" name="txtNamePollutantEdit" id="txtNamePollutantEdit" required min="1" max="25">
@@ -95,10 +95,9 @@
                         </div>
                             
                         <div class="modal-footer">
-                            <button class="btn btn-outline-primary" type="submit" data-bs-dismiss="modal" id="btnEditarPollutant" name="btnEditarPollutant">Aceptar</button>
-                            <button class="btn btn-outline-primary" name="btnCancelarPollutant" id="btnCancelarPollutant" data-bs-dismiss="modal">Cancelar</button>
+                            <button class="btn btn-outline-primary" data-bs-dismiss="modal" id="btnEditarPollutant" name="btnEditarPollutant">Aceptar</button>
+                            <button class="btn btn-outline-primary btnCancel" name="btnCancelarPollutant" id="btnCancelarPollutant" data-bs-dismiss="modal">Cancelar</button>
                         </div>
-                    </form>
                 </div>
             </div>
         </div>
@@ -107,73 +106,10 @@
 </div>
 @entryPointScripts('pollutant')
 <script>
-    let idCont=0;
-
-    function notificationSwal(message,type){
-        Swal.fire({
-            text:message,
-            icon: type,
-            timer:1000,
-            timerProgressBar: true
-        }).then((result)=>{
-            location.reload();
-        });
-    }
-    function requestAxios(url,method,data){
-        axios({
-            url:url,
-            method:method,
-            data:data
-        })
-        .then(response=>{
-            console.log(response.data)
-            this.notificationSwal(response.data,'success')
-        })
-        .catch(error=>{
-            console.log(error)
-            this.notificationSwal(error,'error')
-        })
-    }
-
-    function deletePollutant(id){
-        if(id!=0){
-            Swal.fire({
-                title: 'Está seguro de eliminar este elemento?',
-                showCancelButton: true,
-                confirmButtonText: `Eliminar`,
-                denyButtonText: `Cancelar`,
-            }).then((result)=>{
-                if (result.isConfirmed){
-                    let url='pollutant/delete'
-                    let method='POST'
-                    let dat={
-                        id:id
-                    }
-                    this.requestAxios(url,method,dat)
-                }
-            })
-        }
-    }
-
     function showPollutant(id,name,description){
-        idCont=id;
+        document.getElementById('txtIDPollutantEdit').value=id
         document.getElementById('txtNamePollutantEdit').value=name
         document.getElementById('txtDescriptionPollutantEdit').value=description
     }
-
-    document.getElementById('formEditPullatant')
-    .addEventListener('submit',e =>{
-        e.preventDefault()
-
-        let url='/pollutant/edit'
-        let method='POST'
-        let dat={
-            id:idCont,
-            name:document.getElementById('txtNamePollutantEdit').value.trim(),
-            description:document.getElementById('txtDescriptionPollutantEdit').value.trim()
-        }
-        //alert(JSON.stringify(dat))
-        this.requestAxios(url,method,dat)
-    })
 </script>
 @end

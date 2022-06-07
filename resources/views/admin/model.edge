@@ -45,8 +45,8 @@
                 <div class="col col-6 d-grid gap-2 mx-auto">
                     <button  class="btn btn-info" id="btnEdit" onclick="showModel({{ model.id }})" data-bs-toggle="modal" data-bs-target="#ModeloModalEdit">Editar</button>
                 </div>
-                <div class="col col-6 d-grid gap-2 mx-auto">
-                    <button  class="btn btn-danger" onclick='deleteModel({{ model.id }})'>Eliminar</button>
+                <div class="col col-6 d-grid gap-2 mx-auto" >
+                    <button  class="btn btn-danger btnDelete" name="{{ model.id }}">Eliminar</button>
                 </div>
             </div>
             </div>
@@ -92,7 +92,7 @@
     </div>
 
 
-    
+    <!-- MODAL EDITAR MODELO -->
     <div class="container-fluid">
         <div class="modal fade" id="ModeloModalEdit" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
@@ -101,6 +101,10 @@
                         <h2>Editar Modelo</h2>
                     </div>
                     <div class="modal-body">
+                        <div>
+                            <label for="txtIDModelEdit">ID:</label>
+                            <input class="form-control" type="text" name="txtIDModelEdit" id="txtIDModelEdit" required min="1" max="25" disabled>
+                        </div>
                         <div>
                             <label class="form-label" for="NomModeloEdit">Nombre:</label>
                             <input class="form-control" type="text" name="NomModeloEdit" id="NomModeloEdit" required min="1" max="25">
@@ -118,8 +122,8 @@
                         @endeach            
                     </div>
                     <div class="modal-footer">
-                        <button  class="btn btn-outline-primary"  id="btnEditarModelo" name="btnCrearModelo" data-bs-dismiss="modal" onclick="editModel()">Editar</button>
-                        <button class="btn btn-outline-primary" id="btnCancelarEditModelo" name="btnCancelarModelo" data-bs-dismiss="modal">Cancelar</button>
+                        <button  class="btn btn-outline-primary"  id="btnEditarModelo" name="btnEditarModelo" data-bs-dismiss="modal">Editar</button>
+                        <button class="btn btn-outline-primary" id="btnCancelarEditModelo" name="btnCancelarEditModelo" data-bs-dismiss="modal">Cancelar</button>
                     </div>
                 </div>
             </div>
@@ -129,56 +133,8 @@
 @entryPointScripts('model')
 
 <script>
-    let idMod=0;
-
-    function notificationSwal(message,type){
-        Swal.fire({
-            text:message,
-            icon: type,
-            timer:1000,
-            timerProgressBar: true
-        }).then((result)=>{
-            location.reload();
-        });
-    }
-    function requestAxios(url,method,data){
-        axios({
-            url:url,
-            method:method,
-            data:data
-        })
-        .then(response=>{
-            console.log(response.data)
-            this.notificationSwal(response.data,'success')
-        })
-        .catch(error=>{
-            console.log(error)
-            this.notificationSwal(error,'error')
-        })
-    }
-
-    function deleteModel(id){
-        if(id!=0){
-            Swal.fire({
-                title: 'Está seguro de eliminar este elemento?',
-                showCancelButton: true,
-                confirmButtonText: `Eliminar`,
-                denyButtonText: `Cancelar`,
-            }).then((result)=>{
-                if (result.isConfirmed){
-                    let url='model/delete'
-                    let method='POST'
-                    let dat={
-                        id:id
-                    }
-                    this.requestAxios(url,method,dat)
-                }
-            })
-        }
-    }
-    
     function showModel(id){
-        idMod=id;
+        document.getElementById('txtIDModelEdit').value=id;
         let NomModeloEdit=document.getElementById('NomModeloEdit');
         let txtDesModeloEdit =document.getElementById('txtDesModeloEdit')
         let checks=document.getElementsByName('checkEdit');
@@ -206,38 +162,5 @@
         });
 
     }
-
-    function editModel(){
-        let checks=document.getElementsByName('checkEdit');
-        let idCont=[]
-        let i=0;
-        checks.forEach(element => {
-            if(element.checked){
-                idCont.push(element.value)
-                i++;
-            }
-        });
-
-        if(i<1){
-            let msg="Debe seleccionar al menos un contaminante."
-            let typ="warning"
-            services.notificationSwal(msg,typ)
-            return false;
-        }
-
-        
-        let url='/model/edit'
-        let method='POST'
-        let dat={
-            id:idMod,
-            name:document.getElementById('NomModeloEdit').value.trim(),
-            description:document.getElementById('txtDesModeloEdit').value.trim(),
-            pollutants:idCont
-        }
- 
-        //alert(JSON.stringify(dat))
-        this.requestAxios(url,method,dat)
-    }
-
 </script>
 @end
