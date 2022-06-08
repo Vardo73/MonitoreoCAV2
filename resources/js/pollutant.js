@@ -1,6 +1,4 @@
 import AppGlobal from '../js/app.js'
-
-
 let services=new AppGlobal()
 
 //Limpiar inputs
@@ -57,6 +55,17 @@ let services=new AppGlobal()
         }
 
     })
+    
+//Obtener los botones de Eliminar
+window.onload= function(){
+    let btnCancel=document.querySelectorAll('.btnDelete')
+    btnCancel.forEach(element=>{
+        element.addEventListener('click',()=>{
+            let id=parseInt(element.getAttribute('name'))
+            deletePollutant(id)
+        })
+    })
+}
 
 //Eliminar Contaminante
     function deletePollutant(id){
@@ -79,16 +88,7 @@ let services=new AppGlobal()
         }
     }
 
-//Obtener los botones de Eliminar
-    window.onload= function(){
-        let btnCancel=document.querySelectorAll('.btnDelete')
-        btnCancel.forEach(element=>{
-            element.addEventListener('click',()=>{
-                let id=parseInt(element.getAttribute('name'))
-                deletePollutant(id)
-            })
-        })
-    }
+
 
 
 

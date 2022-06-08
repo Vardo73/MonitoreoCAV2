@@ -32,8 +32,6 @@ export default class ModelsController {
                 description:request.input('description')
             });
             let idM=model.id
-            console.log(idM)
-            console.log(pollutants)
 
             pollutants.forEach(async element => {
                 const polluMod= await PollutantModel.create({
@@ -81,7 +79,6 @@ export default class ModelsController {
             return [model,relacion]
 
         } catch (error) {
-            
             console.log(error);
             return error;
         }

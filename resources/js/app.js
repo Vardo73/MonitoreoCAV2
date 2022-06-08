@@ -32,7 +32,8 @@ export default class AppGlobal {
     }
 
     validator(element){
-        if(element!='' && element!=0){
+        if(element!='' && element!=-1){
+            console.log(element)
             return true;
         }
         return false

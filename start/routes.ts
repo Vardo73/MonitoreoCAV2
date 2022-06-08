@@ -30,10 +30,19 @@ Route.group(() => {
 }).prefix('/pollutant')
 
 
-//Controller Pollutant
+//Controller Model
 Route.group(() => {
   Route.post('/store', 'ModelsController.store')
   Route.post('/delete', 'ModelsController.delete')
   Route.post('/edit', 'ModelsController.edit')
   Route.post('/showModel', 'ModelsController.showModel')
 }).prefix('/model')
+
+
+//Controller Station
+Route.group(() => {
+  Route.post('/store', 'StationsController.store')
+  Route.post('/delete', 'StationsController.delete')
+  Route.post('/edit', 'StationsController.edit')
+  Route.post('/showStation', 'StationsController.showStation')
+}).prefix('/station')

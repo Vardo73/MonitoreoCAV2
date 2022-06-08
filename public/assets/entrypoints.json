@@ -14,6 +14,11 @@
       "js": [
         "http://localhost:8080/assets/model.js"
       ]
+    },
+    "station": {
+      "js": [
+        "http://localhost:8080/assets/station.js"
+      ]
     }
   }
 }
