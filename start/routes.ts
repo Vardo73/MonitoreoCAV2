@@ -46,3 +46,12 @@ Route.group(() => {
   Route.post('/edit', 'StationsController.edit')
   Route.post('/showStation', 'StationsController.showStation')
 }).prefix('/station')
+
+
+//Controller Data
+Route.group(() => {
+  Route.post('/report_day', 'DataController.reportDayJson')
+  Route.post('/report_month', 'DataController.reportMonthJson')
+  Route.get('/report/:station_id/:date', 'DataController.reportDayHTML')
+  Route.get('/report_month/:station_id/:date', 'DataController.reportMonthHTML')
+}).prefix('/data')

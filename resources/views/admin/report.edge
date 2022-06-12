@@ -6,6 +6,62 @@
     <hr/>
         <h2 style="text-align: center;"><span style="color: #2aa5d6;">Reportes</span></h2>
     <hr/>
+    <br>
+    <div class="m-0  row justify-content-center align-items-center" >
+        <div class="container col">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row mx-auto">
+                        <div class="col col-4 mx-auto">
+                            <label class="form-label" for="selectStation">Estación:</label>
+                            <select class="form-control" name="selectStation" id="selectStation" required>
+                                <option  value='0' selected disabled>Seleccione una estación</option>
+                                @each(station in stations)
+                                  <option  value='{{ station.id }}'>{{ station.name }}</option>
+                                @endeach
+                            </select>
+                        </div>
+                        <div class="col col-4 mx-auto">
+                            <label class="form-label" for="selectType">Fecha:</label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-text">
+                                    <label class="form-check-label" for="cbMonth">Mes?.-</label>
+                                    <input id="cbMonth" class="form-check-input mt-0" type="checkbox" value="" aria-label="Check para obtener datos del mes">
+                                </div>
+                                <input type="date" class="form-control" id="dateFrom">
+                            </div>
+                        </div>
+                        <div class="col col-4 mx-auto">
+                            <label class="form-label" for="selectType">Presentación:</label>
+                            <select class="form-control" name="selectType" id="selectType" required>
+                                <option  value='0' selected disabled>Tipo de presentación</option>
+                                <option  value='html'  >HTML</option>
+                                <option  value='json'  >Json</option>
+                            </select>
+                        </div>
+                        <div class="row mx-auto">
+                            <button  class="btn btn-primary" id="btnGenerateReport" >Generar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <div class="d-grid gap-2 col-6 mx-auto">
+        <div class="card collapse " id="cardRepotHTML">
+            <div class="card-body " id="linkReport">
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="card collapse " id="cardRepotJson">
+        <div class="card-body">
+            <pre id="jsondata"></pre>
+        </div>
+    </div>
 </div>
+@entryPointScripts('reports')
 
 @end

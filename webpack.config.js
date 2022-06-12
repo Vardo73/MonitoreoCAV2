@@ -48,7 +48,10 @@ Encore.setPublicPath('/assets')
 Encore.addEntry('app', './resources/js/app.js'),
 Encore.addEntry('pollutant', './resources/js/pollutant.js'),
 Encore.addEntry('model', './resources/js/model.js'),
-Encore.addEntry('station', './resources/js/station.js')
+Encore.addEntry('station', './resources/js/station.js'),
+Encore.addEntry('reports', './resources/js/reports.js'),
+Encore.addEntry('reportData', './resources/js/reportData.js'),
+Encore.addEntry('reportMonth', './resources/js/reportMonth.js')
 
 /*
 |--------------------------------------------------------------------------

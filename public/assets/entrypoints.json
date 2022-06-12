@@ -19,6 +19,21 @@
       "js": [
         "http://localhost:8080/assets/station.js"
       ]
+    },
+    "reports": {
+      "js": [
+        "http://localhost:8080/assets/reports.js"
+      ]
+    },
+    "reportData": {
+      "js": [
+        "http://localhost:8080/assets/reportData.js"
+      ]
+    },
+    "reportMonth": {
+      "js": [
+        "http://localhost:8080/assets/reportMonth.js"
+      ]
     }
   }
 }
