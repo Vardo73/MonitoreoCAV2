@@ -2,7 +2,7 @@ import Route from '@ioc:Adonis/Core/Route'
 
 Route.get('/', async ({ view }) => {
   return view.render('airelimpio/map')
-})
+}).as('map')
 
 //Views
 Route.get('/station', 'StationsController.show').as('station').middleware('auth')

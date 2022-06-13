@@ -13,6 +13,10 @@
  
   <!--AXIOS-->
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+   <!--Mapbox -->
+  <script src='https://api.mapbox.com/mapbox-gl-js/v2.8.2/mapbox-gl.js'></script>
+  <link href='https://api.mapbox.com/mapbox-gl-js/v2.8.2/mapbox-gl.css' rel='stylesheet' />
   
   @entryPointStyles('app')
   @entryPointScripts('app')
@@ -20,7 +24,6 @@
 <body>
 
   <!--Views-->
-  @include('navbar')
   <!--Admin-->
   @!section('login')
   @!section('station')

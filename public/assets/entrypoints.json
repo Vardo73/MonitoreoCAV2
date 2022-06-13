@@ -34,6 +34,11 @@
       "js": [
         "http://localhost:8080/assets/reportMonth.js"
       ]
+    },
+    "map": {
+      "js": [
+        "http://localhost:8080/assets/map.js"
+      ]
     }
   }
 }

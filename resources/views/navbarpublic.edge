@@ -1,0 +1,111 @@
+<section>
+    <nav id="MyNavbarPublic" class="navbar navbar-expand-lg navbar-dark bg-primary" >
+        <a class="navbar-brand"  href="{{route('map')}}" style="margin-left:2%">
+            <h4>Sistema de Monitoreo de la Calidad del Aire</h4>
+            
+        </a>
+        <img src="img/logoBlanco.png" alt="0" width="110"  class="img-fluid d-inline-block align-text-top" style="margin-left:8%">
+        
+        <!--Botón menú -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+         <!--Botones -->
+        <div class="collapse navbar-collapse" id="navbarToggleExternalContent" >
+            <ul class="navbar-nav ms-auto" >
+                <!-- Informate -->
+                <li class="nav-item">
+                  <a class="nav-link btn btn-primary" data-bs-toggle="modal" data-bs-target="#InfoModal" href="">Informate</a>
+                </li>
+                <!-- Apoyanos-->
+                <li class="nav-item">
+                    <a class="nav-link btn btn-primary" data-bs-toggle="modal" data-bs-target="#ApoyanosModal" href="" >
+                        Apoyanos
+                    </a>
+                </li>
+                <!-- Salud -->
+                <li class="nav-item">
+                  <a class="nav-link btn btn-primary" href="http://enfermedades.airelimpiobcs.org.mx">Salud</a>
+                </li>
+                <!-- Cámara -->
+                <li class="nav-item ">
+                  <a class="nav-link btn btn-primary" href="https://photos.app.goo.gl/zQHQwX3zLnfWPiPd6">
+                      Cámara
+                  </a>
+              </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Modal Informate-->
+    <div class="container-fluid">
+        <div class="modal fade" id="InfoModal"  data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="row mx-auto" >
+                            <h2 style="text-align: center;">Obten más información</h2>
+                        </div>
+                        <hr/>
+                        <div class="row mx-auto" >
+                            <h4 style="text-align: center;">Visitando:</h4>
+                        </div>
+                        <hr/>
+                        <div class="row mx-auto">
+                            <a style="text-align: center;" href="https://aire.org.mx/" target="_blank" rel="noopener noreferrer">
+                                <img src="img/logoAire.png" alt="0" width="150"  class="img-fluid d-inline-block align-text-top">
+                            </a>
+                        </div>
+                        <hr/>
+                        <div class="row mx-auto">
+                            <h4 style="text-align: center;">Inscríbete a nuestro boletín:</h4>
+                        </div>
+                        <hr/>
+                        <div class="row mx-auto" >
+                            <a style="text-align: center;" href="https://cerca.org.mx/registro/" target="_blank" rel="noopener noreferrer">
+                                <img src="img/LogotipoColoresOriginales.svg" alt="0" width="175"  class="img-fluid d-inline-block align-text-top">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <!-- Modal Apoyanos-->
+    <div class="container-fluid">
+        <div class="modal fade" id="ApoyanosModal"  data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="row mx-auto" >
+                            <h2 style="text-align: center;">Puedes ayudarnos</h2>
+                        </div>
+                        <hr/>
+                        <div class="row mx-auto" >
+                            <h4 style="text-align: center;">Donando:</h4>
+                        </div>
+                        <hr/>
+                        <div class="row mx-auto">
+                            <a style="text-align: center;" href="https://www.paypal.com/donate/?hosted_button_id=CQX6JXVWALTGG" target="_blank" rel="noopener noreferrer">
+                                <img src="img/logoPayPal.png" alt="0" width="150"  class="img-fluid d-inline-block align-text-top">
+                            </a>
+                        </div>
+                        <hr/>
+                        <div class="row mx-auto">
+                            <h4 style="text-align: center;">Firma una petición:</h4>
+                        </div>
+                        <hr/>
+                        <div class="row mx-auto" >
+                            <a style="text-align: center;" href="https://www.change.org/p/semarnat-mx-semarnat-no-otorgue-permisos-ambientales-para-otra-chimenea-de-proyecto-cci-vi" target="_blank" rel="noopener noreferrer">
+                                <h2>Petición 1</h2>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
