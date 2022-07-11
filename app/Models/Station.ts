@@ -28,6 +28,9 @@ export default class Station extends BaseModel {
 
   @column()
   public active: boolean
+  
+  @column()
+  public suburb: string
 
   @column.dateTime()
   public createdAt: DateTime

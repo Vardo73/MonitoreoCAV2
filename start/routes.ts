@@ -54,4 +54,5 @@ Route.group(() => {
   Route.post('/report_month', 'DataController.reportMonthJson')
   Route.get('/report/:station_id/:date', 'DataController.reportDayHTML')
   Route.get('/report_month/:station_id/:date', 'DataController.reportMonthHTML')
+  Route.get('api/frontc3rk41r3/datosmoviles', 'DataController.API')
 }).prefix('/data')

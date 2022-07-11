@@ -45,6 +45,9 @@ async function DataGraphs(){
     hours.push(moment(ele.created_at).format('HH'))
    })
 
+   console.log(datPm2)
+   console.log(datPm10)
+
    services.pieGraph(canPiePm2,limOmsPm2,limNomPm2,datPm2,'PM 2.5')
    services.pieGraph(canPiePm10,limOmsPm10,limNomPm10,datPm10,'PM 10')
    services.limitGraph(canLimPm2,limOmsPm10,limNomPm10,datPm10,'PM 2.5',hours)

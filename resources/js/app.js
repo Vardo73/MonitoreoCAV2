@@ -77,9 +77,9 @@ export default class AppGlobal {
         let veryBad=0;
 
         data.forEach(ele => {
-            if(ele.average<limOms){
+            if(ele<limOms){
                 good++;
-            }else if(ele.average<limNom){
+            }else if(ele<limNom){
                 bad++;
             }else{
                 veryBad++;
@@ -133,7 +133,7 @@ export default class AppGlobal {
         })
 
         data.forEach(e=>{
-            average.push(e.average)
+            average.push(e)
         })
 
         let Data = {

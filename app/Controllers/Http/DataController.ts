@@ -117,4 +117,34 @@ export default class DataController {
             return error
         }
     }
+
+
+    
+    async API(){
+        try{
+            const datos=await Database.from('data')
+            .join('stations', (query) => {
+                query
+                .on('stations.id', '=', 'data.station_id')
+            })
+            .select('stations.slug as estacion_id','data.average_pm2 as promedio_PM2','data.average_pm10 as promedio_PM10','data.created_at')
+            .orderBy([{ column: 'data.created_at', order: 'desc' }])
+            .limit(2520);
+
+            let i=0;
+            while (i<datos.length) {
+                datos[i].created_at=moment(datos[i].created_at).format()
+                let fec=datos[i].created_at;
+                let h=moment(fec).format('HH')
+
+                datos[i].hora=h;
+                datos[i].datodiario_id=23;
+                i++;
+            }
+            return datos;
+        }
+        catch(error){
+            return error;
+        }
+    }
 }

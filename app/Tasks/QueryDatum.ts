@@ -16,7 +16,7 @@ https://api.thingspeak.com/channels/'+station[i].channel+'/feeds.json?api_key='+
 
 export default class QueryDatum extends BaseTask {
 	public static get schedule() {
-		return '3 * * * *'
+		return '36 * * * *'
 	}
 	/*
 	 * Set enable use .lock file for block run retry task
@@ -27,10 +27,10 @@ export default class QueryDatum extends BaseTask {
 	}
 
 	public async handle() {
-		//this.date(1,7,'06')
-		let hour=moment().format('HH');
+		this.date(1,10,'07')
+		/*let hour=moment().format('HH');
 		let date=moment().format('YYYY-MM-DD');
-    	this.RequestPurpleAirCurrent(hour,date)
+    	this.RequestPurpleAirCurrent(hour,date)*/
   	}
 
 	public async date(pstart,plimit,pmonth){

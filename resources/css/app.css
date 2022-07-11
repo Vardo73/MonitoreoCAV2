@@ -75,6 +75,11 @@ main code {
   background: #e6e2ff;
 }
 
-.abs-center {
-  
+.marker {
+  background-image: url('../../public\img\logo41.svg');
+  background-size: cover;
+  width: 50px;
+  height: 50x;
+  border-radius: 50%;
+  cursor: pointer;
 }

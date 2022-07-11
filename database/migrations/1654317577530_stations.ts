@@ -11,9 +11,10 @@ export default class extends BaseSchema {
       table.string('name',25).notNullable();
       table.integer('channel',15).unique()
       table.string('apikey',50).unique()
-      table.float('longitude',10,7);
-      table.float('latitude',10,7);
+      table.float('longitude',10,7)
+      table.float('latitude',10,7)
       table.boolean('active');
+      table.string('suburb',50)
       table.timestamp('created_at', { useTz: true })
     })
   }

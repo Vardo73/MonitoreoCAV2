@@ -15,12 +15,13 @@ document.getElementById('btnCreateStation')
     let active=document.getElementById('active').value.trim()
     let latitude=document.getElementById('latitude').value.trim()
     let longitude=document.getElementById('longitude').value.trim()
+    let suburb=document.getElementById('suburb').value.trim()
     
     
 
     if(services.validator(name) && services.validator(slug) && 
         services.validator(model_id) && services.validator(active) && 
-        services.validator(latitude) && services.validator(longitude) &&
+        services.validator(suburb) && services.validator(latitude) && services.validator(longitude) &&
         services.validator(channel) && services.validator(apikey)){
 
         let url='/station/store'
@@ -32,6 +33,7 @@ document.getElementById('btnCreateStation')
             apikey:apikey,
             model_id:model_id,
             active:active,
+            suburb:suburb,
             latitude:latitude,
             longitude:longitude
         }
@@ -96,6 +98,7 @@ function showStation(id){
     let active=document.getElementById('activeEdit')
     let latitude=document.getElementById('latitudeEdit')
     let longitude=document.getElementById('longitudeEdit')
+    let suburb=document.getElementById('suburbEdit')
 
     axios({
         method: 'POST',
@@ -112,7 +115,7 @@ function showStation(id){
         longitude.value=response.data.longitude
         model_id.value=response.data.model_id
         active.value=response.data.active
-
+        suburb.value=response.data.suburb
     })
     .catch(function (error) {
         services.notificationSwal(error,'error')
@@ -132,6 +135,7 @@ document.getElementById('btnEditStation')
     let active=document.getElementById('activeEdit').value.trim()
     let latitude=document.getElementById('latitudeEdit').value.trim()
     let longitude=document.getElementById('longitudeEdit').value.trim()
+    let suburb=document.getElementById('suburbEdit').value.trim()
 
     /*let dat={
         id:idEdit,
@@ -148,7 +152,7 @@ document.getElementById('btnEditStation')
     console.log(JSON.stringify(dat))*/
     if(services.validator(name) && services.validator(slug) && 
         services.validator(model_id) && services.validator(active) && 
-        services.validator(latitude) && services.validator(longitude) &&
+        services.validator(suburb) && services.validator(latitude) && services.validator(longitude) &&
         services.validator(channel) && services.validator(apikey)){
 
         let url='/station/edit'
@@ -161,6 +165,7 @@ document.getElementById('btnEditStation')
             apikey:apikey,
             model_id:model_id,
             active:active,
+            suburb:suburb,
             latitude:latitude,
             longitude:longitude
         }

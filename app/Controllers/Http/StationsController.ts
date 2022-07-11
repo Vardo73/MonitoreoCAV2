@@ -22,6 +22,7 @@ export default class StationsController {
             .select('stations.active')
             .select('models.name as nomM')
             .select('models.id as idM')
+            .select('stations.suburb')
         
         const relacion=await Database
         .from('pollutant_models')
@@ -46,7 +47,8 @@ export default class StationsController {
                 apikey: request.input('apikey'),
                 longitude: request.input('longitude'),
                 latitude: request.input('latitude'),
-                active:request.input('active')
+                active:request.input('active'),
+                suburb:request.input('suburb')
             });
 
             
@@ -98,6 +100,7 @@ export default class StationsController {
             station.apikey=request.input('apikey');
             station.model_id=request.input('model_id');
             station.active=request.input('active');
+            station.suburb=request.input('suburb');
             station.latitude=request.input('latitude');
             station.longitude=request.input('longitude');
 
