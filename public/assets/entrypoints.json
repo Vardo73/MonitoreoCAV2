@@ -2,42 +2,42 @@
   "entrypoints": {
     "app": {
       "js": [
-        "http://localhost:8080/assets/app.js"
+        "/assets/app.87b666bb.js"
       ]
     },
     "pollutant": {
       "js": [
-        "http://localhost:8080/assets/pollutant.js"
+        "/assets/pollutant.a85a6de7.js"
       ]
     },
     "model": {
       "js": [
-        "http://localhost:8080/assets/model.js"
+        "/assets/model.fb8a847f.js"
       ]
     },
     "station": {
       "js": [
-        "http://localhost:8080/assets/station.js"
+        "/assets/station.96cc1005.js"
       ]
     },
     "reports": {
       "js": [
-        "http://localhost:8080/assets/reports.js"
+        "/assets/reports.cdbff971.js"
       ]
     },
     "reportData": {
       "js": [
-        "http://localhost:8080/assets/reportData.js"
+        "/assets/reportData.e05bfba0.js"
       ]
     },
     "reportMonth": {
       "js": [
-        "http://localhost:8080/assets/reportMonth.js"
+        "/assets/reportMonth.2e3ed1ad.js"
       ]
     },
     "map": {
       "js": [
-        "http://localhost:8080/assets/map.js"
+        "/assets/map.d6a9f96d.js"
       ]
     }
   }

@@ -3,6 +3,7 @@ import moment from 'moment'
 import Database from '@ioc:Adonis/Lucid/Database'
 import Axios from 'axios'
 import Datum from 'App/Models/Datum'
+import Emailer from 'App/Methods/email'
 
 /* Datos generales del monitor
 https://www.purpleair.com/json?key=7X87EFT46TOH2OL9&show=39465
@@ -14,9 +15,10 @@ https://api.thingspeak.com/channels/'+station[i].channel+'/feeds.json?api_key='+
 	+fecha+'%20'+hora+':00:00&end='+fecha+'%20'+hora+':00:00&round=2
 */
 
+
 export default class QueryDatum extends BaseTask {
 	public static get schedule() {
-		return '36 * * * *'
+		return '0 15 * * * *'
 	}
 	/*
 	 * Set enable use .lock file for block run retry task
@@ -27,10 +29,15 @@ export default class QueryDatum extends BaseTask {
 	}
 
 	public async handle() {
-		this.date(1,10,'07')
-		/*let hour=moment().format('HH');
+
+
+		//Manual para rango de dias de un mes
+		//this.date(17,18,'07')
+
+		//Proceso automatico
+		let hour=moment().format('HH');
 		let date=moment().format('YYYY-MM-DD');
-    	this.RequestPurpleAirCurrent(hour,date)*/
+    	this.RequestPurpleAirCurrent(hour,date)
   	}
 
 	public async date(pstart,plimit,pmonth){

@@ -10,6 +10,7 @@ Route.get('/model', 'ModelsController.show').as('model').middleware('auth')
 Route.get('/pollutant', 'PollutantsController.show').as('pollutant').middleware('auth')
 Route.get('/report', 'DataController.show').as('report').middleware('auth')
 Route.get('/ca-admin', 'UsersController.showLogin').middleware('guest')
+Route.get('/api/frontc3rk41r3/datosmoviles', 'DataController.API')
 
 //Controller User
 Route.group(() => {
@@ -54,5 +55,4 @@ Route.group(() => {
   Route.post('/report_month', 'DataController.reportMonthJson')
   Route.get('/report/:station_id/:date', 'DataController.reportDayHTML')
   Route.get('/report_month/:station_id/:date', 'DataController.reportMonthHTML')
-  Route.get('api/frontc3rk41r3/datosmoviles', 'DataController.API')
 }).prefix('/data')

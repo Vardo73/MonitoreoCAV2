@@ -1,10 +1,10 @@
 {
-  "assets/app.js": "http://localhost:8080/assets/app.js",
-  "assets/pollutant.js": "http://localhost:8080/assets/pollutant.js",
-  "assets/model.js": "http://localhost:8080/assets/model.js",
-  "assets/station.js": "http://localhost:8080/assets/station.js",
-  "assets/reports.js": "http://localhost:8080/assets/reports.js",
-  "assets/reportData.js": "http://localhost:8080/assets/reportData.js",
-  "assets/reportMonth.js": "http://localhost:8080/assets/reportMonth.js",
-  "assets/map.js": "http://localhost:8080/assets/map.js"
+  "assets/app.js": "/assets/app.87b666bb.js",
+  "assets/pollutant.js": "/assets/pollutant.a85a6de7.js",
+  "assets/model.js": "/assets/model.fb8a847f.js",
+  "assets/station.js": "/assets/station.96cc1005.js",
+  "assets/reports.js": "/assets/reports.cdbff971.js",
+  "assets/reportData.js": "/assets/reportData.e05bfba0.js",
+  "assets/reportMonth.js": "/assets/reportMonth.2e3ed1ad.js",
+  "assets/map.js": "/assets/map.d6a9f96d.js"
 }
