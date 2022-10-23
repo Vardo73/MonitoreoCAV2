@@ -2,7 +2,7 @@ import Database from '@ioc:Adonis/Lucid/Database';
 import moment from 'moment';
 
 export default class Logic{
-    public async averageMonth(station:string,date:string){
+    public async averageMonth(station:string,date:string):Promise<any>{
         
         try {
             
@@ -94,6 +94,7 @@ export default class Logic{
                 average_pm2:0,
                 average_pm10:0,
                 created_at:'',
+                suburb:'',
                 percentage:0
             }
 
@@ -104,6 +105,7 @@ export default class Logic{
                 .on('stations.id', '=', 'data.station_id')
             })
             .select('stations.name')
+            .select('stations.suburb')
             .select('data.average_pm2')
             .select('data.average_pm10')
             .select('data.created_at')
@@ -117,16 +119,18 @@ export default class Logic{
                     dat.name=e.name
                     pm2+=e.average_pm2
                     pm10+=e.average_pm10
+                    dat.suburb=e.suburb
                     dat.created_at= moment(e.created_at).format('YYYY-MM-DD').toString()
                 })
 
                 //Promedio
                 pm2=pm2/data.length
                 pm10=pm10/data.length
+                let percentage=(100/24)*data.length;
 
                 dat['average_pm2']=Math.round((pm2 + Number.EPSILON) * 100) / 100;
                 dat['average_pm10']=Math.round((pm10 + Number.EPSILON) * 100) / 100;
-                dat['percentage']=(100/24)*data.length;
+                dat['percentage']=Math.round((percentage + Number.EPSILON) * 100) / 100;
                 
                 return dat;
             }

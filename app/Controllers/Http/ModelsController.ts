@@ -1,5 +1,4 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import { schema, rules } from '@ioc:Adonis/Core/Validator'
 import Pollutant from 'App/Models/Pollutant'
 import PollutantModel from 'App/Models/PollutantModel'
 import Database from '@ioc:Adonis/Lucid/Database'
@@ -10,6 +9,7 @@ export default class ModelsController {
 
         const models=await Model.all();
         const pollutants=await Pollutant.all();
+        
         const relacion=await Database
         .from('pollutant_models')
         .join('pollutants', (query) => {
@@ -59,6 +59,7 @@ export default class ModelsController {
             .whereRaw('pollutant_models.model_id=? ',[id]).delete();
             
             await model.delete();
+            await Database.rawQuery('ALTER TABLE monitoreocav2.models AUTO_INCREMENT = ?', [id])
             return 'Modelo eliminado con exito.'
         } catch (error) {
             console.log(error);

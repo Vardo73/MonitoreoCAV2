@@ -1,3 +1,4 @@
+
 export default class AppGlobal {
 
     constructor(){
@@ -69,7 +70,6 @@ export default class AppGlobal {
         }
         return false
     }
-
 
     pieGraph(canvas,limOms,limNom,data,text){
         let good=0;
@@ -180,7 +180,6 @@ export default class AppGlobal {
         });
 
     }
-
     
     pieGraphMonth(canvas,limOms,limNom,data,text){
         let good=0;

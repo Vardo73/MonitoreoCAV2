@@ -7,10 +7,20 @@ Route.get('/', async ({ view }) => {
 //Views
 Route.get('/station', 'StationsController.show').as('station').middleware('auth')
 Route.get('/model', 'ModelsController.show').as('model').middleware('auth')
+Route.get('/ailment', 'AilmentsController.show').as('ailment').middleware('auth')
+Route.get('/location', 'LocationsController.show').as('location').middleware('auth')
 Route.get('/pollutant', 'PollutantsController.show').as('pollutant').middleware('auth')
 Route.get('/report', 'DataController.show').as('report').middleware('auth')
+Route.get('/json', 'DataController.showJson').as('json').middleware('auth')
 Route.get('/ca-admin', 'UsersController.showLogin').middleware('guest')
-Route.get('/api/frontc3rk41r3/datosmoviles', 'DataController.API')
+Route.get('/historics/:station_id', 'StationsController.historics').as('historics')
+Route.get('/mapa-salud', 'LocationsController.showMap').as('mapAilments')
+
+//API 
+Route.group(() => {
+  Route.get('/frontc3rk41r3/datosmoviles', 'DataController.API')
+  Route.get('/free/bot/stations', 'StationsController.ApiStation')
+}).prefix('/api')
 
 //Controller User
 Route.group(() => {
@@ -31,6 +41,24 @@ Route.group(() => {
 }).prefix('/pollutant')
 
 
+//Controller Ailment
+Route.group(() => {
+  Route.post('/store', 'AilmentsController.store')
+  Route.post('/edit', 'AilmentsController.edit')
+  Route.post('/showAilment', 'AilmentsController.showAilment')
+  Route.post('/delete', 'AilmentsController.delete')
+  Route.post('/storeAilLoc', 'AilmentsController.storeAilLoc')
+}).prefix('/ailment')
+
+//Controller Location
+Route.group(() => {
+  Route.post('/store', 'LocationsController.store')
+  Route.post('/edit', 'LocationsController.edit')
+  Route.post('/delete', 'LocationsController.delete')
+  Route.get('/map', 'LocationsController.LocationsMap')
+  Route.get('/LocAil/:location_id', 'LocationsController.LocAil')
+}).prefix('/location')
+
 //Controller Model
 Route.group(() => {
   Route.post('/store', 'ModelsController.store')
@@ -46,6 +74,7 @@ Route.group(() => {
   Route.post('/delete', 'StationsController.delete')
   Route.post('/edit', 'StationsController.edit')
   Route.post('/showStation', 'StationsController.showStation')
+  Route.get('/map', 'StationsController.StationsMap')
 }).prefix('/station')
 
 

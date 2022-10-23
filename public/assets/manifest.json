@@ -6,5 +6,10 @@
   "assets/reports.js": "/assets/reports.cdbff971.js",
   "assets/reportData.js": "/assets/reportData.e05bfba0.js",
   "assets/reportMonth.js": "/assets/reportMonth.2e3ed1ad.js",
-  "assets/map.js": "/assets/map.d6a9f96d.js"
+  "assets/map.js": "/assets/map.f3a6d6db.js",
+  "assets/mapAil.js": "/assets/mapAil.ef8fce9a.js",
+  "assets/historics.js": "/assets/historics.858267bb.js",
+  "assets/json.js": "/assets/json.6f4f5d4d.js",
+  "assets/ailment.js": "/assets/ailment.8f3a64dc.js",
+  "assets/location.js": "/assets/location.5b7dc640.js"
 }

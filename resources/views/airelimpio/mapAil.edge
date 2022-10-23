@@ -1,0 +1,35 @@
+@layout('master')
+
+@section('mapAil')
+<style>
+    body { margin: 0; padding: 0; }
+    #mapAil { position: absolute;  width: 100%; height: 83%;}
+        
+    .marker{
+        border-right: 1px solid white;
+        width: 25px;
+        height: 24px;
+        border-radius: 50%;
+        cursor: pointer;
+        background-Color: #38B208;
+        -webkit-mask-image: url('img/ico_salud.svg');
+        mask-image: url('img/ico_salud.svg');
+    }
+    .contPin{
+        display: flex;
+        align-items: center;
+    }
+    
+    .mapboxgl-popup {
+        max-width: 500px;
+    }
+
+</style>
+@include('navbarpublic')
+<div id='mapAil'></div>
+
+@include('airelimpio/fab')
+@include('airelimpio/index')
+@include('footer')
+@entryPointScripts('mapAil')
+@end

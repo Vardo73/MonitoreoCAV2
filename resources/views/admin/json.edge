@@ -1,0 +1,33 @@
+@layout('master')
+
+@section('json')
+
+@include('navbar')
+<br>
+<div class="container">
+    <hr/>
+        <h2 style="text-align: center;"><span style="color: #2aa5d6;">Lectura de Json</span></h2>
+    <hr/>
+</div>
+<div class="container">
+    <br>
+    <div class="row">
+            <div class="col">
+                <label class="form-label" for="jsonfile">Año de los datos:</label>
+                <input class="form-control" class="form-control" type="number" name="year" id="year" min="2000" max="2999">
+            </div>
+            
+            <div class="col">
+                <label class="form-label" for="jsonfile">Suba el archivo en formato json:</label>
+                <input class="form-control" type="file" name="jsonfile" id="jsonfile" accept=".json">
+            </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col">
+            <button class='form-control btn btn-primary' id="LeerJson" disabled="true">Aceptar</button>
+        </div>
+    </div>
+</div>
+@entryPointScripts('json')
+@end

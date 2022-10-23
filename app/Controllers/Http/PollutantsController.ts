@@ -82,6 +82,7 @@ export default class PollutantsController {
             .whereRaw('pollutant_models.pollutant_id=? ',[id]).delete();
             
             await pollutant.delete();
+            await Database.rawQuery('ALTER TABLE monitoreocav2.pollutants AUTO_INCREMENT = ?', [id])
             return 'Contaminante eliminado con exito.'
         } catch (error) {
             console.log(error);

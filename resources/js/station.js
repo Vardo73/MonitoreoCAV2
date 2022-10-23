@@ -52,7 +52,6 @@ window.onload= function(){
         element.addEventListener('click',()=>{
             let id=parseInt(element.getAttribute('name'))
             deletePollutant(id)
-            
         })
     })
 
@@ -137,19 +136,6 @@ document.getElementById('btnEditStation')
     let longitude=document.getElementById('longitudeEdit').value.trim()
     let suburb=document.getElementById('suburbEdit').value.trim()
 
-    /*let dat={
-        id:idEdit,
-        slug:slug,
-        name:name,
-        channel:channel,
-        apikey:apikey,
-        model_id:model_id,
-        active:active,
-        latitude:latitude,
-        longitude:longitude
-    }
-    
-    console.log(JSON.stringify(dat))*/
     if(services.validator(name) && services.validator(slug) && 
         services.validator(model_id) && services.validator(active) && 
         services.validator(suburb) && services.validator(latitude) && services.validator(longitude) &&

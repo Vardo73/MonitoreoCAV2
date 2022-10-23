@@ -76,7 +76,7 @@
                                                 </td>
                                                 <td>
                                                     @if(station.active)
-                                                    <span class="badge rounded-pill bg-success text-dark">Activo</span>
+                                                    <span class="badge rounded-pill bg-success text-dark" >Activo</span>
                                                     @else
                                                     <span class="badge rounded-pill bg-danger text-dark">Inactivo</span>
                                                     @endif
@@ -97,15 +97,15 @@
                                 </div>
                             </div>
                             <div class="col col-3">
-                                <div class="accordion " id="accordionBanner">
-                                    <div class="accordion-item">
+                                <div class="accordion " id="accordionBanner" >
+                                    <div class="accordion-item" >
                                         <h2 class="accordion-header" id="panelsStayOpen-headingOne">
                                           <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
                                             Banner
                                           </button>
                                         </h2>
-                                        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
-                                          <div class="accordion-body">
+                                        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne" >
+                                          <div class="accordion-body" >
                                             <div id='PurpleAirWidget_{{ station.slug }}_module_AQI_conversion_C0_average_10_layer_standard'>Loading PurpleAir Widget...</div>
                                             <script src='https://www.purpleair.com/pa.widget.js?key={{ station.apikey }}&module=AQI&conversion=C0&average=10&layer=standard&container=PurpleAirWidget_{{ station.slug }}_module_AQI_conversion_C0_average_10_layer_standard'></script>
                                           </div>
@@ -132,7 +132,7 @@
         </div>
       </div>
     </div>
-  </div>
+</div>
 
 
     <!--MODAL REGISTRO DE ESTACION-->

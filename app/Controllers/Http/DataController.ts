@@ -11,6 +11,12 @@ export default class DataController {
         return view.render('admin/report',{stations});
     }
 
+    
+    public async showJson({view}:HttpContextContract){
+
+        return view.render('admin/json');
+    }
+
     public async reportDayJson({request}:HttpContextContract){
         const station_id=request.input('station_id');
         const date=request.input('date');
@@ -118,8 +124,6 @@ export default class DataController {
         }
     }
 
-
-    
     async API(){
         try{
             const datos=await Database.from('data')
@@ -147,4 +151,6 @@ export default class DataController {
             return error;
         }
     }
+
+
 }

@@ -1,0 +1,153 @@
+@layout('master')
+
+@section('ailment')
+@include('navbar')
+
+<div class="container">
+    <hr/>
+    <h2 style="text-align: center;"><span style="color: #2aa5d6;">Enfermedades</span></h2>
+    <hr/>
+</div>
+<br>
+<div class="container">
+    <div class="col col-12 align-self-end">
+        <div class="d-grid gap-2 mx-auto ">
+            <button class="btn btn-primary" id="modalNewAilment" data-bs-toggle="modal" data-bs-target="#AilmentModal">Agregar Nuevo</button>
+        </div>
+    </div>
+    <br>
+
+    <div id="CardsAilment">
+        <div class="row row-cols-3  ">
+            @each(ailment in ailments)
+            <div class="col">
+                <div class="card {{ ailment.id }}" name='tarjeta' style="margin-bottom:2rem">
+                    <h5 class="card-header">{{ ailment.id }}# {{ ailment.name }}</h5>
+                    <div class="card-body">
+                        <h5 class="card-title">Contaminante relacionados</h5>
+                        
+                        <div class="inline">
+                            @each(rel in relacion)
+                            @if(rel.ailment_id==ailment.id)
+                            
+                            <span class="badge rounded-pill bg-warning text-dark">{{ rel.name }}</span>
+                                
+                            @endif
+                                
+                            @endeach
+                        </div>
+                        <br>
+                        <div class="row mx-auto">
+                            <div class="col col-6 d-grid gap-2 mx-auto">
+                                <button name="{{ ailment.id }}" onclick="showAilment({{ ailment.id }},'{{ailment.name}}')" class="btn btn-info btnEdit" data-bs-toggle="modal" data-bs-target="#AilmentEditModal" >Editar</button>
+                            </div>
+                            <div class="col col-6 d-grid gap-2 mx-auto">
+                                <button class="btn btn-danger btnDelete" name="{{ ailment.id }}">Eliminar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            @endeach
+        </div>
+    </div>
+</div>
+
+
+
+<!-- MODAL NUEVO PADECIMIENTO -->
+<div class="container-fluid">
+    <div class="modal fade" id="AilmentModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>Agregar Padecimiento</h2>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <label for="NomAilment">Nombre:</label>
+                            <input class="form-control" type="text" name="NomAilment" id="NomAilment" required min="1" max="45">
+                        </div>
+                        <label  class="form-label" >¿Qué contaminantes lo relacionan?:</label><br>
+                        @each(pollutant in pollutants)
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" name='check' type="checkbox"  value={{ pollutant.id }}>
+                                <label class="form-check-label" for="inlineCheckbox1">{{ pollutant.name }}</label>
+                            </div>
+                        @endeach     
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-outline-primary" data-bs-dismiss="modal" id="btnCreateAilment" name="btnCreateAilment">Aceptar</button>
+                        <button class="btn btn-outline-primary btnCancel" name="btnCancelAilment" id="btnCancelAilment" data-bs-dismiss="modal">Cancelar</button>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL EDITAR PADECIMIENTO -->
+<div class="container-fluid">
+    <div class="modal fade" id="AilmentEditModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Editar Padecimiento</h2>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <label for="txtIDAilmentEdit">ID:</label>
+                        <input class="form-control" type="text" name="txtIDAilmentEdit" id="txtIDAilmentEdit" required min="1" max="25" disabled>
+                    </div>
+                    <div>
+                        <label class="form-label" for="NomAilmentEdit">Nombre:</label>
+                        <input class="form-control" type="text" name="NomAilmentEdit" id="NomAilmentEdit" required min="1" max="25">
+                    </div>      
+                    <label  class="form-label" >¿Qué contaminantes lo relacionan?:</label><br>
+                    @each(pollutant in pollutants)
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" name='checkEdit' type="checkbox" value={{ pollutant.id }}>
+                            <label class="form-check-label" for="inlineCheckbox1">{{ pollutant.name }}</label>
+                        </div>
+                    @endeach            
+                </div>
+                <div class="modal-footer">
+                    <button  class="btn btn-outline-primary"  id="btnEditarAilment" name="btnEditarAilment" data-bs-dismiss="modal">Editar</button>
+                    <button class="btn btn-outline-primary" id="btnCancelarEditAilment" name="btnCancelarEditAilment" data-bs-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@entryPointScripts('ailment')
+
+<script>
+    function showAilment(id,name){
+        document.getElementById('txtIDAilmentEdit').value=id;
+        document.getElementById('NomAilmentEdit').value=name;
+
+        let checks=document.getElementsByName('checkEdit');
+        axios({
+            method: 'POST',
+            url: '/ailment/showAilment',
+            data: {
+                id:id
+            }
+        })
+        .then(function (response) {
+
+            checks.forEach(element => {
+                response.data.forEach(element2 => {
+                    if(element.value==element2.pollutant_id){
+                        element.checked = true
+                    }
+                });
+            });
+        })
+        .catch(function (error) {
+            return [false, error]
+        });
+
+    }
+</script>
+@end

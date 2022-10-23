@@ -35,6 +35,7 @@
                     <thead style="background: #BFBFBF">
                         <tr>
                             <th>Estación</th>
+                            <th>Colonia</th>
                             <th>PM 2.5 &#956;g/m<sup>3</sup></th>
                             <th>PM 10 &#956;g/m<sup>3</sup></th>
                             <th>Datos (%)</th>
@@ -43,28 +44,53 @@
                     <tbody>
                         @each(dat in averages)
                         <tr>
-                            <th id="thRepDiaHora"> {{dat.name}}</th>
+                            <th> {{dat.name}}</th>
+                            <th> {{dat.suburb}}</th>
 
-                            @if(dat.average_pm2>=1000)
-                            <th id="thRepDiaPromedioH2" style="color: #FF0F00;">{{dat.average_pm2}}</th>
+                            @if(dat.average_pm2>=200)
+                            <th style="color: #A8549D;">{{dat.average_pm2}}</th>
+                            @elseif(dat.average_pm2>=151)
+                            <th style="color: #F93131;">{{dat.average_pm2}}</th>
+                            @elseif(dat.average_pm2>=101)
+                            <th style="color: #FC7928;">{{dat.average_pm2}}</th>
+                            @elseif(dat.average_pm2>=51)
+                            <th style="color: #EDB02D;">{{dat.average_pm2}}</th>
                             @else
-                            <th id="thRepDiaPromedioH2">{{dat.average_pm2}}</th>
+                            <th style="color: #38B208;">{{dat.average_pm2}}</th>
                             @endif
 
-                            @if(dat.average_pm10>=1000)
-                            <th id="thRepDiaPromedioH10" style="color: #FF0F00; "> {{dat.average_pm10}}</th>
+                            @if(dat.average_pm10>=200)
+                            <th style="color: #A8549D;">{{dat.average_pm10}}</th>
+                            @elseif(dat.average_pm10>=151)
+                            <th style="color: #F93131;">{{dat.average_pm10}}</th>
+                            @elseif(dat.average_pm10>=101)
+                            <th style="color: #FC7928;">{{dat.average_pm10}}</th>
+                            @elseif(dat.average_pm10>=51)
+                            <th style="color: #EDB02D;">{{dat.average_pm10}}</th>
                             @else
-                            <th id="thRepDiaPromedioH10"> {{dat.average_pm10}}</th>
+                            <th style="color: #38B208;">{{dat.average_pm10}}</th>
                             @endif
                             
-                            <th id="thRepDiaHora"> {{dat.percentage}}</th>
+                            @if(dat.percentage>=75)
+                            <th style="color: #38B208;"> {{dat.percentage}}</th>
+                            @else
+                            <th style="color: #EDB02D;">{{dat.percentage}}</th>
+                            @endif
                         </tr>
                         @endeach
                     </tbody>
                 </table>
              </div>
         </div>
-
+        <br>
+        <h4><span style="color: #2aa5d6;">Indice de colores</span></h4>
+        <div class="inline">
+            <span class="badge rounded-pill text-dark" style=" background-color: #38B208;">Buena</span>
+            <span class="badge rounded-pill text-dark" style=" background-color: #EDB02D;">Aceptable</span>
+            <span class="badge rounded-pill text-dark" style=" background-color: #FC7928;">Mala</span>
+            <span class="badge rounded-pill text-dark" style=" background-color: #F93131;">Muy malo</span>
+            <span class="badge rounded-pill text-dark" style=" background-color: #A8549D;">Extremadamente malo</span>
+        </div>
         <br>
     </div>
     <!--Bootstrap Bundle-->

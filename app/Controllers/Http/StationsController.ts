@@ -2,7 +2,9 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Database from '@ioc:Adonis/Lucid/Database';
 import Model from 'App/Models/Model';
 import Station from 'App/Models/Station'
+import moment from 'moment';
 export default class StationsController {
+    
     public async show({view}:HttpContextContract){
         const models=await Model.all()
 
@@ -35,6 +37,52 @@ export default class StationsController {
         .select('pollutant_models.model_id')
 
         return view.render('admin/station',{stations,models,relacion});
+    }
+
+    public async historics({view,request}:HttpContextContract){
+        try {
+            const slug=request.param('station_id');
+            let datum:any[]=[]
+            let data:any[]=[]
+
+            const stations=await Database
+            .from('stations')
+            .select('stations.id')
+            .select('stations.slug')
+            .select('stations.name ')
+
+            
+            let date=moment().format('YYYY-MM-DD')
+
+            let p=0;
+            while (p<5) {
+                data=await Database.from('data')
+                .select('data.average_pm2')
+                .select('data.average_pm10')
+                .select('data.created_at')
+                .where('data.created_at','like','%'+date+'%')
+                .andWhereRaw('data.station_id=? ',[slug])
+                .orderBy([{ column: 'created_at', order: 'asc' }])
+            
+                let i=0;
+                while (i<data.length) {
+                    let fec=data[i].created_at;
+                    let h=moment(fec).format('HH')
+                    data[i].created_at=moment(data[i].created_at).format('DD/MMM')
+                    data[i].hour=h;
+                    i++;
+                }
+                if (data.length>0) {
+                    datum.push(data)
+                }
+                date=moment(date).subtract(1, 'days').format('YYYY-MM-DD')
+                p++;
+            }
+            
+            return view.render('airelimpio/historics',{stations,slug,datum});
+        } catch (error) {  
+            console.log(error)
+        }
     }
 
     public async store({request}:HttpContextContract){
@@ -71,6 +119,8 @@ export default class StationsController {
             .whereRaw('data.station_id=? ',[id]).delete();
             
             await station.delete();
+            
+            await Database.rawQuery('ALTER TABLE monitoreocav2.stations AUTO_INCREMENT = ?', [id])
             return 'Estación eliminada con exito.'
         } catch (error) {
             console.log(error);
@@ -113,5 +163,37 @@ export default class StationsController {
             console.log(error);
             return error
         }
+    }
+
+
+    public async StationsMap(){
+        const stations=await Database
+        .from('stations')
+        .select('stations.id')
+        .select('stations.name')
+        .select('stations.slug')
+        .select('stations.channel')
+        .select('stations.apikey')
+        .select('stations.longitude')
+        .select('stations.latitude')
+        .select('stations.suburb')
+        .select('stations.active')
+
+        return stations;
+    }
+
+    public async ApiStation(){
+        const stations=await Database
+        .from('stations')
+        .select('stations.slug as id')
+        .select('stations.name ')
+        .select('stations.channel')
+        .select('stations.apikey')
+        .select('stations.longitude')
+        .select('stations.latitude')
+        .select('stations.suburb')
+        .whereRaw('stations.active=? ',[true])
+
+        return stations;
     }
 }

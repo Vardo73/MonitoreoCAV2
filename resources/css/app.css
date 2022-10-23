@@ -74,12 +74,3 @@ main code {
   font-size: 16px;
   background: #e6e2ff;
 }
-
-.marker {
-  background-image: url('../../public\img\logo41.svg');
-  background-size: cover;
-  width: 50px;
-  height: 50x;
-  border-radius: 50%;
-  cursor: pointer;
-}

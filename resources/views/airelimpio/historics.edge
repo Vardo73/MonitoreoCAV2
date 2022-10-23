@@ -1,0 +1,296 @@
+@layout('master')
+@section('historics')
+@include('navbarpublic')
+<style>
+    th,td{
+        text-align: center;
+    }
+
+    table tr td.tdG {
+        background-color: #38B208;
+    }
+    table tr td.tdA{
+        background-color: #EDB02D;
+    }
+    table tr td.tdM {
+        background-color: #FC7928;
+    }
+    table tr td.tdMM {
+        background-color: #F93131;
+    }
+    table tr td.tdEM {
+        background-color: #A8549D;
+    }
+</style>
+<div class="container">
+    <hr/>
+        <h2 style="text-align: center;"><span style="color: #2aa5d6;">Históricos de contaminación</span></h2>
+    <hr/>
+</div>
+<div class="container">
+    <!-- SELECT -->
+    <div class="m-0 row mx-auto justify-content-center align-items-center">
+        <div class="col col-4 mx-auto ">
+            <label class="form-label" for="selectStation">Estación:</label>
+            <select class="form-control" name="selectStation" id="selectStation" required>
+                @each(station in stations)
+                    @if(station.id == slug)
+                        <option  value='{{ station.id }}' selected>{{ station.name }}</option>
+                    @else
+                        <option  value='{{ station.id }}' >{{ station.name }}</option>
+                    @endif
+                @endeach
+            </select>
+        </div>
+    </div>
+    
+    <br>
+
+    
+
+
+    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="false">
+        @if(datum.length>0)
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <!-- INDICE PM 2.5 -->
+                    <div class="m-0 row mx-auto justify-content-center align-items-center">
+                        <span class="badge text-bg-secondary" style="max-width: 8rem; ">Índice:</span>
+                        <span class="badge text-dark" style="max-width: 8rem; background-color:#38B208; ">0-12</span>
+                        <span class="badge text-dark" style="max-width: 8rem; background-color:#EDB02D; ">12.1–35.4</span>
+                        <span class="badge text-dark" style="max-width: 8rem; background-color:#FC7928; ">35.5-55.4</span>
+                        <span class="badge text-dark" style="max-width: 8rem; background-color:#F93131; ">55.5-150.4</span>
+                        <span class="badge text-dark" style="max-width: 8rem; background-color:#A8549D; ">150.5+</span>
+                    </div>
+                    <br>
+                    <!-- TABLA PM2.5-->
+                    <div >
+                        <h4 style="text-align: center;"><span style="color: #2aa5d6;">PM 2.5 (&#956;g/m<sup>3</sup>)</span></h4>
+                    </div>
+                    <div class=" row mx-auto justify-content-center align-items-center d-block ">
+                        <table class="table table-bordered table-sm">
+                            <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">0</th>
+                                <th scope="col">1</th>
+                                <th scope="col">2</th>
+                                <th scope="col">3</th>
+                                <th scope="col">4</th>
+                                <th scope="col">5</th>
+                                <th scope="col">6</th>
+                                <th scope="col">7</th>
+                                <th scope="col">8</th>
+                                <th scope="col">9</th>
+                                <th scope="col">10</th>
+                                <th scope="col">11</th>
+                                <th scope="col">12</th>
+                                <th scope="col">13</th>
+                                <th scope="col">14</th>
+                                <th scope="col">15</th>
+                                <th scope="col">16</th>
+                                <th scope="col">17</th>
+                                <th scope="col">18</th>
+                                <th scope="col">19</th>
+                                <th scope="col">20</th>
+                                <th scope="col">21</th>
+                                <th scope="col">22</th>
+                                <th scope="col">23</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                @each(dats in datum)
+                                <tr id="rowsTab">
+                                    <th scope="row">{{ dats[0].created_at }}</th>
+                                    <div class="pm2">
+                                    @each(dat in dats)
+                                        @if(dat.hour == 0)
+                                        <td class="tdpm2">{{dat.average_pm2}}</td>
+                                        @elseif(dat.hour == 1)
+                                        <td class="tdpm2">{{dat.average_pm2}}</td>
+                                        @elseif(dat.hour == 2)
+                                        <td class="tdpm2">{{dat.average_pm2}}</td>
+                                        @elseif(dat.hour == 3)
+                                        <td class="tdpm2">{{dat.average_pm2}}</td>
+                                        @elseif(dat.hour == 4)
+                                        <td class="tdpm2">{{dat.average_pm2}}</td>
+                                        @elseif(dat.hour == 5)
+                                        <td class="tdpm2">{{dat.average_pm2}}</td>
+                                        @elseif(dat.hour == 6)
+                                        <td class="tdpm2">{{dat.average_pm2}}</td>
+                                        @elseif(dat.hour == 7)
+                                        <td class="tdpm2">{{dat.average_pm2}}</td>
+                                        @elseif(dat.hour == 8)
+                                        <td class="tdpm2">{{dat.average_pm2}}</td>
+                                        @elseif(dat.hour == 9)
+                                        <td class="tdpm2">{{dat.average_pm2}}</td>
+                                        @elseif(dat.hour == 10)
+                                        <td class="tdpm2">{{dat.average_pm2}}</td>
+                                        @elseif(dat.hour == 11)
+                                        <td class="tdpm2">{{dat.average_pm2}}</td>
+                                        @elseif(dat.hour == 12)
+                                        <td class="tdpm2">{{dat.average_pm2}}</td>
+                                        @elseif(dat.hour == 13)
+                                        <td class="tdpm2">{{dat.average_pm2}}</td>
+                                        @elseif(dat.hour == 14)
+                                        <td class="tdpm2">{{dat.average_pm2}}</td>
+                                        @elseif(dat.hour == 15)
+                                        <td class="tdpm2">{{dat.average_pm2}}</td>
+                                        @elseif(dat.hour == 16)
+                                        <td class="tdpm2">{{dat.average_pm2}}</td>
+                                        @elseif(dat.hour == 17)
+                                        <td class="tdpm2">{{dat.average_pm2}}</td>
+                                        @elseif(dat.hour == 18)
+                                        <td class="tdpm2">{{dat.average_pm2}}</td>
+                                        @elseif(dat.hour == 19)
+                                        <td class="tdpm2">{{dat.average_pm2}}</td>
+                                        @elseif(dat.hour == 20)
+                                        <td class="tdpm2">{{dat.average_pm2}}</td>
+                                        @elseif(dat.hour == 21)
+                                        <td class="tdpm2">{{dat.average_pm2}}</td>
+                                        @elseif(dat.hour == 22)
+                                        <td class="tdpm2">{{dat.average_pm2}}</td>
+                                        @elseif(dat.hour == 23)
+                                        <td class="tdpm2">{{dat.average_pm2}}</td>
+                                        @else
+                                        <td>---</td>
+                                        @endif
+                                    @endeach
+                                    </div>
+                                </tr>
+                                @endeach    
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    
+                    <!-- INDICE PM 10 -->
+                    <div class="m-0 row mx-auto justify-content-center align-items-center">
+                        <span class="badge text-bg-secondary" style="max-width: 8rem; ">Índice:</span>
+                        <span class="badge text-dark" style="max-width: 8rem; background-color:#38B208; ">0-54</span>
+                        <span class="badge text-dark" style="max-width: 8rem; background-color:#EDB02D; ">55-154</span>
+                        <span class="badge text-dark" style="max-width: 8rem; background-color:#FC7928; ">155-254</span>
+                        <span class="badge text-dark" style="max-width: 8rem; background-color:#F93131; ">255-354</span>
+                        <span class="badge text-dark" style="max-width: 8rem; background-color:#A8549D; ">355+</span>
+                    </div>
+                    <br>
+                    <!-- TABLA PM 10-->
+                    <div >
+                        <h4 style="text-align: center;"><span style="color: #2aa5d6;">PM 10 (&#956;g/m<sup>3</sup>)</span></h4>
+                    </div>
+                    <div class="row mx-auto justify-content-center align-items-center d-block ">
+                        <table class="table table-bordered table-sm"  >
+                            <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">0</th>
+                                <th scope="col">1</th>
+                                <th scope="col">2</th>
+                                <th scope="col">3</th>
+                                <th scope="col">4</th>
+                                <th scope="col">5</th>
+                                <th scope="col">6</th>
+                                <th scope="col">7</th>
+                                <th scope="col">8</th>
+                                <th scope="col">9</th>
+                                <th scope="col">10</th>
+                                <th scope="col">11</th>
+                                <th scope="col">12</th>
+                                <th scope="col">13</th>
+                                <th scope="col">14</th>
+                                <th scope="col">15</th>
+                                <th scope="col">16</th>
+                                <th scope="col">17</th>
+                                <th scope="col">18</th>
+                                <th scope="col">19</th>
+                                <th scope="col">20</th>
+                                <th scope="col">21</th>
+                                <th scope="col">22</th>
+                                <th scope="col">23</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                @each(dats in datum)
+                                <tr id="rowsTab">
+                                    <th scope="row">{{ dats[0].created_at }}</th>
+                                    <div class="pm10">
+                                    @each(dat in dats)
+                                        @if(dat.hour == 0)
+                                        <td class="tdpm10">{{dat.average_pm10}}</td>
+                                        @elseif(dat.hour == 1)
+                                        <td class="tdpm10">{{dat.average_pm10}}</td>
+                                        @elseif(dat.hour == 2)
+                                        <td class="tdpm10">{{dat.average_pm10}}</td>
+                                        @elseif(dat.hour == 3)
+                                        <td class="tdpm10">{{dat.average_pm10}}</td>
+                                        @elseif(dat.hour == 4)
+                                        <td class="tdpm10">{{dat.average_pm10}}</td>
+                                        @elseif(dat.hour == 5)
+                                        <td class="tdpm10">{{dat.average_pm10}}</td>
+                                        @elseif(dat.hour == 6)
+                                        <td class="tdpm10">{{dat.average_pm10}}</td>
+                                        @elseif(dat.hour == 7)
+                                        <td class="tdpm10">{{dat.average_pm10}}</td>
+                                        @elseif(dat.hour == 8)
+                                        <td class="tdpm10">{{dat.average_pm10}}</td>
+                                        @elseif(dat.hour == 9)
+                                        <td class="tdpm10">{{dat.average_pm10}}</td>
+                                        @elseif(dat.hour == 10)
+                                        <td class="tdpm10">{{dat.average_pm10}}</td>
+                                        @elseif(dat.hour == 11)
+                                        <td class="tdpm10">{{dat.average_pm10}}</td>
+                                        @elseif(dat.hour == 12)
+                                        <td class="tdpm10">{{dat.average_pm10}}</td>
+                                        @elseif(dat.hour == 13)
+                                        <td class="tdpm10">{{dat.average_pm10}}</td>
+                                        @elseif(dat.hour == 14)
+                                        <td class="tdpm10">{{dat.average_pm10}}</td>
+                                        @elseif(dat.hour == 15)
+                                        <td class="tdpm10">{{dat.average_pm10}}</td>
+                                        @elseif(dat.hour == 16)
+                                        <td class="tdpm10">{{dat.average_pm10}}</td>
+                                        @elseif(dat.hour == 17)
+                                        <td class="tdpm10">{{dat.average_pm10}}</td>
+                                        @elseif(dat.hour == 18)
+                                        <td class="tdpm10">{{dat.average_pm10}}</td>
+                                        @elseif(dat.hour == 19)
+                                        <td class="tdpm10">{{dat.average_pm10}}</td>
+                                        @elseif(dat.hour == 20)
+                                        <td class="tdpm10">{{dat.average_pm10}}</td>
+                                        @elseif(dat.hour == 21)
+                                        <td class="tdpm10">{{dat.average_pm10}}</td>
+                                        @elseif(dat.hour == 22)
+                                        <td class="tdpm10">{{dat.average_pm10}}</td>
+                                        @elseif(dat.hour == 23)
+                                        <td class="tdpm10">{{dat.average_pm10}}</td>
+                                        @else
+                                        <td>---</td>
+                                        @endif
+                                    @endeach
+                                    </div>
+                                </tr>
+                                @endeach    
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        @endif
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true" style="margin-bottom:130%; background-color:black;"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next" style="color:black;">
+          <span class="carousel-control-next-icon" aria-hidden="true" style=" margin-bottom:130%; background-color:black;"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+</div>
+
+
+@include('footer')   
+@entryPointScripts('historics')
+@end
+
+

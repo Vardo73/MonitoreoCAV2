@@ -1,0 +1,162 @@
+@layout('master')
+
+@section('location')
+@include('navbar')
+
+<div class="container">
+    <hr/>
+    <h2 style="text-align: center;"><span style="color: #2aa5d6;">Unidades Medicas</span></h2>
+    <hr/>
+</div>
+<br>
+<div class="container">
+    <div class="col col-12 align-self-end">
+        <div class="d-grid gap-2 mx-auto ">
+            <button class="btn btn-primary" id="modalNewLocation" data-bs-toggle="modal" data-bs-target="#LocationModal">Agregar Nuevo</button>
+        </div>
+    </div>
+    <br>
+
+
+    <div id="CardsLocation">
+        <div class="row row-cols-2  ">
+            @each(location in locations)
+            <div class="col">
+                <div class="card {{ location.id }}" name='tarjeta' style="margin-bottom:2rem">
+                    <h5 class="card-header">{{ location.name }}</h5>
+                    <div class="card-body">
+                        <div class=" container-fluid table-responsive table-bordered">
+                            <table class="table table-hover " name="tabAnual" id="tabAnual">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Latitud</th>
+                                        <th scope="col">Longitud</th>
+                                        <th scope="col">Colonia</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{{ location.id}}</td>
+                                        <td>{{ location.latitude}}</td>
+                                        <td>{{ location.longitude }}</td>
+                                        <td>{{ location.suburb }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <br>
+                        <div class="row mx-auto">
+                            <div class="col col-6 d-grid gap-2 mx-auto">
+                                <button name="{{ location.id }}" onclick="showLocation({{ location.id }},'{{location.name}}',{{location.latitude}},{{location.longitude}},'{{location.suburb}}')" class="btn btn-info btnEdit" data-bs-toggle="modal" data-bs-target="#LocationEditModal" >Editar</button>
+                            </div>
+                            <div class="col col-6 d-grid gap-2 mx-auto">
+                                <button class="btn btn-danger btnDelete" name="{{ location.id }}">Eliminar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            @endeach
+        </div>
+    </div>
+</div>
+
+<!-- MODAL NUEVA UNIDAD MEDICA -->
+<div class="container-fluid">
+    <div class="modal fade" id="LocationModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>Agregar Unidad Medica</h2>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row mx-auto">
+                            <label for="NomLocation">Nombre:</label>
+                            <input class="form-control" type="text" name="NomLocation" id="NomLocation" required min="1" max="45">
+                        </div>  
+                        <br>
+                        <div class="row mx-auto">
+                            <div class="col col-6 d-grid gap-2 mx-auto">
+                                <label class="form-label" for="latitudeLocation">Latitud:</label>
+                                <input class="form-control" class="form-control" type="number" name="latitudeLocation" id="latitudeLocation" required min="1" max="99999999">
+                            </div>
+                            <div class="col col-6 d-grid gap-2 mx-auto">
+                                <label class="form-label" for="longitudeLocation">Longitud:</label>
+                                <input class="form-control" type="number" name="longitudeLocation" id="longitudeLocation" required min="1" max="25">
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row mx-auto">
+                            <label for="suburbLocation">Colonia:</label>
+                            <input class="form-control" type="text" name="suburbLocation" id="suburbLocation" required min="1" max="45">
+                        </div>  
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-outline-primary" data-bs-dismiss="modal" id="btnCreateLocation" name="btnCreateLocation">Aceptar</button>
+                        <button class="btn btn-outline-primary btnCancel" name="btnCancelLocation" id="btnCancelLocation" data-bs-dismiss="modal">Cancelar</button>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- MODAL EDITAR UNIDAD MEDICA -->
+<div class="container-fluid">
+    <div class="modal fade" id="LocationEditModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>Editar Unidad Medica</h2>
+                    </div>
+                    <div class="modal-body">
+                        
+                        <div class="row mx-auto">
+                            <label for="txtIDLocationEdit">ID:</label>
+                            <input class="form-control" type="text" name="txtIDLocationEdit" id="txtIDLocationEdit" required min="1" max="25" disabled>
+                        </div>
+                        <div class="row mx-auto">
+                            <label for="NomEditLocation">Nombre:</label>
+                            <input class="form-control" type="text" name="NomEditLocation" id="NomEditLocation" required min="1" max="45">
+                        </div>  
+                        <br>
+                        <div class="row mx-auto">
+                            <div class="col col-6 d-grid gap-2 mx-auto">
+                                <label class="form-label" for="latitudeEditLocation">Latitud:</label>
+                                <input class="form-control" class="form-control" type="number" name="latitudeEditLocation" id="latitudeEditLocation" required min="1" max="99999999">
+                            </div>
+                            <div class="col col-6 d-grid gap-2 mx-auto">
+                                <label class="form-label" for="longitudeEditLocation">Longitud:</label>
+                                <input class="form-control" type="number" name="longitudeEditLocation" id="longitudeEditLocation" required min="1" max="25">
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row mx-auto">
+                            <label for="suburbEditLocation">Colonia:</label>
+                            <input class="form-control" type="text" name="suburbEditLocation" id="suburbEditLocation" required min="1" max="45">
+                        </div>  
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-outline-primary" data-bs-dismiss="modal" id="btnEditLocation" name="btnEditLocation">Aceptar</button>
+                        <button class="btn btn-outline-primary btnCancel" name="btnCancelEditLocation" id="btnCancelEditLocation" data-bs-dismiss="modal">Cancelar</button>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+@entryPointScripts('location')
+
+
+<script>
+    function showLocation(id,name,lat,lon,sub){
+        document.getElementById('txtIDLocationEdit').value=id;
+        document.getElementById('NomEditLocation').value=name;
+        document.getElementById('latitudeEditLocation').value=lat;
+        document.getElementById('longitudeEditLocation').value=lon;
+        document.getElementById('suburbEditLocation').value=sub;
+    }
+</script>
+@end

@@ -52,7 +52,12 @@ Encore.addEntry('station', './resources/js/station.js'),
 Encore.addEntry('reports', './resources/js/reports.js'),
 Encore.addEntry('reportData', './resources/js/reportData.js'),
 Encore.addEntry('reportMonth', './resources/js/reportMonth.js'),
-Encore.addEntry('map', './resources/js/map.js')
+Encore.addEntry('map', './resources/js/map.js'),
+Encore.addEntry('mapAil', './resources/js/mapAil.js'),
+Encore.addEntry('historics', './resources/js/historics.js'),
+Encore.addEntry('json', './resources/js/json.js'),
+Encore.addEntry('ailment', './resources/js/ailment.js'),
+Encore.addEntry('location', './resources/js/location.js')
 
 /*
 |--------------------------------------------------------------------------

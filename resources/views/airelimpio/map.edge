@@ -1,11 +1,77 @@
 @layout('master')
 
 @section('map')
+<style>
+    
+
+    body { margin: 0; padding: 0; }
+    #map { position: absolute;  width: 100%; height: 83%;}
+        
+    .marker{
+        border-right: 1px solid white;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+    .markerGood {
+        background-Color: #38B208;
+        -webkit-mask-image: url('img/logo41.svg');
+        mask-image: url('img/logo41.svg');
+    }
+    .markerA {
+        background-Color: #EDB02D;
+        -webkit-mask-image: url('img/logo41.svg');
+        mask-image: url('img/logo41.svg');
+    }
+    .markerM {
+        background-Color: #FC7928;
+        -webkit-mask-image: url('img/logo41.svg');
+        mask-image: url('img/logo41.svg');
+    }
+    .markerMM {
+        background-Color: #F93131;
+        -webkit-mask-image: url('img/logo41.svg');
+        mask-image: url('img/logo41.svg');
+    }
+    .markerEM {
+        background-Color: #A8549D;
+        -webkit-mask-image: url('img/logo41.svg');
+        mask-image: url('img/logo41.svg');
+    }
+    .markerInactive {
+        background-Color: grey;
+        -webkit-mask-image: url('img/logo41.svg');
+        mask-image: url('img/logo41.svg');
+    }
+    .markerC {
+        background-Color: #4B95FF;
+        -webkit-mask-image: url('img/logo41.svg');
+        mask-image: url('img/logo41.svg');
+    }
+    .textoPin{
+        color: black;
+        font-family: Nunito, Arial;
+        width:100px;
+        font-size: 20px;
+        font-weight: 600;
+        text-align:center;
+    }
+    .contPin{
+        display: flex;
+        align-items: center;
+    }
+    
+    .mapboxgl-popup {
+        max-width: 500px;
+    }
+
+</style>
 @include('navbarpublic')
+<div id='map'></div>
 
-<div id='map' style='position:absolute; width: 100%; height: 90%'>
-
-</div>
-
+@include('airelimpio/fab')
+@include('airelimpio/index')
+@include('footer')
 @entryPointScripts('map')
 @end

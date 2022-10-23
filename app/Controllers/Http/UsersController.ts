@@ -1,6 +1,7 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import { schema, rules } from '@ioc:Adonis/Core/Validator'
 import User from 'App/Models/User'
+import Database from '@ioc:Adonis/Lucid/Database';
 
 export default class UsersController {
     public async index(ctx:HttpContextContract){
@@ -84,6 +85,8 @@ export default class UsersController {
         const id=request.input('id');
         const user=await User.find(id);
         await user?.delete();
+        
+        await Database.rawQuery('ALTER TABLE monitoreocav2.users AUTO_INCREMENT = ?', [id])
         return user;
     }
     public async showLogin ({view}:HttpContextContract){
