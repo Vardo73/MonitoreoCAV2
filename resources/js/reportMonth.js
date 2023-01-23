@@ -1,17 +1,18 @@
+import moment from 'moment'
 import AppGlobal from '../js/app.js'
 
 let services=new AppGlobal()
 
 //Limites de contaminantes NOM
-const limNomPm2=45
-const limNomPm10=75
+const limNomPm2=41
+const limNomPm10=70
 
 //Limites de contaminantes OMS
-const limOmsPm2=25
-const limOmsPm10=50
+const limOmsPm2=15
+const limOmsPm10=45
 
 //Varibles 
-let date='';
+let datelbl='';
 let stationId=document.getElementById('IdEstacion').getAttribute('name');
 let canPiePm2=document.getElementById('piePM2')
 let canPiePm10=document.getElementById('piePM10')
@@ -22,17 +23,18 @@ let frequencyDayPM10=document.getElementById('frequencyDayPM10')
 
 window.onload=function(){
     let lblData=document.getElementById('lblData')
-    date=moment(lblData.innerText).format("[Mes de ] MMMM [ del año ] YYYY");  
-    lblData.innerText=date;  
-    DataGraphs()
+    let date=moment(lblData.innerText).format('YYYY-MM-DD')
+    datelbl=moment(lblData.innerText).format("[Mes de ] MMMM [ del año ] YYYY");  
+    lblData.innerText=datelbl;  
+    DataGraphs(date)
 }
 
-async function DataGraphs(){
+async function DataGraphs(date){
     let url='/data/report_month'
     let method='POST'
     let dat={
         station_id:stationId,
-        date:date
+        date:moment(date).format('YYYY-MM-DD')
     }
 
    let data=await services.request(url,method,dat)

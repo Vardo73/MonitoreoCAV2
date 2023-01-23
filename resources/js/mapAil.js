@@ -62,7 +62,6 @@ function Popup(location,data){
         <tr>
             <td style="text-align:center;">${element.name}</td>
             <td style="text-align:center;">${element.total}</td>
-            <td style="text-align:center;">${element.pollutans}</td>
         </tr>`
     });
 
@@ -77,7 +76,6 @@ function Popup(location,data){
                             <tr style="background-color:#white; color:#0d6efd;">
                                 <th style="text-align:center;">Padecimiento</th>
                                 <th style="text-align:center;">No. Casos</th>
-                                <th style="text-align:center;">Contaminantes relacionados</th>
                             </tr>
                         </thead>
                         <tbody>

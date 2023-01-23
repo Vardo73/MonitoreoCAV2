@@ -8,7 +8,8 @@ const logic=new Logic()
 
 export default class EmailTask extends BaseTask {
     public static get schedule() {
-		return '0 0 8 * * *'
+		//return '0 15 * * * *'
+        return '0 0 8 * * *'
 	}
     
 	public static get useLock() {
@@ -26,7 +27,8 @@ export default class EmailTask extends BaseTask {
         .whereRaw('stations.active=? ',[true])
         
         let datStations:any[]=[]
-        
+
+        //let day=moment().format('2022-05-15')
         let day=moment().subtract(1, 'days').format('YYYY-MM-DD').toString();
 
         if(stations.length>0){

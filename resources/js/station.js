@@ -2,6 +2,37 @@ import AppGlobal from '../js/app.js'
 let services=new AppGlobal()
 
 let idEdit=0;
+//Limpiar inputs
+document.getElementById('btnCancelStation')
+.addEventListener('click',()=>{
+    document.getElementById('slug').value='';
+    document.getElementById('name').value='';
+    document.getElementById('apikey').value='';
+    document.getElementById('model_id').value='';
+    document.getElementById('active').value='';
+    document.getElementById('latitude').value='';
+    document.getElementById('longitude').value='';
+    document.getElementById('suburb').value='';
+    let checks=document.getElementsByName('check');
+    checks.forEach(element => {
+        element.checked=false;
+    });
+})
+document.getElementById('btnCancelStationEdit')
+.addEventListener('click',()=>{
+    document.getElementById('slugEdit').value='';
+    document.getElementById('nameEdit').value='';
+    document.getElementById('apikeyEdit').value='';
+    document.getElementById('model_idEdit').value='';
+    document.getElementById('activeEdit').value='';
+    document.getElementById('latitudeEdit').value='';
+    document.getElementById('longitudeEdit').value='';
+    document.getElementById('suburbEdit').value='';
+    let checks2=document.getElementsByName('checkEditSponsor');
+    checks2.forEach(element => {
+        element.checked=false;
+    });
+})
 
 //Guardar Contaminante
 document.getElementById('btnCreateStation')
@@ -9,7 +40,7 @@ document.getElementById('btnCreateStation')
 
     let slug=document.getElementById('slug').value.trim()
     let name=document.getElementById('name').value.trim()
-    let channel=document.getElementById('channel').value.trim()
+    //let channel=document.getElementById('channel').value.trim()
     let apikey=document.getElementById('apikey').value.trim()
     let model_id=document.getElementById('model_id').value.trim()
     let active=document.getElementById('active').value.trim()
@@ -22,22 +53,40 @@ document.getElementById('btnCreateStation')
     if(services.validator(name) && services.validator(slug) && 
         services.validator(model_id) && services.validator(active) && 
         services.validator(suburb) && services.validator(latitude) && services.validator(longitude) &&
-        services.validator(channel) && services.validator(apikey)){
+        /*services.validator(channel) &&*/ services.validator(apikey)){
+        let checks=document.getElementsByName('checkSponsor');
+        let idSpon=[]
+        let i=0;
+        checks.forEach(element => {
+            if(element.checked){
+                idSpon.push(element.value)
+                i++;
+            }
+        });
+    
+        if(i<1){
+            let msg="Debe seleccionar al menos un patrocinador."
+            let typ="warning"
+            services.notificationSwal(msg,typ)
+            return false;
+        }
 
         let url='/station/store'
         let method='POST'
         let dat={
             slug:slug,
             name:name,
-            channel:channel,
+            //channel:channel,
             apikey:apikey,
             model_id:model_id,
             active:active,
             suburb:suburb,
             latitude:latitude,
-            longitude:longitude
+            longitude:longitude,
+            sponsors:idSpon
+
         }
-        console.log(JSON.stringify(dat))
+        //console.log(JSON.stringify(dat))
         services.requestAxios(url,method,dat)
     }else{
         services.notificationSwal('Faltan campos por llenar.','warning')
@@ -91,13 +140,14 @@ function showStation(id){
     idEdit=id
     let slug=document.getElementById('slugEdit')
     let name=document.getElementById('nameEdit')
-    let channel=document.getElementById('channelEdit')
+    //let channel=document.getElementById('channelEdit')
     let apikey=document.getElementById('apikeyEdit')
     let model_id=document.getElementById('model_idEdit')
     let active=document.getElementById('activeEdit')
     let latitude=document.getElementById('latitudeEdit')
     let longitude=document.getElementById('longitudeEdit')
     let suburb=document.getElementById('suburbEdit')
+    let checks=document.getElementsByName('checkEditSponsor');
 
     axios({
         method: 'POST',
@@ -106,15 +156,24 @@ function showStation(id){
             id:id
         }
     }).then(function (response) {
-        slug.value=response.data.slug
-        name.value=response.data.name
-        channel.value=response.data.channel
-        apikey.value=response.data.apikey
-        latitude.value=response.data.latitude
-        longitude.value=response.data.longitude
-        model_id.value=response.data.model_id
-        active.value=response.data.active
-        suburb.value=response.data.suburb
+        slug.value=response.data[0].slug
+        name.value=response.data[0].name
+        //channel.value=response.data.channel
+        apikey.value=response.data[0].apikey
+        latitude.value=response.data[0].latitude
+        longitude.value=response.data[0].longitude
+        model_id.value=response.data[0].model_id
+        active.value=response.data[0].active
+        suburb.value=response.data[0].suburb
+
+
+        checks.forEach(element => {
+            response.data[1].forEach(element2 => {
+                if(element.value==element2.sponsor_id){
+                    element.checked = true
+                }
+            });
+        });
     })
     .catch(function (error) {
         services.notificationSwal(error,'error')
@@ -128,7 +187,7 @@ document.getElementById('btnEditStation')
     
     let slug=document.getElementById('slugEdit').value.trim()
     let name=document.getElementById('nameEdit').value.trim()
-    let channel=document.getElementById('channelEdit').value.trim()
+    //let channel=document.getElementById('channelEdit').value.trim()
     let apikey=document.getElementById('apikeyEdit').value.trim()
     let model_id=document.getElementById('model_idEdit').value.trim()
     let active=document.getElementById('activeEdit').value.trim()
@@ -136,10 +195,29 @@ document.getElementById('btnEditStation')
     let longitude=document.getElementById('longitudeEdit').value.trim()
     let suburb=document.getElementById('suburbEdit').value.trim()
 
+    let checks=document.getElementsByName('checkEditSponsor');
+    console.log(checks)
+    let idSpon=[]
+    let i=0;
+    checks.forEach(element => {
+        if(element.checked){
+            idSpon.push(element.value)
+            i++;
+        }
+    });
+    
+    console.log(idSpon)
+    if(i<1){
+        let msg="Debe seleccionar al menos un patrocinador."
+        let typ="warning"
+        services.notificationSwal(msg,typ)
+        return false;
+    }
+
     if(services.validator(name) && services.validator(slug) && 
         services.validator(model_id) && services.validator(active) && 
         services.validator(suburb) && services.validator(latitude) && services.validator(longitude) &&
-        services.validator(channel) && services.validator(apikey)){
+         services.validator(apikey)){
 
         let url='/station/edit'
         let method='POST'
@@ -147,13 +225,14 @@ document.getElementById('btnEditStation')
             id:idEdit,
             slug:slug,
             name:name,
-            channel:channel,
+            //channel:channel,
             apikey:apikey,
             model_id:model_id,
             active:active,
             suburb:suburb,
             latitude:latitude,
-            longitude:longitude
+            longitude:longitude,
+            sponsors:idSpon
         }
         services.requestAxios(url,method,dat)
     }else{

@@ -32,6 +32,10 @@ window.onload= function(){
             }
         }
     })
+    const myModalEl = document.querySelector('#ModalAlertStations')
+
+    const modal = new bootstrap.Modal(myModalEl) // initialized with defaults
+    modal.show()
 }
 
 

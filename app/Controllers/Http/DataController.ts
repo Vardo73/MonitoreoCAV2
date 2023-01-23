@@ -82,9 +82,12 @@ export default class DataController {
     }
     
     public async reportMonthJson({request}:HttpContextContract){
-        const station_id=request.input('station_id');
-        const date=request.input('date');
-
+        const station_id:string=request.input('station_id');
+        const date:string=request.input('date');
+        
+        console.log('------Parametros de entrada JSON----------')
+        console.log('Fecha: '+date)
+        console.log('Estacion ID: '+station_id)
         try{
             const logic= new Logic();
             let data=await logic.averageMonth(station_id,date);            
@@ -97,10 +100,12 @@ export default class DataController {
 
     
     public async reportMonthHTML({view,request}:HttpContextContract){
-        const station_id=request.param('station_id');
-        const date=request.param('date');
+        const station_id:string=request.param('station_id');
+        const date:string=request.param('date');
+        console.log('------Parametros de entrada HTML----------')
+        console.log('Fecha: '+date)
+        console.log('Estacion ID: '+station_id)
         try{
-            
             const station=await Station.findOrFail(station_id);
 
             const logic= new Logic();

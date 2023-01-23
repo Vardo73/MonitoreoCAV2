@@ -57,7 +57,9 @@ Encore.addEntry('mapAil', './resources/js/mapAil.js'),
 Encore.addEntry('historics', './resources/js/historics.js'),
 Encore.addEntry('json', './resources/js/json.js'),
 Encore.addEntry('ailment', './resources/js/ailment.js'),
-Encore.addEntry('location', './resources/js/location.js')
+Encore.addEntry('location', './resources/js/location.js'),
+Encore.addEntry('sponsor', './resources/js/sponsor.js'),
+Encore.addEntry('fab', './resources/js/fab.js')
 
 /*
 |--------------------------------------------------------------------------

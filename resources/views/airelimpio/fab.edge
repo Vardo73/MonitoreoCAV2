@@ -60,7 +60,8 @@
         <div class="options">
             <button  data-bs-toggle="modal" data-bs-target="#AboutModal"><i class="bi bi-info-circle"></i></button>
             <button data-bs-toggle="modal" data-bs-target="#ContactModal"><i class="bi bi-file-person"></i></button>
-            <button data-bs-toggle="modal" data-bs-target="#FileModal"><i class="bi bi-file-earmark-text"></i></button>
+            <!--<button data-bs-toggle="modal" data-bs-target="#FileModal"><i class="bi bi-file-earmark-text"></i></button>-->
+            <button data-bs-toggle="modal" data-bs-target="#SubscriberModal"><i class="bi bi-person-lines-fill"></i></button>
         </div>
     </div>
 
@@ -106,7 +107,7 @@
         </div>
     </div>
 
-    <!-- MODAL FILE -->
+    <!-- MODAL FILE 
     <div class="container-fluid">
         <div class="modal fade" id="FileModal"  tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
@@ -335,6 +336,46 @@
                 </div>
             </div>
         </div>
+    </div>-->
+
+    <!-- MODAL Subscribers -->
+    <div class="container-fluid">
+        <div class="modal fade" id="SubscriberModal"  tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header justify-content-around" style="background:#0d6efd; color:#FFFFFF; ">
+                        <h2>Suscríbete:</h2>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row mx-auto">
+                            <p class="justify-content-around" style="text-align:center;">Recibe por correo electrónico alertas cuando los niveles de contaminación hayan rebasado la norma.</p>
+                            
+                            <div class="col col-6 d-grid gap-2 mx-auto">
+                                <label class="form-label" for="name ">Nombre:</label>
+                                <input class="form-control" type="text" name="name" id="name" required min="1" max="25">
+                            </div>
+                            <div class="col col-6 d-grid gap-2 mx-auto">
+                                <label class="form-label" for="lastname">Apellido:</label>
+                                <input class="form-control" type="text" name="lastname" id="lastname" required min="1" max="25">
+                            </div>
+                        </div>
+                        <div class="row mx-auto">
+                            <div class="col col-12 d-grid gap-2 mx-auto">
+                                <label class="form-label" for="email ">Email:</label>
+                                <input class="form-control" type="email" name="email" id="email" required min="1" max="25">
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row mx-auto">
+                            <div class="col col-12 d-grid gap-2 mx-auto">
+                                <input type="submit" class="btn btn-outline-primary" value="Aceptar" id="btnSubscriber" name="btnCreateStation" data-bs-dismiss="modal">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     
+@entryPointScripts('fab')
 </section>

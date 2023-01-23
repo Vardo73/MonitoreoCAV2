@@ -30,13 +30,30 @@ export default class Email{
         try {
             const view = View.getRenderer()
             const transporter= this.createTrans()
-            const info =await transporter.sendMail({
+            await transporter.sendMail({
                 from:'"Sistemas" <sistemas@cerca.org.mx>',
                 to:"salud.calidadambiental@cerca.org.mx, comunicacion@cerca.org.mx",
                 subject:"Promedios diarios",
                 html: await view.render('admin/email',{averages,day})
             })
-            //console.log('Correo ENVIADO!!')
+           // console.log('Correo ENVIADO!!')
+        } catch (error) {
+            console.log('ERROR sendMail')
+            console.log(error)
+        }
+    }
+
+    public async sendSubscribers(suburb:string,date:string,hour:string,subs:any[]){
+        try {
+            const view = View.getRenderer()
+            const transporter= this.createTrans()
+            await transporter.sendMail({
+                from:'"Sistemas" <sistemas@cerca.org.mx>',
+                to:subs,
+                subject:"Promedios diarios",
+                html: await view.render('admin/email',{suburb,date,hour})
+            })
+           // console.log('Correo ENVIADO!!')
         } catch (error) {
             console.log('ERROR sendMail')
             console.log(error)

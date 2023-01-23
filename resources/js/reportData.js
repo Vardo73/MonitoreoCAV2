@@ -3,12 +3,12 @@ import AppGlobal from '../js/app.js'
 let services=new AppGlobal()
 
 //Limites de contaminantes NOM
-const limNomPm2=45
-const limNomPm10=75
+const limNomPm2=41
+const limNomPm10=70
 
 //Limites de contaminantes OMS
-const limOmsPm2=25
-const limOmsPm10=50
+const limOmsPm2=15
+const limOmsPm10=45
 
 //Varibles 
 let date='';

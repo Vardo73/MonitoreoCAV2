@@ -18,6 +18,27 @@ export default class AppGlobal {
         });
     }
 
+    
+    requestAxiosFile(url,method,data,notificacion=true){
+        axios({
+            url:url,
+            method:method,
+            data:data,
+            headers: {'Content-Type': 'multipart/form-data'}
+        })
+        .then(response=>{
+            if(notificacion){
+                this.notificationSwal(response.data,'success')
+            }else{
+                this.notificationSwal(response.data,'success',1000,false)
+            }
+        })
+        .catch(error=>{
+            console.log(error)
+            this.notificationSwal(error,'error')
+        })
+    }
+
     requestAxios(url,method,data,notificacion=true){
         axios({
             url:url,

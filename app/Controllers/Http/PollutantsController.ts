@@ -19,14 +19,14 @@ export default class PollutantsController {
         })
 
         try {
-            const payload = await request.validate({
+            await request.validate({
               schema: newPollutantSchema,
               messages: {
                 required: 'El campo {{ field }} es requerido para registrar el Contaminante.'
               }
             })
 
-            const pollutant= await Pollutant.create({
+            await Pollutant.create({
                 name: request.input('name'),
                 description:request.input('description')
             });
@@ -50,7 +50,7 @@ export default class PollutantsController {
         })
 
         try {
-            const payload = await request.validate({
+            await request.validate({
               schema: newUserSchema,
               messages: {
                 required: 'El campo {{ field }} es requerido para editar el Contaminante.'

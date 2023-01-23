@@ -1,5 +1,7 @@
 import Database from '@ioc:Adonis/Lucid/Database';
+import Axios from 'axios'
 import moment from 'moment';
+import Env from '@ioc:Adonis/Core/Env'
 
 export default class Logic{
     public async averageMonth(station:string,date:string):Promise<any>{
@@ -9,16 +11,16 @@ export default class Logic{
             let datum:any[]=[]
             //Optener los meses actual y siguiente
             let month=parseFloat(moment(date).format('MM'))
-            let month2=month+1
 
             //Iniciar objeto fecha a inicio de mes
             let start=moment(moment(date).format('YYYY-MM').toString()+'-01')
+            let month2=parseFloat(start.format('MM'))
 
             //console.log(start) 
             //date=moment(date).add(1, 'day').format('YYYY-MM-DD').toString()
             
 
-            while(month<month2){
+            while(month==month2){
                 //Sumatoria de los contaminantes
                 let pm2=0
                 let pm10=0
@@ -70,8 +72,7 @@ export default class Logic{
                 //console.log(start.format('YYYY-MM-DD').toString()) 
 
                 //Aumenta el contador si cambia de mes
-                month=parseFloat(moment(start).format('MM'))
-                
+                month2=parseFloat(start.format('MM'))
             }
 
             //console.log(datum)
@@ -139,6 +140,16 @@ export default class Logic{
 
         } catch (error) {
             console.log(error)
+        }
+    }
+
+    public async QueryPurple(url:string){
+        try {
+            let query=await Axios.get(url,{headers: {'Content-Type': 'application/json',
+					'X-API-Key':Env.get('APP_KEY_READ_PURPLE')}});
+            return[true,query]
+        } catch (error) {
+            return [false,error]
         }
     }
 } 

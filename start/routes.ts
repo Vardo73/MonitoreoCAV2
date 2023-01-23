@@ -12,6 +12,7 @@ Route.get('/location', 'LocationsController.show').as('location').middleware('au
 Route.get('/pollutant', 'PollutantsController.show').as('pollutant').middleware('auth')
 Route.get('/report', 'DataController.show').as('report').middleware('auth')
 Route.get('/json', 'DataController.showJson').as('json').middleware('auth')
+Route.get('/sponsor', 'SponsorsController.show').as('sponsor').middleware('auth')
 Route.get('/ca-admin', 'UsersController.showLogin').middleware('guest')
 Route.get('/historics/:station_id', 'StationsController.historics').as('historics')
 Route.get('/mapa-salud', 'LocationsController.showMap').as('mapAilments')
@@ -67,6 +68,16 @@ Route.group(() => {
   Route.post('/showModel', 'ModelsController.showModel')
 }).prefix('/model')
 
+//Controller Subscriber
+Route.group(() => {
+  Route.post('/store', 'SubscribersController.store')
+}).prefix('/subscriber')
+
+//Controller Sponsor
+Route.group(() => {
+  Route.post('/store', 'SponsorsController.store')
+  Route.post('/delete', 'SponsorsController.delete')
+}).prefix('/sponsor')
 
 //Controller Station
 Route.group(() => {

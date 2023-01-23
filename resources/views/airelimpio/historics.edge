@@ -4,6 +4,7 @@
 <style>
     th,td{
         text-align: center;
+        font-size: 12px; 
     }
 
     table tr td.tdG {
@@ -104,53 +105,53 @@
                                     <th scope="row">{{ dats[0].created_at }}</th>
                                     <div class="pm2">
                                     @each(dat in dats)
-                                        @if(dat.hour == 0)
+                                        @if(dat.hour == '00')
                                         <td class="tdpm2">{{dat.average_pm2}}</td>
-                                        @elseif(dat.hour == 1)
+                                        @elseif(dat.hour == '01')
                                         <td class="tdpm2">{{dat.average_pm2}}</td>
-                                        @elseif(dat.hour == 2)
+                                        @elseif(dat.hour == '02')
                                         <td class="tdpm2">{{dat.average_pm2}}</td>
-                                        @elseif(dat.hour == 3)
+                                        @elseif(dat.hour == '03')
                                         <td class="tdpm2">{{dat.average_pm2}}</td>
-                                        @elseif(dat.hour == 4)
+                                        @elseif(dat.hour == '04')
                                         <td class="tdpm2">{{dat.average_pm2}}</td>
-                                        @elseif(dat.hour == 5)
+                                        @elseif(dat.hour == '05')
                                         <td class="tdpm2">{{dat.average_pm2}}</td>
-                                        @elseif(dat.hour == 6)
+                                        @elseif(dat.hour == '06')
                                         <td class="tdpm2">{{dat.average_pm2}}</td>
-                                        @elseif(dat.hour == 7)
+                                        @elseif(dat.hour == '07')
                                         <td class="tdpm2">{{dat.average_pm2}}</td>
-                                        @elseif(dat.hour == 8)
+                                        @elseif(dat.hour == '08')
                                         <td class="tdpm2">{{dat.average_pm2}}</td>
-                                        @elseif(dat.hour == 9)
+                                        @elseif(dat.hour == '09')
                                         <td class="tdpm2">{{dat.average_pm2}}</td>
-                                        @elseif(dat.hour == 10)
+                                        @elseif(dat.hour == '10')
                                         <td class="tdpm2">{{dat.average_pm2}}</td>
-                                        @elseif(dat.hour == 11)
+                                        @elseif(dat.hour == '11')
                                         <td class="tdpm2">{{dat.average_pm2}}</td>
-                                        @elseif(dat.hour == 12)
+                                        @elseif(dat.hour == '12')
                                         <td class="tdpm2">{{dat.average_pm2}}</td>
-                                        @elseif(dat.hour == 13)
+                                        @elseif(dat.hour == '13')
                                         <td class="tdpm2">{{dat.average_pm2}}</td>
                                         @elseif(dat.hour == 14)
                                         <td class="tdpm2">{{dat.average_pm2}}</td>
-                                        @elseif(dat.hour == 15)
+                                        @elseif(dat.hour == '15')
+                                        <td class="tdpm10">{{dat.average_pm2}}</td>
+                                        @elseif(dat.hour == '16')
+                                        <td class="tdpm10">{{dat.average_pm2}}</td>
+                                        @elseif(dat.hour == '17')
                                         <td class="tdpm2">{{dat.average_pm2}}</td>
-                                        @elseif(dat.hour == 16)
+                                        @elseif(dat.hour == '18')
                                         <td class="tdpm2">{{dat.average_pm2}}</td>
-                                        @elseif(dat.hour == 17)
+                                        @elseif(dat.hour == '19')
                                         <td class="tdpm2">{{dat.average_pm2}}</td>
-                                        @elseif(dat.hour == 18)
+                                        @elseif(dat.hour == '20')
                                         <td class="tdpm2">{{dat.average_pm2}}</td>
-                                        @elseif(dat.hour == 19)
+                                        @elseif(dat.hour == '21')
                                         <td class="tdpm2">{{dat.average_pm2}}</td>
-                                        @elseif(dat.hour == 20)
+                                        @elseif(dat.hour == '22')
                                         <td class="tdpm2">{{dat.average_pm2}}</td>
-                                        @elseif(dat.hour == 21)
-                                        <td class="tdpm2">{{dat.average_pm2}}</td>
-                                        @elseif(dat.hour == 22)
-                                        <td class="tdpm2">{{dat.average_pm2}}</td>
-                                        @elseif(dat.hour == 23)
+                                        @elseif(dat.hour == '23')
                                         <td class="tdpm2">{{dat.average_pm2}}</td>
                                         @else
                                         <td>---</td>
@@ -216,53 +217,53 @@
                                     <th scope="row">{{ dats[0].created_at }}</th>
                                     <div class="pm10">
                                     @each(dat in dats)
-                                        @if(dat.hour == 0)
+                                        @if(dat.hour == '00')
                                         <td class="tdpm10">{{dat.average_pm10}}</td>
-                                        @elseif(dat.hour == 1)
+                                        @elseif(dat.hour == '01')
                                         <td class="tdpm10">{{dat.average_pm10}}</td>
-                                        @elseif(dat.hour == 2)
+                                        @elseif(dat.hour == '02')
                                         <td class="tdpm10">{{dat.average_pm10}}</td>
-                                        @elseif(dat.hour == 3)
+                                        @elseif(dat.hour == '03')
                                         <td class="tdpm10">{{dat.average_pm10}}</td>
-                                        @elseif(dat.hour == 4)
+                                        @elseif(dat.hour == '04')
                                         <td class="tdpm10">{{dat.average_pm10}}</td>
-                                        @elseif(dat.hour == 5)
+                                        @elseif(dat.hour == '05')
                                         <td class="tdpm10">{{dat.average_pm10}}</td>
-                                        @elseif(dat.hour == 6)
+                                        @elseif(dat.hour == '06')
                                         <td class="tdpm10">{{dat.average_pm10}}</td>
-                                        @elseif(dat.hour == 7)
+                                        @elseif(dat.hour == '07')
                                         <td class="tdpm10">{{dat.average_pm10}}</td>
-                                        @elseif(dat.hour == 8)
+                                        @elseif(dat.hour == '08')
                                         <td class="tdpm10">{{dat.average_pm10}}</td>
-                                        @elseif(dat.hour == 9)
+                                        @elseif(dat.hour == '09')
                                         <td class="tdpm10">{{dat.average_pm10}}</td>
-                                        @elseif(dat.hour == 10)
+                                        @elseif(dat.hour == '10')
                                         <td class="tdpm10">{{dat.average_pm10}}</td>
-                                        @elseif(dat.hour == 11)
+                                        @elseif(dat.hour == '11')
                                         <td class="tdpm10">{{dat.average_pm10}}</td>
-                                        @elseif(dat.hour == 12)
+                                        @elseif(dat.hour == '12')
                                         <td class="tdpm10">{{dat.average_pm10}}</td>
-                                        @elseif(dat.hour == 13)
+                                        @elseif(dat.hour == '13')
                                         <td class="tdpm10">{{dat.average_pm10}}</td>
-                                        @elseif(dat.hour == 14)
+                                        @elseif(dat.hour == '14')
                                         <td class="tdpm10">{{dat.average_pm10}}</td>
-                                        @elseif(dat.hour == 15)
+                                        @elseif(dat.hour == '15')
                                         <td class="tdpm10">{{dat.average_pm10}}</td>
-                                        @elseif(dat.hour == 16)
+                                        @elseif(dat.hour == '16')
                                         <td class="tdpm10">{{dat.average_pm10}}</td>
-                                        @elseif(dat.hour == 17)
+                                        @elseif(dat.hour == '17')
                                         <td class="tdpm10">{{dat.average_pm10}}</td>
-                                        @elseif(dat.hour == 18)
+                                        @elseif(dat.hour == '18')
                                         <td class="tdpm10">{{dat.average_pm10}}</td>
-                                        @elseif(dat.hour == 19)
+                                        @elseif(dat.hour == '19')
                                         <td class="tdpm10">{{dat.average_pm10}}</td>
-                                        @elseif(dat.hour == 20)
+                                        @elseif(dat.hour == '20')
                                         <td class="tdpm10">{{dat.average_pm10}}</td>
-                                        @elseif(dat.hour == 21)
+                                        @elseif(dat.hour == '21')
                                         <td class="tdpm10">{{dat.average_pm10}}</td>
-                                        @elseif(dat.hour == 22)
+                                        @elseif(dat.hour == '22')
                                         <td class="tdpm10">{{dat.average_pm10}}</td>
-                                        @elseif(dat.hour == 23)
+                                        @elseif(dat.hour == '23')
                                         <td class="tdpm10">{{dat.average_pm10}}</td>
                                         @else
                                         <td>---</td>
@@ -287,8 +288,20 @@
         </button>
       </div>
 </div>
-
-
+<!-- MODAL MENSAJE DE MANTENIMIENTO
+<div class="modal fade"   tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" id="ModalAlertStations">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+                <div class="modal-header justify-content-around" style="background:#0d6efd; color:#FFFFFF; ">
+                    <h2>Sitio en mantenimiento</h2>
+                </div>
+                <div class="modal-body ">
+                    <p>En estos momentos las estaciones de monitoreo se encuentran en mantenimiento y actualización.</p>
+                </div>
+        </div>
+    </div>
+</div>
+-->
 @include('footer')   
 @entryPointScripts('historics')
 @end

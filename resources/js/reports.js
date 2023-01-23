@@ -81,7 +81,7 @@ function ReportMonth(date,station_id,type){
         let method='POST'
         let dat={
             station_id:station_id,
-            date:date
+            date:moment(date).format('YYYY-MM-DD')
         }
         axios({
             url:url,

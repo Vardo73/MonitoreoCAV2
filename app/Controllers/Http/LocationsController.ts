@@ -1,15 +1,10 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import { schema, rules } from '@ioc:Adonis/Core/Validator'
 import Location from 'App/Models/Location'
-import Ailment from 'App/Models/Ailment'
 import Database from '@ioc:Adonis/Lucid/Database';
 
 export default class LocationsController {
     public async show({view}:HttpContextContract){
-
         const locations=await Location.all();
-
-        
         return view.render('admin/location',{locations});
     }
 
@@ -18,7 +13,7 @@ export default class LocationsController {
     public async store({request}:HttpContextContract){
 
         try {
-            const location= await Location.create({
+            await Location.create({
                 name: request.input('name'),
                 longitude: request.input('longitude'),
                 latitude: request.input('latitude'),
@@ -89,7 +84,7 @@ export default class LocationsController {
 
     public async LocAil({request}:HttpContextContract){
         const location_id=request.param('location_id');
-        let poll='';
+       // let poll='';
        try {
             const locations=await Database
             .from('ail_los')
@@ -103,7 +98,7 @@ export default class LocationsController {
             .select('ail_los.total')
             .whereRaw('ail_los.location_id=?',[location_id])
 
-            const ailments=await Database
+            /*const ailments=await Database
             .from('ailments')
             .select('*')
 
@@ -132,7 +127,7 @@ export default class LocationsController {
                 });
 
                 poll='';
-            });
+            });*/
             
         
                 

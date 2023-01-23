@@ -47,25 +47,25 @@
                             <th> {{dat.name}}</th>
                             <th> {{dat.suburb}}</th>
 
-                            @if(dat.average_pm2>=200)
+                            @if(dat.average_pm2>=150.5)
                             <th style="color: #A8549D;">{{dat.average_pm2}}</th>
-                            @elseif(dat.average_pm2>=151)
+                            @elseif(dat.average_pm2>=55.5)
                             <th style="color: #F93131;">{{dat.average_pm2}}</th>
-                            @elseif(dat.average_pm2>=101)
+                            @elseif(dat.average_pm2>=35.5)
                             <th style="color: #FC7928;">{{dat.average_pm2}}</th>
-                            @elseif(dat.average_pm2>=51)
+                            @elseif(dat.average_pm2>=12.1)
                             <th style="color: #EDB02D;">{{dat.average_pm2}}</th>
                             @else
                             <th style="color: #38B208;">{{dat.average_pm2}}</th>
                             @endif
 
-                            @if(dat.average_pm10>=200)
+                            @if(dat.average_pm10>=355)
                             <th style="color: #A8549D;">{{dat.average_pm10}}</th>
-                            @elseif(dat.average_pm10>=151)
+                            @elseif(dat.average_pm10>=255)
                             <th style="color: #F93131;">{{dat.average_pm10}}</th>
-                            @elseif(dat.average_pm10>=101)
+                            @elseif(dat.average_pm10>=155)
                             <th style="color: #FC7928;">{{dat.average_pm10}}</th>
-                            @elseif(dat.average_pm10>=51)
+                            @elseif(dat.average_pm10>=55)
                             <th style="color: #EDB02D;">{{dat.average_pm10}}</th>
                             @else
                             <th style="color: #38B208;">{{dat.average_pm10}}</th>

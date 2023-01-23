@@ -4,7 +4,7 @@ import User from 'App/Models/User'
 import Database from '@ioc:Adonis/Lucid/Database';
 
 export default class UsersController {
-    public async index(ctx:HttpContextContract){
+    public async index(){
         return await User.all();
     }
     
@@ -24,7 +24,7 @@ export default class UsersController {
         })
         
         try {
-            const payload = await request.validate({
+            await request.validate({
               schema: newUserSchema,
               messages: {
                 required: 'El campo {{ field }} es requerido para crear una cuenta.'
@@ -76,7 +76,7 @@ export default class UsersController {
         }
     }
     
-    public async someone({ auth, response }:HttpContextContract){
+    public async someone({ auth }:HttpContextContract){
         await auth.use('web').authenticate()
         return auth.use('web').isLoggedIn
     }

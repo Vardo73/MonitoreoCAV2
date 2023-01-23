@@ -34,7 +34,7 @@ export default class ModelsController {
             let idM=model.id
 
             pollutants.forEach(async element => {
-                const polluMod= await PollutantModel.create({
+                await PollutantModel.create({
                     pollutant_id: element,
                     model_id:idM
                 });
@@ -90,6 +90,7 @@ export default class ModelsController {
         const id=request.input('id');
         const name=request.input('name');
         const description=request.input('description');
+        
         let pollutants= request.input('pollutants');
         let aux: any[]=[];
         try {
@@ -117,7 +118,7 @@ export default class ModelsController {
 
             pollutants.forEach( async element => {
                 if(!aux.includes(element)){
-                    const contMod= await PollutantModel.create({
+                    await PollutantModel.create({
                         pollutant_id: element,
                         model_id:id
                     });

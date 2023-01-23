@@ -36,7 +36,7 @@ export default class AilmentsController {
             let idA=ailment.id
 
             pollutants.forEach(async element => {
-                const AilPol= await AilmentPollutant.create({
+                await AilmentPollutant.create({
                     pollutant_id: element,
                     ailment_id:idA
                 });
@@ -102,7 +102,7 @@ export default class AilmentsController {
 
             pollutants.forEach( async element => {
                 if(!aux.includes(element)){
-                    const contMod= await AilmentPollutant.create({
+                    await AilmentPollutant.create({
                         pollutant_id: element,
                         ailment_id:id
                     });
@@ -144,7 +144,7 @@ export default class AilmentsController {
 
 
             obj.forEach(async element => {
-                const aillo= await AilLo.create({
+                await AilLo.create({
                     location_id: element.unidad_medica,
                     ailment_id:element.padecimiento,
                     year:year,

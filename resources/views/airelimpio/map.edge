@@ -45,9 +45,14 @@
         mask-image: url('img/logo41.svg');
     }
     .markerC {
-        background-Color: #4B95FF;
+        background-Color: grey;
         -webkit-mask-image: url('img/logo41.svg');
         mask-image: url('img/logo41.svg');
+    }
+    .markerCam{
+        background-Color: #000000;
+        -webkit-mask-image: url('img/icon-camera.svg');
+        mask-image: url('img/icon-camera.svg');
     }
     .textoPin{
         color: black;
@@ -68,7 +73,23 @@
 
 </style>
 @include('navbarpublic')
+
+
+
 <div id='map'></div>
+
+<div class="modal fade"   tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" id="ModalAlertLocation">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+                <div class="modal-header justify-content-around" style="background:#0d6efd; color:#FFFFFF; ">
+                    <h2>Encontrar mi ubicación</h2>
+                </div>
+                <div class="modal-body ">
+                    <p>Para ubicarte en el mapa presiona el boton <img src="img/icon_location.png" alt="0" width="50" height="25"> en la esquina superior derecha.</p>
+                </div>
+        </div>
+    </div>
+</div>
 
 @include('airelimpio/fab')
 @include('airelimpio/index')
