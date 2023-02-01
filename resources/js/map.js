@@ -188,7 +188,7 @@ function Popup(station,pm2,pm10,active,sponsors){
     return html;
 }
 function PopupCamera(){
-    let url=`https://photos.app.goo.gl/zQHQwX3zLnfWPiPd6`
+    let url=`https://mega.nz/folder/qVEA2b7Y#RlxgdoTHhKW_msCaIDxq_A`
     let btn=`<div class='d-grid gap-2' style="text-align:center;">
         <a class='btn btn-primary' href="${url}">VER</a>
         </div>`
