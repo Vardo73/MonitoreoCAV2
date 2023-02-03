@@ -17,7 +17,7 @@
     },
     "station": {
       "js": [
-        "/assets/station.3b141554.js"
+        "/assets/station.35edeca3.js"
       ]
     },
     "reports": {
@@ -68,6 +68,11 @@
     "sponsor": {
       "js": [
         "/assets/sponsor.deeffac1.js"
+      ]
+    },
+    "suburb": {
+      "js": [
+        "/assets/suburb.7616ec1c.js"
       ]
     },
     "fab": {

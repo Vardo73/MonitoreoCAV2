@@ -1,0 +1,220 @@
+@layout('master')
+
+@section('suburb')
+
+@include('navbar')
+<div class="container">
+    <hr/>
+    <h2 style="text-align: center;"><span style="color: #2aa5d6;">Colonias</span></h2>
+    <hr/>
+</div>
+<div class="container">
+    
+    <div class="col col-12 align-self-end">
+        <div class="d-grid gap-2 mx-auto ">
+            <button class="btn btn-primary" id="modalNewSuburb" data-bs-toggle="modal" data-bs-target="#SuburbModal">Agregar</button>
+        </div>
+    </div>
+    <br>
+    
+    <div class=" container-fluid table-responsive table-bordered">
+        <table class="table table-hover " name="tabAnual" id="tabAnual">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Colonia</th>
+                    <th scope="col">Coordenadas</th>
+                    <th scope="col">Contaminantes</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @each(suburb in suburbs)
+                <tr>
+                    <td>{{ suburb.id}}</td>
+                    <td>{{ suburb.name }}</td>
+                    <td>{{ suburb.latitude }},{{ suburb.longitude }}</td>
+                    <td>
+                        <div class="inline">
+                            @each(rel in relacion)
+                            @if(rel.suburb_id==suburb.id)
+                            
+                            <span class="badge rounded-pill bg-warning text-dark">{{ rel.name }}</span>
+                                
+                            @endif
+                                
+                            @endeach
+                        </div>
+                    </td>
+                    <td>
+                        <div class="row mx-auto">
+                            <div class="col col-6 d-grid gap-2 mx-auto">
+                                <button  class="btn btn-info" id="btnEdit" onclick="showSuburb({{ suburb.id }})" data-bs-toggle="modal" data-bs-target="#SuburbModalEdit">Editar</button>
+                            </div>
+                            <div class="col col-6 d-grid gap-2 mx-auto" >
+                                <button  class="btn btn-danger btnDelete" name="{{ suburb.id }}">Eliminar</button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                @endeach
+            </tbody>
+        </table>
+    </div>
+<!--   
+    <div class="row row-cols-3  ">
+        @each(suburb in suburbs)
+        <div class="col">
+            <div class="card" style="margin-bottom:2rem">
+                <h5 class="card-header">{{ suburb.name }}</h5>
+                <div class="card-body">
+                    <h2>Coordenadas</h2>
+                    <p class="card-text">{{ suburb.latitude }},{{ suburb.longitude }}</p>
+                    
+                    <h4 for="">Contaminantes presentes:</h4>
+                    <div class="inline">
+                        @each(rel in relacion)
+                        @if(rel.suburb_id==suburb.id)
+                        
+                        <span class="badge rounded-pill bg-warning text-dark">{{ rel.name }}</span>
+                            
+                        @endif
+                            
+                        @endeach
+                    </div>
+                    <br>
+                    <div class="row mx-auto">
+                        <div class="col col-6 d-grid gap-2 mx-auto">
+                            <button  class="btn btn-info" id="btnEdit" onclick="showSuburb({{ suburb.id }})" data-bs-toggle="modal" data-bs-target="#SuburbModalEdit">Editar</button>
+                        </div>
+                        <div class="col col-6 d-grid gap-2 mx-auto" >
+                            <button  class="btn btn-danger btnDelete" name="{{ suburb.id }}">Eliminar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <br>
+        </div>
+        @endeach
+    </div>
+-->
+    
+    <!-- MODAL NUEVA COLONIA -->
+    <div class="container-fluid">
+        <div class="modal fade" id="SuburbModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                        <div class="modal-header">
+                            <h2>Agregar Colonia</h2>
+                        </div>
+                        <div class="modal-body">
+                            <div>
+                                <label class="form-label" for="NomSuburb">Nombre:</label>
+                                <input class="form-control" type="text" name="NomSuburb" id="NomSuburb" required min="1" max="25">
+                            </div>
+                            <div class="row mx-auto">
+                                <div class="col col-6 d-grid gap-2 mx-auto">
+                                    <label class="form-label" for="latitude">Latitud:</label>
+                                    <input class="form-control" class="form-control" type="number" name="latitude" id="latitude" required min="1" max="99999999">
+                                </div>
+                                <div class="col col-6 d-grid gap-2 mx-auto">
+                                    <label class="form-label" for="longitude">Longitud:</label>
+                                    <input class="form-control" type="number" name="longitude" id="longitude" required min="1" max="25">
+                                </div>
+                            </div>        
+                            <label  class="form-label" >¿Qué contaminantes presenta?:</label><br>
+                            @each(pollutant in pollutants)
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" name='check' type="checkbox"  value={{ pollutant.id }}>
+                                    <label class="form-check-label" for="inlineCheckbox1">{{ pollutant.name }}</label>
+                                </div>
+                            @endeach            
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-outline-primary" id="btnCreateSuburb" name="btnCreateSuburb" data-bs-dismiss="modal">Crear</button>
+                            <button class="btn btn-outline-primary" id="btnCancelSuburb" name="btnCancelSuburb" data-bs-dismiss="modal">Cancelar</button>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL EDITAR COLONIA -->
+    <div class="container-fluid">
+        <div class="modal fade" id="SuburbModalEdit" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>Editar Colonia</h2>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <label for="txtIDSuburbEdit">ID:</label>
+                            <input class="form-control" type="text" name="txtIDSuburbEdit" id="txtIDSuburbEdit" required min="1" max="25" disabled>
+                        </div>
+                        <div>
+                            <label class="form-label" for="NomSuburbEdit">Nombre:</label>
+                            <input class="form-control" type="text" name="NomSuburbEdit" id="NomSuburbEdit" required min="1" max="25">
+                        </div>
+                        <div class="row mx-auto">
+                            <div class="col col-6 d-grid gap-2 mx-auto">
+                                <label class="form-label" for="latitudeEdit">Latitud:</label>
+                                <input class="form-control" class="form-control" type="number" name="latitudeEdit" id="latitudeEdit" required min="1" max="99999999">
+                            </div>
+                            <div class="col col-6 d-grid gap-2 mx-auto">
+                                <label class="form-label" for="longitudeEdit">Longitud:</label>
+                                <input class="form-control" type="number" name="longitudeEdit" id="longitudeEdit" required min="1" max="25">
+                            </div>
+                        </div>        
+                        <label  class="form-label" >¿Qué contaminantes monitorea?:</label><br>
+                        @each(pollutant in pollutants)
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" name='checkEdit' type="checkbox" value={{ pollutant.id }}>
+                                <label class="form-check-label" for="inlineCheckbox1">{{ pollutant.name }}</label>
+                            </div>
+                        @endeach            
+                    </div>
+                    <div class="modal-footer">
+                        <button  class="btn btn-outline-primary"  id="btnEditarSuburb" name="btnEditarSuburb" data-bs-dismiss="modal">Editar</button>
+                        <button class="btn btn-outline-primary" id="btnCancelarEditSuburb" name="btnCancelarEditSuburb" data-bs-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@entryPointScripts('suburb')
+
+<script>
+    function showSuburb(id){
+        document.getElementById('txtIDSuburbEdit').value=id;
+        let NomSuburbEdit=document.getElementById('NomSuburbEdit');
+        let latitudeEdit=document.getElementById('latitudeEdit');
+        let longitudeEdit=document.getElementById('longitudeEdit');
+        let checks=document.getElementsByName('checkEdit');
+        axios({
+            method: 'POST',
+            url: '/suburb/showSuburb',
+            data: {
+                id:id
+            }
+        })
+        .then(function (response) {
+            NomSuburbEdit.value=response.data[0].name
+            latitudeEdit.value=response.data[0].latitude
+            longitudeEdit.value=response.data[0].longitude
+            checks.forEach(element => {
+                response.data[1].forEach(element2 => {
+                    if(element.value==element2.pollutant_id){
+                        element.checked = true
+                    }
+                });
+            });
+        })
+        .catch(function (error) {
+            return [false, error]
+        });
+
+    }
+</script>
+@end

@@ -59,6 +59,7 @@ Encore.addEntry('json', './resources/js/json.js'),
 Encore.addEntry('ailment', './resources/js/ailment.js'),
 Encore.addEntry('location', './resources/js/location.js'),
 Encore.addEntry('sponsor', './resources/js/sponsor.js'),
+Encore.addEntry('suburb', './resources/js/suburb.js'),
 Encore.addEntry('fab', './resources/js/fab.js')
 
 /*

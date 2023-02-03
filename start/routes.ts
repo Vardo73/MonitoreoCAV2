@@ -7,6 +7,7 @@ Route.get('/', async ({ view }) => {
 //Views
 Route.get('/station', 'StationsController.show').as('station').middleware('auth')
 Route.get('/model', 'ModelsController.show').as('model').middleware('auth')
+Route.get('/suburb', 'SuburbsController.show').as('suburb').middleware('auth')
 Route.get('/ailment', 'AilmentsController.show').as('ailment').middleware('auth')
 Route.get('/location', 'LocationsController.show').as('location').middleware('auth')
 Route.get('/pollutant', 'PollutantsController.show').as('pollutant').middleware('auth')
@@ -68,6 +69,14 @@ Route.group(() => {
   Route.post('/showModel', 'ModelsController.showModel')
 }).prefix('/model')
 
+//Controller Suburb
+Route.group(() => {
+  Route.post('/store', 'SuburbsController.store')
+  Route.post('/delete', 'SuburbsController.delete')
+  Route.post('/edit', 'SuburbsController.edit')
+  Route.post('/showSuburb', 'SuburbsController.showSuburb')
+}).prefix('/suburb')
+
 //Controller Subscriber
 Route.group(() => {
   Route.post('/store', 'SubscribersController.store')
@@ -83,6 +92,7 @@ Route.group(() => {
 Route.group(() => {
   Route.post('/store', 'StationsController.store')
   Route.post('/delete', 'StationsController.delete')
+  Route.post('/active', 'StationsController.active')
   Route.post('/edit', 'StationsController.edit')
   Route.post('/showStation', 'StationsController.showStation')
   Route.get('/map', 'StationsController.StationsMap')

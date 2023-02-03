@@ -160,6 +160,24 @@ export default class StationsController {
         }
     }
 
+    public async active({request}:HttpContextContract){
+        const id=request.input('id');
+        const bool=request.input('bool');
+        try {
+            const station=await Station.findOrFail(id);
+            station.active=bool
+            await station.save(); 
+            
+            if(bool) return 'Estación activada';
+
+            return 'Estación desactivada'
+        } catch (error) {
+            console.log(error);
+            return error
+        }
+
+    }
+
     public async showStation({request}:HttpContextContract){
         const id=request.input('id');
         try {

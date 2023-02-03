@@ -56,7 +56,7 @@
                                                 <th scope="col">Colonia</th>
                                                 <th scope="col">Ubicación</th>
                                                 <th scope="col">Contaminates Monitoreados</th>
-                                                <th scope="col">Estado</th>
+                                                <th scope="col">Activo</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -73,11 +73,13 @@
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    @if(station.active)
-                                                    <span class="badge rounded-pill bg-success text-dark" >Activo</span>
-                                                    @else
-                                                    <span class="badge rounded-pill bg-danger text-dark">Inactivo</span>
-                                                    @endif
+                                                    <div class="form-check form-switch">
+                                                        @if(station.active)
+                                                            <input class="form-check-input SwitchActive" type="checkbox" role="switch" name="{{ station.id }}" checked>
+                                                        @else
+                                                            <input class="form-check-input SwitchActive" type="checkbox" role="switch" name="{{ station.id }}">
+                                                        @endif
+                                                    </div>
                                                 </td>
                                             </tr>
                                         </tbody>

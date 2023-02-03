@@ -34,7 +34,7 @@ document.getElementById('btnCancelStationEdit')
     });
 })
 
-//Guardar Contaminante
+//Guardar Estación 
 document.getElementById('btnCreateStation')
 .addEventListener('click',() =>{
 
@@ -100,7 +100,7 @@ window.onload= function(){
     btnDelete.forEach(element=>{
         element.addEventListener('click',()=>{
             let id=parseInt(element.getAttribute('name'))
-            deletePollutant(id)
+            deleteStation(id)
         })
     })
 
@@ -111,11 +111,35 @@ window.onload= function(){
             showStation(id)
         })
     })
+
+    //Evento active checked
+    let checkbox = document.querySelectorAll(".SwitchActive");
+
+    checkbox.forEach(element=>{
+        element.addEventListener('change',()=>{
+            let id=parseInt(element.getAttribute('name'))
+            if (element.checked) {
+                checkedActive(id,true)
+            } else {
+                checkedActive(id,false)
+            }
+        })
+    })
 }
 
 
-//Eliminar Contaminante
-function deletePollutant(id){
+function checkedActive(id,bool){
+    let url='station/active'
+    let method='POST'
+    let dat={
+        id:id,
+        bool:bool
+    }
+    services.requestAxios(url,method,dat)
+}
+
+//Eliminar Estación
+function deleteStation(id){
     if(id!=0){
         Swal.fire({
             title: 'Está seguro de eliminar este elemento? Se borrarán los datos optenidos por ese monitor.',
