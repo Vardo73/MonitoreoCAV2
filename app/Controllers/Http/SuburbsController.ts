@@ -136,4 +136,39 @@ export default class SuburbsController {
             return error
         }
     }
+
+    public async showMap({view}:HttpContextContract){
+        return view.render('airelimpio/mapSuburb');
+    }
+
+    
+    public async SuburbMap(){
+        const suburbs=await Suburb.all();
+        return suburbs;
+    }
+
+
+    
+    public async SubPoll({request}:HttpContextContract){
+        const suburb_id=request.param('suburb_id');
+       try {
+            const pollutants=await Database
+            .from('suburb_pollutants')
+            .join('pollutants', (query) => {
+                query
+                .on('pollutants.id', '=', 'suburb_pollutants.pollutant_id')
+            })
+            .select('suburb_pollutants.suburb_id')
+            .select('suburb_pollutants.pollutant_id ')
+            .select('pollutants.name')
+            .whereRaw('suburb_pollutants.suburb_id=?',[suburb_id])
+        
+                
+            return pollutants;
+       } catch (error) {
+            console.log(error)
+            return error
+       }
+    }
+
 }

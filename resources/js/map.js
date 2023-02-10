@@ -5,7 +5,6 @@ mapboxgl.accessToken = 'pk.eyJ1Ijoic2lzdGVtYXNjZXJjYSIsImEiOiJjbDRldWE2ZjAwMjI3M
 
 let divMap=document.getElementById('map')
 
-let lon,lat;
 
 let map = new mapboxgl.Map({
     container: divMap,
@@ -187,6 +186,7 @@ function Popup(station,pm2,pm10,active,sponsors){
     
     return html;
 }
+
 function PopupCamera(){
     let url=`https://mega.nz/folder/qVEA2b7Y#RlxgdoTHhKW_msCaIDxq_A`
     let btn=`<div class='d-grid gap-2' style="text-align:center;">

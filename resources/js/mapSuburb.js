@@ -3,26 +3,25 @@ import AppGlobal from '../js/app.js'
 let services=new AppGlobal()
 mapboxgl.accessToken = 'pk.eyJ1Ijoic2lzdGVtYXNjZXJjYSIsImEiOiJjbDRldWE2ZjAwMjI3M2JwOHpsb21jbHpxIn0.jLF2ydLoAdgrv68l8iM2VQ';
 
+let mapSuburb=document.getElementById('mapSuburb')
 
-let divMapAil=document.getElementById('mapAil')
 
 let map = new mapboxgl.Map({
-    container: divMapAil,
+    container: mapSuburb,
     style: 'mapbox://styles/mapbox/streets-v11',
     center:[-110.3064,24.1416],
-    zoom:13
+    zoom:10.8
 });
-
 
 map.addControl(new mapboxgl.NavigationControl());
 map.addControl(new mapboxgl.GeolocateControl());
 map.addControl(new mapboxgl.FullscreenControl());
 map.addControl(new mapboxgl.ScaleControl());
 
-//Unidades medicas
+
 axios({
     method: 'GET',
-    url: '/location/map'
+    url: '/suburb/map'
 }).then(function (response) {
     response.data.forEach(function(marker){
         let popup=new mapboxgl.Popup({ offset: 25 }).setMaxWidth('500')
@@ -35,7 +34,7 @@ axios({
         div.appendChild(el);
         el.classList.add('marker');
 
-        axios.get(`location/LocAil/${marker.id}`).then(function (response) {
+        axios.get(`suburb/sub_poll/${marker.id}`).then(function (response) {
             //console.log(response.data)
             let pop=Popup(marker,response.data)
             popup.setHTML(pop);
@@ -53,38 +52,42 @@ axios({
 
 
 
-function Popup(location,data){
+
+function Popup(suburb,data){
     let html='';
-    let tr='';
+    let div='';
 
     data.forEach(async element => {
-        tr+=`
-        <tr>
-            <td style="text-align:center;">${element.name}</td>
-            <td style="text-align:center;">${element.total}</td>
-        </tr>`
+        div+=`
+            <div class="inline"> 
+                <span class="badge rounded-pill bg-warning text-dark">${element.name}</span>
+            </div>
+            `
     });
 
 
     html=`
         <br>
-            <div  class="card">
-                <h5 class="card-header" style="text-align:center; background:#0d6efd; color:#FFFFFF; ">${location.name}</h5>
+            <div  class="card ">
+                <h5 class="card-header" style="text-align:center; background:#0d6efd; color:#FFFFFF; ">${suburb.name}</h5>
                 <div class="card-body">
                     <table class="table table-bordered" style="margin-left:auto; margin-right:auto; padding-top:8px; padding-left:55px; padding-right:55px;">
                         <thead>
                             <tr style="background-color:#white; color:#0d6efd;">
-                                <th style="text-align:center;">Padecimiento</th>
-                                <th style="text-align:center;">No. Casos</th>
+                                <th scope="col" style="text-align:center;">Contaminantes detectados</th>
                             </tr>
                         </thead>
                         <tbody>
-                        ${tr}
+                            <tr>
+                                <td style="text-align:center;">
+                                    ${div}
+                                </td>
+                            </tr>
                         </tbody>
                         <tfoot>
-                        <tr>
-                        <td colspan="3" style="text-align:center;">Colonia: ${location.suburb}</td>
-                        </tr>
+                            <tr>
+                            <td colspan="3" style="text-align:center;">Datos obtenidos de la red de monitoreo móvil de Aclima</td>
+                            </tr>
                         </tfoot>
                     </table>
                 </div>

@@ -28,11 +28,14 @@
                     </a>
                 </li>
                 <!-- Salud -->
-                <li class="nav-item">
-                    <a class="nav-link btn btn-primary" style="background: none; color: #FFFFFF;"  href="{{route('mapAilments')}}" >
-                        <i class="bi bi-heart-pulse"></i>
-                        Salud
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" style="background: none; color: #FFFFFF;"   href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-heart-pulse"></i> Salud
                     </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown" >
+                        <li><a class="dropdown-item" href="{{route('mapAilments')}}">Clínicas</a></li>
+                        <li><a class="dropdown-item" href="{{route('mapSuburb')}}">Colónias</a></li>
+                    </ul>
                 </li>
             </ul>
         </div>

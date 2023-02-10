@@ -42,7 +42,7 @@
     },
     "mapAil": {
       "js": [
-        "/assets/mapAil.6b4c3fe1.js"
+        "/assets/mapAil.0e7f30f4.js"
       ]
     },
     "historics": {
@@ -78,6 +78,11 @@
     "fab": {
       "js": [
         "/assets/fab.3f3fca00.js"
+      ]
+    },
+    "mapSuburb": {
+      "js": [
+        "/assets/mapSuburb.c0a5be98.js"
       ]
     }
   }

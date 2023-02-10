@@ -17,6 +17,7 @@ Route.get('/sponsor', 'SponsorsController.show').as('sponsor').middleware('auth'
 Route.get('/ca-admin', 'UsersController.showLogin').middleware('guest')
 Route.get('/historics/:station_id', 'StationsController.historics').as('historics')
 Route.get('/mapa-salud', 'LocationsController.showMap').as('mapAilments')
+Route.get('/mapa-calonia', 'SuburbsController.showMap').as('mapSuburb')
 
 //API 
 Route.group(() => {
@@ -75,6 +76,8 @@ Route.group(() => {
   Route.post('/delete', 'SuburbsController.delete')
   Route.post('/edit', 'SuburbsController.edit')
   Route.post('/showSuburb', 'SuburbsController.showSuburb')
+  Route.get('/map', 'SuburbsController.SuburbMap')
+  Route.get('/sub_poll/:suburb_id', 'SuburbsController.SubPoll')
 }).prefix('/suburb')
 
 //Controller Subscriber
