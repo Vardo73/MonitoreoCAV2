@@ -22,6 +22,9 @@
     table tr td.tdEM {
         background-color: #A8549D;
     }
+    table tr td.tdMMM {
+        background-color: #7E0023;
+    }
 </style>
 <div class="container">
     <hr/>
@@ -61,7 +64,8 @@
                         <span class="badge text-dark" style="max-width: 8rem; background-color:#EDB02D; ">12.1–35.4</span>
                         <span class="badge text-dark" style="max-width: 8rem; background-color:#FC7928; ">35.5-55.4</span>
                         <span class="badge text-dark" style="max-width: 8rem; background-color:#F93131; ">55.5-150.4</span>
-                        <span class="badge text-dark" style="max-width: 8rem; background-color:#A8549D; ">150.5+</span>
+                        <span class="badge text-dark" style="max-width: 8rem; background-color:#A8549D; ">150.5-250.4</span>
+                        <span class="badge text-dark" style="max-width: 8rem; background-color:#7E0023; ">250.5+</span>
                     </div>
                     <br>
                     <!-- TABLA PM2.5-->
@@ -173,7 +177,8 @@
                         <span class="badge text-dark" style="max-width: 8rem; background-color:#EDB02D; ">55-154</span>
                         <span class="badge text-dark" style="max-width: 8rem; background-color:#FC7928; ">155-254</span>
                         <span class="badge text-dark" style="max-width: 8rem; background-color:#F93131; ">255-354</span>
-                        <span class="badge text-dark" style="max-width: 8rem; background-color:#A8549D; ">355+</span>
+                        <span class="badge text-dark" style="max-width: 8rem; background-color:#A8549D; ">355-424</span>
+                        <span class="badge text-dark" style="max-width: 8rem; background-color:#7E0023; ">425+</span>
                     </div>
                     <br>
                     <!-- TABLA PM 10-->
@@ -277,15 +282,19 @@
                     </div>
                 </div>
             </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true" style="margin-bottom:130%; margin-right:50%;background-color:black; "></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next" style="color:black;">
+              <span class="carousel-control-next-icon" aria-hidden="true" style=" margin-bottom:130%; margin-left:50%; background-color:black;"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+        @else
+        <div style="margin:7%">
+            <h2 style="text-align: center;"><span style="color: #2aa5d6;">Sin datos de los últimos 5 días.</span></h2>
+        </div>
         @endif
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true" style="margin-bottom:130%; background-color:black;"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next" style="color:black;">
-          <span class="carousel-control-next-icon" aria-hidden="true" style=" margin-bottom:130%; background-color:black;"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
       </div>
 </div>
 <!-- MODAL MENSAJE DE MANTENIMIENTO

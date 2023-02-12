@@ -1,6 +1,7 @@
 <section>
     <style>
         .indice{
+            font-size: 12px;
             background-Color: white;
             color: black;
             display: flex;
@@ -31,7 +32,7 @@
         }
 
         .visible{
-            bottom: 26%;
+            bottom: 22.8%;
         }
         
         .hide{
@@ -45,7 +46,7 @@
             justify-content: center
         }
 
-        .calidadDelAire, .buenaI , .aceptableI, .malaI, .muyMaloI, .extremadamenteMaloI{
+        .calidadDelAire, .buenaI , .aceptableI, .malaI, .muyMaloI, .extremadamenteMaloI,.hazardous{
             width: 16.6666666667%;
             display: flex;
             justify-content: center;
@@ -81,6 +82,11 @@
 
         .extremadamenteMaloI{
             background-Color: #A8549D;
+            border-right: 1px solid white;
+        }
+        .hazardous{
+            background-Color: #7E0023;
+            border-right: 1px solid white;
         }
 
         .topIndice, .botIndice{
@@ -89,23 +95,25 @@
     </style>
     <div>
         <div class="row mx-auto justify-content-around">
-            <div id='index' class='indice'>
+            <div id='index' class='indice '>
                 <div class='topIndice'>Calidad del aire</div>
-                <div class='calidadIndice'>
-                    <div class='calidadDelAire'>Calidad del aire</div>
-                    <div class='buenaI'>Buena</div>
-                    <div class='aceptableI'>Aceptable</div>
-                    <div class='malaI'>Mala*</div>
-                    <div class='muyMaloI'>Muy malo*</div>
-                    <div class='extremadamenteMaloI'>Extremadamente malo*</div>
+                <div class='calidadIndice row mx-auto'>
+                    <div class='calidadDelAire col'>Calidad del aire</div>
+                    <div class='buenaI col'>Buena</div>
+                    <div class='aceptableI col'>Aceptable</div>
+                    <div class='malaI col'>Mala*</div>
+                    <div class='muyMaloI col'>Muy malo*</div>
+                    <div class='extremadamenteMaloI col'>Extremadamente malo*</div>
+                    <div class='hazardous col'>Peligrosa*</div>
                 </div>
-                <div class='calidadIndice'>
-                    <div class='calidadDelAire'>Riesgo asociado</div>
-                    <div class='buenaI'>Bajo</div>
-                    <div class='aceptableI'>Moderado</div>
-                    <div class='malaI'>Alto*</div>
-                    <div class='muyMaloI'>Muy alto*</div>
-                    <div class='extremadamenteMaloI'>Extremadamente alto*</div>
+                <div class='calidadIndice  row mx-auto '>
+                    <div class='calidadDelAire col'>Riesgo asociado</div>
+                    <div class='buenaI col'>Bajo</div>
+                    <div class='aceptableI col'>Moderado</div>
+                    <div class='malaI col'>Alto*</div>
+                    <div class='muyMaloI col'>Muy alto*</div>
+                    <div class='extremadamenteMaloI col'>Extremadamente alto*</div>
+                    <div class='hazardous col'>Peligroso*</div>
                 </div>
                 <div class='botIndice'>*No se recomienda realizar actividades al aire libre. Se recomienda utilizar cubrebocas.</div>
             </div>

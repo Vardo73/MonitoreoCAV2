@@ -13,6 +13,16 @@
          <!--Botones -->
         <div class="collapse navbar-collapse" id="navbarToggleExternalContent" >
             <ul class="navbar-nav ms-auto" >
+                <!-- Salud -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" style="background: none; color: #FFFFFF;"   href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-heart-pulse"></i> Salud
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown" >
+                        <li><a class="dropdown-item" href="{{route('mapAilments')}}">Padecimientos </a></li>
+                        <li><a class="dropdown-item" href="{{route('mapSuburb')}}">Contaminantes </a></li>
+                    </ul>
+                </li>
                 <!-- Informate -->
                 <li class="nav-item" >
                     <a class="nav-link btn btn-primary" style="background: none; color: #FFFFFF;" data-bs-toggle="modal" data-bs-target="#InfoModal" href="">
@@ -26,16 +36,6 @@
                         <i class="bi bi-person-heart"></i>
                         Apóyanos
                     </a>
-                </li>
-                <!-- Salud -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" style="background: none; color: #FFFFFF;"   href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="bi bi-heart-pulse"></i> Salud
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown" >
-                        <li><a class="dropdown-item" href="{{route('mapAilments')}}">Clínicas</a></li>
-                        <li><a class="dropdown-item" href="{{route('mapSuburb')}}">Colónias</a></li>
-                    </ul>
                 </li>
             </ul>
         </div>

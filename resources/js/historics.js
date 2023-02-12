@@ -6,7 +6,9 @@ window.onload= function(){
 
         if (element.classList.contains('tdpm2')) {
             //PM 2.5
-            if(average>150.5){
+            if(average>250.5){
+                element.classList.add('tdMMM')
+            }else if(average>150.5){
                 element.classList.add('tdEM')
             }else if(average>55.5){
                 element.classList.add('tdMM')
@@ -19,7 +21,9 @@ window.onload= function(){
             }
         }else if(element.classList.contains('tdpm10')){
             //PM 10
-            if(average>355){
+            if(average>425){
+                element.classList.add('tdMMM')
+            }else if(average>355){
                 element.classList.add('tdEM')
             }else if(average>255){
                 element.classList.add('tdMM')
@@ -32,10 +36,12 @@ window.onload= function(){
             }
         }
     })
+    /*
     const myModalEl = document.querySelector('#ModalAlertStations')
 
     const modal = new bootstrap.Modal(myModalEl) // initialized with defaults
     modal.show()
+    */
 }
 
 

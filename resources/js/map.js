@@ -69,7 +69,9 @@ axios({
                     popup.setHTML(pop);
                 }
     
-                if(pm2>150.5 || pm10>355){
+                if(pm2>250.4 || pm10>425){
+                    el.classList.add('markerMMM') ;
+                }else if(pm2>150.5 || pm10>355){
                     el.classList.add('markerEM') ;
                 }else if(pm2>55.5 || pm10>255){
                     el.classList.add('markerMM') ;
