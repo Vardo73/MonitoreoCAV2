@@ -61,6 +61,11 @@
             align-items: center;
             background: none;
         }
+        @media only screen and (max-width: 680px) {
+            #leyenda{
+                display: none;
+            }
+        }
     </style>
     <footer >
     <!--
@@ -75,14 +80,14 @@
             </div>
         </div>
     -->
-        <p class='textoInf'>© 2021 Centro de Energía Renovable y Calidad Ambiental A.C.</p>
+        <p id='leyenda' class='textoInf'>© 2021 Centro de Energía Renovable y Calidad Ambiental A.C.</p>
     <!--
         <div class='banderas'>
             <button><img src='img/mexico.png' /></button>
             <button><img src='img/estados-unidos.png' /></button>
         </div>
     -->
-        <div class ='contacTD'>
+        <div class ='contacTD' id="contacts">
             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AddressModal"><i class="bi bi-geo-alt"></i> Dirección</button>
             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#PhoneModal"><i class="bi bi-telephone"></i> Teléfono</button>
         </div>

@@ -2,7 +2,6 @@ import Database from '@ioc:Adonis/Lucid/Database';
 import Axios from 'axios'
 import moment from 'moment';
 import Env from '@ioc:Adonis/Core/Env'
-
 export default class Logic{
     public async averageMonth(station:string,date:string):Promise<any>{
         

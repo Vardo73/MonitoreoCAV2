@@ -75,7 +75,18 @@
     .mapboxgl-popup {
         max-width: 500px;
     }
-
+    
+    @media only screen and (max-width: 680px) {
+    .mapboxgl-popup-content {
+        max-width: 200px;
+    }
+    .mapboxgl-popup-content div {
+        padding:0em;
+    }
+    .mapboxgl-popup-content p {
+        margin: 0.5em 0.5em;
+    }
+}
 </style>
 @include('navbarpublic')
 

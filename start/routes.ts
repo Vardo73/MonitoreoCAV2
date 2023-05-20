@@ -5,7 +5,10 @@ Route.get('/', async ({ view }) => {
 }).as('map')
 
 //Views
+Route.get('/ca-admin', 'UsersController.showLogin').middleware('guest')
+
 Route.get('/station', 'StationsController.show').as('station').middleware('auth')
+Route.get('/fwop', 'StationsController.showFWOP').as('stationFWOP').middleware('auth')
 Route.get('/model', 'ModelsController.show').as('model').middleware('auth')
 Route.get('/suburb', 'SuburbsController.show').as('suburb').middleware('auth')
 Route.get('/ailment', 'AilmentsController.show').as('ailment').middleware('auth')
@@ -14,7 +17,8 @@ Route.get('/pollutant', 'PollutantsController.show').as('pollutant').middleware(
 Route.get('/report', 'DataController.show').as('report').middleware('auth')
 Route.get('/json', 'DataController.showJson').as('json').middleware('auth')
 Route.get('/sponsor', 'SponsorsController.show').as('sponsor').middleware('auth')
-Route.get('/ca-admin', 'UsersController.showLogin').middleware('guest')
+Route.get('/calendar', 'DataController.calendar').as('calendar').middleware('auth')
+
 Route.get('/historics/:station_id', 'StationsController.historics').as('historics')
 Route.get('/mapa-salud', 'LocationsController.showMap').as('mapAilments')
 Route.get('/mapa-calonia', 'SuburbsController.showMap').as('mapSuburb')
@@ -93,12 +97,19 @@ Route.group(() => {
 
 //Controller Station
 Route.group(() => {
+  /*Purple-Air*/
   Route.post('/store', 'StationsController.store')
-  Route.post('/delete', 'StationsController.delete')
-  Route.post('/active', 'StationsController.active')
   Route.post('/edit', 'StationsController.edit')
+
+  /*FWOP*/
+  Route.post('/storefwop', 'StationsController.storeFWOP')
+  Route.post('/editfwop', 'StationsController.editFWOP')
+
+  /*General*/
   Route.post('/showStation', 'StationsController.showStation')
   Route.get('/map', 'StationsController.StationsMap')
+  Route.post('/delete', 'StationsController.delete')
+  Route.post('/active', 'StationsController.active')
 }).prefix('/station')
 
 
@@ -106,6 +117,12 @@ Route.group(() => {
 Route.group(() => {
   Route.post('/report_day', 'DataController.reportDayJson')
   Route.post('/report_month', 'DataController.reportMonthJson')
+  Route.post('/report_calendar', 'DataController.reportCalendarJson')
+  Route.post('/report_year', 'DataController.reportYearJson')
   Route.get('/report/:station_id/:date', 'DataController.reportDayHTML')
   Route.get('/report_month/:station_id/:date', 'DataController.reportMonthHTML')
+  Route.get('/report_year/:station_id/:date', 'DataController.reportYearHTML')
+
+  
+  Route.post('/fwop', 'DataController.storeDataFwop')
 }).prefix('/data')

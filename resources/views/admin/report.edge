@@ -5,13 +5,32 @@
 @include('navbar')
 <div class="container">
     <hr/>
-        <h2 style="text-align: center;"><span style="color: #2aa5d6;">Reportes</span></h2>
+        <h2 style="text-align: center;"><span style="color: #2aa5d6;">Generar reportes</span></h2>
     <hr/>
-    <br>
+    <p style="text-align: center;">
+        Escoge el tipo de reporte a generar, selecciona la estación y fecha correspondiente.
+    </p>
     <div class="m-0  row justify-content-center align-items-center" >
         <div class="container col">
             <div class="card">
                 <div class="card-body">
+                    <h4 style="text-align: center;">
+                        Tipo de reporte
+                    </h4>
+                    <div style="text-align: center;" >
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="rbReportType" id="rbDay" value="day" checked>
+                            <label class="form-check-label" for="inlineRadio1">Diario</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="rbReportType" id="rbMonth" value="month">
+                            <label class="form-check-label" for="inlineRadio2">Mensual</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="rbReportType" id="rbYear" value="year" >
+                            <label class="form-check-label" for="inlineRadio3">Anual</label>
+                        </div>
+                    </div>
                     <div class="row mx-auto">
                         <div class="col col-4 mx-auto">
                             <label class="form-label" for="selectStation">Estación:</label>
@@ -25,10 +44,6 @@
                         <div class="col col-4 mx-auto">
                             <label class="form-label" for="selectType">Fecha:</label>
                             <div class="input-group mb-3">
-                                <div class="input-group-text">
-                                    <label class="form-check-label" for="cbMonth">Mes?.-</label>
-                                    <input id="cbMonth" class="form-check-input mt-0" type="checkbox" value="" aria-label="Check para obtener datos del mes">
-                                </div>
                                 <input type="date" class="form-control" id="dateFrom">
                             </div>
                         </div>

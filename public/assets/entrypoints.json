@@ -7,42 +7,47 @@
     },
     "pollutant": {
       "js": [
-        "/assets/pollutant.126288ab.js"
+        "/assets/pollutant.f9b4c2db.js"
       ]
     },
     "model": {
       "js": [
-        "/assets/model.c740398f.js"
+        "/assets/model.6a9fc39b.js"
       ]
     },
     "station": {
       "js": [
-        "/assets/station.35edeca3.js"
+        "/assets/station.5f8adda6.js"
       ]
     },
     "reports": {
       "js": [
-        "/assets/reports.dfa24066.js"
+        "/assets/reports.1342f8c4.js"
       ]
     },
     "reportData": {
       "js": [
-        "/assets/reportData.2ab9c3c1.js"
+        "/assets/reportData.0e22a289.js"
       ]
     },
     "reportMonth": {
       "js": [
-        "/assets/reportMonth.a245b594.js"
+        "/assets/reportMonth.5871d571.js"
+      ]
+    },
+    "reportYear": {
+      "js": [
+        "/assets/reportYear.4afcb00c.js"
       ]
     },
     "map": {
       "js": [
-        "/assets/map.b4123d04.js"
+        "/assets/map.590e1797.js"
       ]
     },
     "mapAil": {
       "js": [
-        "/assets/mapAil.0e7f30f4.js"
+        "/assets/mapAil.0b48c808.js"
       ]
     },
     "historics": {
@@ -52,37 +57,47 @@
     },
     "json": {
       "js": [
-        "/assets/json.55ffd123.js"
+        "/assets/json.44ea10dd.js"
       ]
     },
     "ailment": {
       "js": [
-        "/assets/ailment.4466eb24.js"
+        "/assets/ailment.3bac359b.js"
       ]
     },
     "location": {
       "js": [
-        "/assets/location.4380c05c.js"
+        "/assets/location.74866a28.js"
       ]
     },
     "sponsor": {
       "js": [
-        "/assets/sponsor.deeffac1.js"
+        "/assets/sponsor.af0fc72e.js"
       ]
     },
     "suburb": {
       "js": [
-        "/assets/suburb.7616ec1c.js"
+        "/assets/suburb.a89e71c9.js"
       ]
     },
     "fab": {
       "js": [
-        "/assets/fab.3f3fca00.js"
+        "/assets/fab.d7139400.js"
+      ]
+    },
+    "calendar": {
+      "js": [
+        "/assets/calendar.61d3f982.js"
       ]
     },
     "mapSuburb": {
       "js": [
-        "/assets/mapSuburb.c0a5be98.js"
+        "/assets/mapSuburb.a6e6c4a2.js"
+      ]
+    },
+    "stationFWOP": {
+      "js": [
+        "/assets/stationFWOP.22ab243e.js"
       ]
     }
   }

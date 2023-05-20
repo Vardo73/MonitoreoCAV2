@@ -1,12 +1,20 @@
 <section>
+    <style>
+        @media only screen and (max-width: 680px) {
+            #nameNavbar{
+                display: none;
+            }
+        }
+    </style>
     <nav id="MyNavbarPublic" class="navbar navbar-expand-lg navbar-dark bg-primary" >
-        <a class="navbar-brand"  href="{{route('map')}}" style="margin-left:2%">
+        <a class="navbar-brand"  href="{{route('map')}}" style="margin-left:2%" id='nameNavbar'>
             <h4>Sistema de Monitoreo de la Calidad del Aire</h4>
         </a>
-        <img src="../img/logoBlanco.png" alt="0" width="110"  class="img-fluid d-inline-block align-text-top" style="margin-left:8%">
-        
+        <a class="navbar-brand"  href="{{route('map')}}" style="margin-left:2%">
+            <img src="../img/logoBlanco.png" alt="0" width="110"  class="img-fluid d-inline-block align-text-top" style="margin-left:8%">
+        </a>
         <!--Botón menú -->
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button  id='btnNavToggler' class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -125,4 +133,5 @@
             </div>
         </div>
     </div>
+    @entryPointScripts('fab')
 </section>

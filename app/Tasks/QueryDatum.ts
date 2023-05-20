@@ -4,7 +4,7 @@ import moment from 'moment'
 import Database from '@ioc:Adonis/Lucid/Database'
 import Axios from 'axios'
 import Datum from 'App/Models/Datum'
-import Logic from 'App/Methods/Logic';
+import Logic from 'App/Methods/Logic'
 
 /* Datos generales del monitor
 https://www.purpleair.com/json?key=7X87EFT46TOH2OL9&show=39465*/
@@ -21,8 +21,8 @@ https://api.thingspeak.com/channels/1724128/feeds.json?api_key=Q0YJ8J67XQ9EJZ9U
 
 export default class QueryDatum extends BaseTask {
 	public static get schedule() {
-		//return '0 15 * * * *'
-		return '0 33 * * * *'
+		return '0 15 * * * *'
+		//return '0 33 * * * *'
 	}
 	/*
 	 * Set enable use .lock file for block run retry task
@@ -55,6 +55,9 @@ export default class QueryDatum extends BaseTask {
 		.from('stations')
 		.select('*')
 		.whereRaw('stations.active=? ',[true])
+		.andWhereILike('models.name','%purple%')
+		.orWhereILike('models.name', '%Purple%')
+		.orWhereILike('models.name', '%PURPLE%')
 
 		try {
 			if(stations.length>0){
@@ -101,6 +104,9 @@ export default class QueryDatum extends BaseTask {
 			.from('stations')
 			.select('*')
             .whereRaw('stations.active=? ',[true])
+			.andWhereILike('models.name','%purple%')
+			.orWhereILike('models.name', '%Purple%')
+			.orWhereILike('models.name', '%PURPLE%')
 
 			if(stations.length>0){
 				let i=0;
@@ -186,6 +192,9 @@ export default class QueryDatum extends BaseTask {
 			.from('stations')
 			.select('*')
             .whereRaw('stations.active=? ',[true])
+			.andWhereILike('models.name','%purple%')
+			.orWhereILike('models.name', '%Purple%')
+			.orWhereILike('models.name', '%PURPLE%')
 
 			if(stations.length>0){
 				let i=0;
@@ -229,8 +238,4 @@ export default class QueryDatum extends BaseTask {
 	    }
 	}
 
-
-	public async BOSCH(){
-		
-	}
 }

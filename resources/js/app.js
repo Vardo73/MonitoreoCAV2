@@ -1,8 +1,14 @@
 
 export default class AppGlobal {
+    //Limites de contaminantes NOM
+        limNomPm2=41
+        limNomPm10=70
+
+    //Limites de contaminantes OMS
+        limOmsPm2=15
+        limOmsPm10=45
 
     constructor(){
-
     }
 
     notificationSwal(message,type,time=1000,reload=true){
@@ -18,7 +24,6 @@ export default class AppGlobal {
         });
     }
 
-    
     requestAxiosFile(url,method,data,notificacion=true){
         axios({
             url:url,
@@ -46,7 +51,10 @@ export default class AppGlobal {
             data:data
         })
         .then(response=>{
-            if(notificacion){
+            if(response.data[0]=='Error'){
+                this.notificationSwal(response.data[1],'error',1000)
+            }
+            else if(notificacion){
                 this.notificationSwal(response.data,'success')
             }else{
                 this.notificationSwal(response.data,'success',1000,false)
@@ -82,11 +90,10 @@ export default class AppGlobal {
         }
         return false
     }
-
     
     selectValidator(element){
         if(element!='0' ){
-            console.log(element)
+            //console.log(element)
             return true;
         }
         return false
@@ -208,9 +215,9 @@ export default class AppGlobal {
         let veryBad=0;
 
         data.forEach(ele => {
-            if(ele.average<limOms){
+            if(ele<limOms){
                 good++;
-            }else if(ele.average<limNom){
+            }else if(ele<limNom){
                 bad++;
             }else{
                 veryBad++;
@@ -245,7 +252,7 @@ export default class AppGlobal {
                   },
                   title: {
                       display: true,
-                      text: 'Horas buenas, malas y muy malas para '+text
+                      text: 'Días buenos, malos y muy malos para '+text
                   }
               }
             }
@@ -257,16 +264,12 @@ export default class AppGlobal {
 
         let o=[]
         let n=[]
-        let average=[]
 
         days.forEach(()=>{
             o.push(limNom)
             n.push(limOms)
         })
         
-        data.forEach(e=>{
-            average.push(e.average)
-        })
 
         let Data = {
             labels: days,
@@ -286,7 +289,7 @@ export default class AppGlobal {
                 },
                 {
                     label: 'Niveles de contaminante '+text +' (ug/m^3)',
-                    data: average,
+                    data: data,
                     fill: false,
                     borderColor: '#6AFF33',
                     tension: 0.1
@@ -323,7 +326,7 @@ export default class AppGlobal {
         let sunday=[];
 
         data.forEach(e=>{
-            let dia=moment(e.created_at).format('d');
+            let dia=moment(e.day).format('d');
             switch (dia) {
                 case '1':
                     //alert('Es Lunes')
@@ -439,4 +442,5 @@ export default class AppGlobal {
             },
           });
     }
+
 }

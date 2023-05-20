@@ -25,16 +25,34 @@
                       <li><a class="dropdown-item" href="{{route('pollutant')}}">Contaminantes</a></li>
                       <li><a class="dropdown-item" href="{{route('suburb')}}">Colonias</a></li>
                       <li><a class="dropdown-item" href="{{route('ailment')}}">Enfermedades</a></li>
-                      <li><a class="dropdown-item" href="{{route('station')}}">Estaciones</a></li>
                       <li><a class="dropdown-item" href="{{route('sponsor')}}">Patrocinadores</a></li>
                       <li><a class="dropdown-item" href="{{route('model')}}">Modelos</a></li>
                       <li><a class="dropdown-item" href="{{route('location')}}">Unidades Medicas</a></li>
                   </ul>
               </li>
               
-              <!-- Reportes -->
-              <li class="nav-item">
-                <a class="nav-link" href="{{route('report')}}">Reportes</a>
+              <!-- Estadísticas -->
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Estadísticas
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown" >
+                  <li><a class="dropdown-item" href="{{route('report')}}">Reportes</a></li>
+                  <li><a class="dropdown-item" href="{{route('calendar')}}">Calendario</a></li>
+
+                </ul>
+
+              </li>
+              <!-- Estaciones -->
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Estaciones
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown" >
+                  <li><a class="dropdown-item" href="{{route('station')}}">PurpleAir</a></li>
+                  <li><a class="dropdown-item" href="{{route('stationFWOP')}}">FWOP</a></li>
+
+                </ul>
               </li>
               <!-- Logout -->
               <li class="nav-item dropdown">

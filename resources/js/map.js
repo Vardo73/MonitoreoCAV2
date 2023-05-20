@@ -50,7 +50,7 @@ axios({
         });
 
 
-        if(marker.active){
+        if(marker.active && marker.nomM.toLowerCase()=='purple-air'){
             let url=`https://api.purpleair.com/v1/sensors/${marker.slug}`
             //console.log(url)
             axios.get(url,{headers: {'Content-Type': 'application/json',
@@ -62,10 +62,10 @@ axios({
                 if(average.data.hasOwnProperty('sensor')){
                     pm2=average.data.sensor["pm2.5"];
                     pm10=average.data.sensor["pm10.0"];
-                    let pop=Popup(marker,pm2,pm10,true,sponsors)
+                    let pop=Popup(marker,pm2,pm10,sponsors)
                     popup.setHTML(pop);
                 }else{
-                    let pop=Popup(marker,null,null,true,sponsors)
+                    let pop=Popup(marker,null,null,sponsors)
                     popup.setHTML(pop);
                 }
     
@@ -79,15 +79,19 @@ axios({
                     el.classList.add('markerM') ;
                 }else if(pm2>12.1 || pm10>55){
                     el.classList.add('markerA') ;
-                }else if(pm2>0 || pm10>0){
+                }else if(pm2>=0 || pm10>=0){
                     el.classList.add('markerGood') ;
                 }else{
                     el.classList.add('markerC') ;
                 }
             });
-        
+        } 
+        else if(marker.active && marker.nomM.toLowerCase()=='fwop'){
+            let pop=PopupFWOP(marker,sponsors)
+            popup.setHTML(pop);
+            el.classList.add('markerGood') ;
         }else{
-            let pop=Popup(marker,null,null,false,sponsors)
+            let pop=PopupInactive(marker,sponsors)
             popup.setHTML(pop);
 
             el.classList.add('markerInactive') ;
@@ -127,26 +131,20 @@ axios({
 });
 
 
-function Popup(station,pm2,pm10,active,sponsors){
+function Popup(station,pm2,pm10,sponsors){
     let url=`/historics/${station.id}`
     let html='';
     let td='';
     let btn='';
     let img='';
-    if(active){
-
-        td='<td colspan="3" style="text-align:center;">Concentraciones de los ultimos 10 min.</td>';
-        btn=`<div class='d-grid gap-2' style="text-align:center;">
+    
+    td='<td colspan="3" style="text-align:center;">Concentraciones de los ultimos 10 min.</td>';
+    btn=`<div class='d-grid gap-2' style="text-align:center;">
         <a class='btn btn-primary' href="${url}">Histórico</a>
         </div>`
-        if(pm2==null && pm10==null){
-            td='<td colspan="3" style="text-align:center;">Fallas en la conexión...</td>';
-            pm2='---';
-            pm10='---';
-        }
-    }else{
-        td='<td colspan="3" style="text-align:center;color:red;" >Desconectado temporalmente</td>';
-        pm2='---';
+    if(pm2==null && pm10==null){
+        td='<td colspan="3" style="text-align:center;">Fallas en la conexión...</td>';
+           pm2='---';
         pm10='---';
     }
 
@@ -173,6 +171,9 @@ function Popup(station,pm2,pm10,active,sponsors){
                                 <td style="text-align:center;">${pm2}</td>
                                 <td style="text-align:center;">${pm10}</td>
                             </tr>
+                            <tr>
+                                <td colspan="3"  style="text-align:center;">Modelo: ${station.nomM}</td>
+                            </tr>
                         </tbody>
                         <tfoot>
                         <tr>
@@ -182,6 +183,92 @@ function Popup(station,pm2,pm10,active,sponsors){
                     </table>
                     ${img}
                     ${btn}
+                </div>
+            </div>
+        `
+    
+    return html;
+}
+
+function PopupFWOP(station,sponsors){
+    //let url=`/historics/${station.id}`
+    let html='';
+    let td='';
+    let btn='';
+    let img='';
+
+    sponsors.forEach(element => {
+        img+=`<img src="${element}" alt="" >`
+    });
+
+    html=`
+        <br>
+            <div  class="card">
+                <h5 class="card-header" style="text-align:center; background:#0d6efd; color:#FFFFFF; ">Índice de calidad del aire</h5>
+                <div class="card-body">
+                    <table class="table table-bordered" style="margin-left:auto; margin-right:auto; padding-top:8px; padding-left:55px; padding-right:55px;">
+                        <thead>
+                            <tr style="background-color:#white; color:#0d6efd;">
+                                <th style="text-align:center;">${station.name}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="text-align:center;">Colonia: ${station.suburb}</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:center;">Modelo: ${station.nomM}</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                        ${td}
+                        </tr>
+                        </tfoot>
+                    </table>
+                    ${img}
+                </div>
+            </div>
+        `
+    return html;
+}
+
+function PopupInactive(station,sponsors){
+    let html='';
+    let td='';
+    let img='';
+    td='<td style="text-align:center;color:red;" >Desconectado temporalmente</td>';
+
+    sponsors.forEach(element => {
+        img+=`<img src="${element}" alt="" >`
+    });
+
+    html=`
+        <br>
+            <div  class="card">
+                <h5 class="card-header" style="text-align:center; background:#0d6efd; color:#FFFFFF; ">Índice de calidad del aire</h5>
+                <div class="card-body">
+                    <table class="table table-bordered" style="margin-left:auto; margin-right:auto; padding-top:8px; padding-left:55px; padding-right:55px;">
+                        <thead>
+                            <tr style="background-color:#white; color:#0d6efd;">
+                                <th style="text-align:center;">${station.name}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="text-align:center;">Colonia: ${station.suburb}</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:center;">Modelo: ${station.nomM}</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                        ${td}
+                        </tr>
+                        </tfoot>
+                    </table>
+                    ${img}
                 </div>
             </div>
         `

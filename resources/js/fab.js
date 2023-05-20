@@ -1,6 +1,9 @@
 import AppGlobal from '../js/app.js'
 let services=new AppGlobal()
 
+let container=document.getElementById('containerFab');
+let bn=false;
+
 document.getElementById('btnSubscriber').addEventListener('click',()=>{
     let name=document.getElementById('name').value.trim()
     let lastname=document.getElementById('lastname').value.trim()
@@ -17,5 +20,15 @@ document.getElementById('btnSubscriber').addEventListener('click',()=>{
         services.requestAxios(url,method,dat)
     }else{
         services.notificationSwal('Faltan campos por llenar.','warning')
+    }
+})
+
+document.getElementById('btnNavToggler').addEventListener('click',()=>{
+    if(!bn){
+        container.style.top='35%'
+        bn=true;
+    }else{
+        container.style.top='12%'
+        bn=false;
     }
 })

@@ -9,25 +9,60 @@
         <h2 style="text-align: center;"><span style="color: #2aa5d6;">Lectura de Json</span></h2>
     <hr/>
 </div>
+
+<br>
+
 <div class="container">
-    <br>
-    <div class="row">
-            <div class="col">
-                <label class="form-label" for="jsonfile">Año de los datos:</label>
-                <input class="form-control" class="form-control" type="number" name="year" id="year" min="2000" max="2999">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="health-tab" data-bs-toggle="tab" data-bs-target="#health" type="button" role="tab" aria-controls="health" aria-selected="true">Salud</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="fwop-tab" data-bs-toggle="tab" data-bs-target="#fwop" type="button" role="tab" aria-controls="fwop" aria-selected="true">FWOP</button>
+        </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active " id="health" role="tabpanel" aria-labelledby="health-tab">
+            <div class="container">
+                <br>
+                <div class="row">
+                        <div class="col">
+                            <label class="form-label" for="jsonfile">Año de los datos:</label>
+                            <input class="form-control" class="form-control" type="number" name="year" id="year" min="2000" max="2999">
+                        </div>
+                        
+                        <div class="col">
+                            <label class="form-label" for="jsonfile">Suba el archivo en formato json:</label>
+                            <input class="form-control" type="file" name="jsonfile" id="jsonfile" accept=".json">
+                        </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col">
+                        <button class='form-control btn btn-primary' id="LeerJson" disabled="true">Aceptar</button>
+                    </div>
+                </div>
             </div>
-            
-            <div class="col">
-                <label class="form-label" for="jsonfile">Suba el archivo en formato json:</label>
-                <input class="form-control" type="file" name="jsonfile" id="jsonfile" accept=".json">
+        </div>
+        <div class="tab-pane fade" id="fwop" role="tabpanel" aria-labelledby="fwop-tab">
+            <div class="container">
+                <br>
+                <div class="row">
+                    <div class="col">
+                        <label class="form-label" for="jsonfileFwop">Suba el archivo en formato json:</label>
+                        <input class="form-control" type="file" name="jsonfileFwop" id="jsonfileFwop" accept=".json">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col">
+                        <button class='form-control btn btn-primary' id="LeerJsonFwop" disabled="true">Aceptar</button>
+                    </div>
+                </div>
             </div>
-    </div>
-    <br>
-    <div class="row">
-        <div class="col">
-            <button class='form-control btn btn-primary' id="LeerJson" disabled="true">Aceptar</button>
         </div>
     </div>
 </div>
+
 @entryPointScripts('json')
 @end

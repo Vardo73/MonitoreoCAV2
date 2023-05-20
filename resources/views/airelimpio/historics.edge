@@ -25,6 +25,11 @@
     table tr td.tdMMM {
         background-color: #7E0023;
     }
+    @media only screen and (max-width: 680px) {
+        .indice{
+            font-size: 7px;
+        }
+    }
 </style>
 <div class="container">
     <hr/>
@@ -58,7 +63,7 @@
             <div class="carousel-inner">
                 <div class="carousel-item active">
                     <!-- INDICE PM 2.5 -->
-                    <div class="m-0 row mx-auto justify-content-center align-items-center">
+                    <div class="m-0 row mx-auto justify-content-center align-items-center indice">
                         <span class="badge text-bg-secondary" style="max-width: 8rem; ">Índice:</span>
                         <span class="badge text-dark" style="max-width: 8rem; background-color:#38B208; ">0-12</span>
                         <span class="badge text-dark" style="max-width: 8rem; background-color:#EDB02D; ">12.1–35.4</span>
@@ -72,7 +77,7 @@
                     <div >
                         <h4 style="text-align: center;"><span style="color: #2aa5d6;">PM 2.5 (&#956;g/m<sup>3</sup>)</span></h4>
                     </div>
-                    <div class=" row mx-auto justify-content-center align-items-center d-block ">
+                    <div class=" row mx-auto justify-content-center align-items-center d-block table-responsive">
                         <table class="table table-bordered table-sm">
                             <thead>
                             <tr>
@@ -171,7 +176,7 @@
                 <div class="carousel-item">
                     
                     <!-- INDICE PM 10 -->
-                    <div class="m-0 row mx-auto justify-content-center align-items-center">
+                    <div class="m-0 row mx-auto justify-content-center align-items-center indice">
                         <span class="badge text-bg-secondary" style="max-width: 8rem; ">Índice:</span>
                         <span class="badge text-dark" style="max-width: 8rem; background-color:#38B208; ">0-54</span>
                         <span class="badge text-dark" style="max-width: 8rem; background-color:#EDB02D; ">55-154</span>
@@ -185,7 +190,7 @@
                     <div >
                         <h4 style="text-align: center;"><span style="color: #2aa5d6;">PM 10 (&#956;g/m<sup>3</sup>)</span></h4>
                     </div>
-                    <div class="row mx-auto justify-content-center align-items-center d-block ">
+                    <div class="row mx-auto justify-content-center align-items-center d-block table-responsive">
                         <table class="table table-bordered table-sm"  >
                             <thead>
                             <tr>
@@ -283,11 +288,11 @@
                 </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true" style="margin-bottom:130%; margin-right:50%;background-color:black; "></span>
+              <span class="carousel-control-prev-icon spanF" aria-hidden="true" style="margin-bottom:130%; margin-right:50%;background-color:black; "></span>
               <span class="visually-hidden">Previous</span>
             </button>
             <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next" style="color:black;">
-              <span class="carousel-control-next-icon" aria-hidden="true" style=" margin-bottom:130%; margin-left:50%; background-color:black;"></span>
+              <span class="carousel-control-next-icon spanF" aria-hidden="true" style=" margin-bottom:130%; margin-left:50%; background-color:black;"></span>
               <span class="visually-hidden">Next</span>
             </button>
         @else

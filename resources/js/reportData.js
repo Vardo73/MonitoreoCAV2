@@ -1,14 +1,6 @@
 import AppGlobal from '../js/app.js'
 
-let services=new AppGlobal()
-
-//Limites de contaminantes NOM
-const limNomPm2=41
-const limNomPm10=70
-
-//Limites de contaminantes OMS
-const limOmsPm2=15
-const limOmsPm10=45
+const services=new AppGlobal()
 
 //Varibles 
 let date='';
@@ -42,16 +34,16 @@ async function DataGraphs(){
    data.forEach(ele=>{
     datPm2.push(ele.average_pm2)
     datPm10.push(ele.average_pm10)
-    hours.push(moment(ele.created_at).format('HH'))
+    hours.push(ele.hour)
    })
 
-   console.log(datPm2)
-   console.log(datPm10)
+   //console.log(datPm2)
+   //console.log(datPm10)
 
-   services.pieGraph(canPiePm2,limOmsPm2,limNomPm2,datPm2,'PM 2.5')
-   services.pieGraph(canPiePm10,limOmsPm10,limNomPm10,datPm10,'PM 10')
-   services.limitGraph(canLimPm2,limOmsPm10,limNomPm10,datPm10,'PM 2.5',hours)
-   services.limitGraph(canLimPm10,limOmsPm10,limNomPm10,datPm10,'PM 10',hours)
+   services.pieGraph(canPiePm2,services.limOmsPm2,services.limNomPm2,datPm2,'PM 2.5')
+   services.pieGraph(canPiePm10,services.limOmsPm10,services.limNomPm10,datPm10,'PM 10')
+   services.limitGraph(canLimPm2,services.limOmsPm2,services.limNomPm2,datPm2,'PM 2.5',hours)
+   services.limitGraph(canLimPm10,services.limOmsPm10,services.limNomPm10,datPm10,'PM 10',hours)
 }
 
 document.getElementById('btnImprimir')

@@ -52,6 +52,7 @@ Encore.addEntry('station', './resources/js/station.js'),
 Encore.addEntry('reports', './resources/js/reports.js'),
 Encore.addEntry('reportData', './resources/js/reportData.js'),
 Encore.addEntry('reportMonth', './resources/js/reportMonth.js'),
+Encore.addEntry('reportYear', './resources/js/reportYear.js'),
 Encore.addEntry('map', './resources/js/map.js'),
 Encore.addEntry('mapAil', './resources/js/mapAil.js'),
 Encore.addEntry('historics', './resources/js/historics.js'),
@@ -61,7 +62,9 @@ Encore.addEntry('location', './resources/js/location.js'),
 Encore.addEntry('sponsor', './resources/js/sponsor.js'),
 Encore.addEntry('suburb', './resources/js/suburb.js'),
 Encore.addEntry('fab', './resources/js/fab.js'),
-Encore.addEntry('mapSuburb', './resources/js/mapSuburb.js')
+Encore.addEntry('calendar', './resources/js/calendar.js'),
+Encore.addEntry('mapSuburb', './resources/js/mapSuburb.js'),
+Encore.addEntry('stationFWOP', './resources/js/stationFWOP.js')
 
 /*
 |--------------------------------------------------------------------------

@@ -1,0 +1,259 @@
+@layout('master')
+
+@section('station')
+
+@include('navbar')
+<div class="container">
+    <hr/>
+        <h2 style="text-align: center;"><span style="color: #2aa5d6;">F.W.O.P.</span></h2>
+    <hr/>
+</div>
+<br>
+
+
+<div class="container">
+    <div class="col col-12 align-self-end">
+        <div class="d-grid gap-2 mx-auto ">
+            <button class="btn btn-primary" id="modalNuevoStation" data-bs-toggle="modal" data-bs-target="#StationModal">Agregar Nuevo</button>
+        </div>
+    </div>
+    <br>
+
+    <div id="CardsStation">
+        <div class="row row-cols-1  ">
+            @each(station in stations)
+            <div class="col">
+                <div class="card " name='tarjeta' style="margin-bottom:2rem">
+                    <h5 class="card-header">{{ station.name }}</h5>
+                    <div class="card-body">
+                        
+                        <div class="row">
+                            <div class="col col-12">
+                                <div class="row" style="text-align: center;"><h5>Credenciales</h5></div>
+                                <div class=" container-fluid table-responsive table-bordered">
+                                    <table class="table table-hover " name="tabAnual" id="tabAnual">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">ID</th>
+                                                <th scope="col">Modelo</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>{{ station.slug}}</td>
+                                                <td>{{ station.nomM }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                
+                                <div class="row" style="text-align: center;"><h5>Detalles</h5></div>
+                                
+                                <div class=" container-fluid table-responsive table-bordered">
+                                    <table class="table table-hover " name="tabAnual" id="tabAnual">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Colonia</th>
+                                                <th scope="col">Ubicación</th>
+                                                <th scope="col">Contaminates Monitoreados</th>
+                                                <th scope="col">Activo</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>{{ station.suburb }}</td>
+                                                <td>{{ station.latitude }},{{ station.longitude }}</td>
+                                                <td>
+                                                    <div class="inline">
+                                                    @each(rel in relacion)
+                                                    @if(rel.model_id==station.idM)
+                                                    <span class="badge rounded-pill bg-warning text-dark">{{ rel.name }}</span>
+                                                    @endif
+                                                    @endeach
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-check form-switch">
+                                                        @if(station.active)
+                                                            <input class="form-check-input SwitchActive" type="checkbox" role="switch" name="{{ station.id }}" checked>
+                                                        @else
+                                                            <input class="form-check-input SwitchActive" type="checkbox" role="switch" name="{{ station.id }}">
+                                                        @endif
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="row" style="text-align: center;"><h5>Patrocinadores</h5></div>
+                                <br>
+                                <div class="row row-cols-3  ">
+                                    @each(sponsor in stationSponsors)
+                                        @if(sponsor.station_id==station.id)
+                                            <img src="{{sponsor.logo}}" alt="" width="200px">
+                                        @endif
+                                    @endeach
+                                </div>
+                                <br>
+                                <div class="row mx-auto">
+                                    <div class="col col-6 d-grid gap-2 mx-auto">
+                                        <button name="{{ station.id }}" class="btn btn-info btnEdit" data-bs-toggle="modal" data-bs-target="#StationEditModal" >Editar</button>
+                                    </div>
+                                    <div class="col col-6 d-grid gap-2 mx-auto">
+                                        <button class="btn btn-danger btnDelete" name="{{ station.id }}">Eliminar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            @endeach
+        </div>
+    </div>
+</div>
+
+<!--MODAL REGISTRO DE ESTACION-->
+<div class="container-fluid">
+    <div class="modal fade" id="StationModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Agregar Estación</h2>
+                </div>
+                <div class="modal-body">
+                    <div class="row mx-auto">
+                        <div class="col col-6 d-grid gap-2 mx-auto">
+                            <label class="form-label" for="slug">ID:</label>
+                            <input class="form-control" type="text" name="slug" id="slug" required min="1" max="25">
+                        </div>
+                        <div class="col col-6 d-grid gap-2 mx-auto">
+                            <label class="form-label" for="name">Nombre:</label>
+                            <input class="form-control" type="text" name="name" id="name" required min="1" max="25">
+                        </div>
+                    </div>
+                    <div class="row mx-auto">
+                        <div class="col col-4 d-grid gap-2 mx-auto">
+                            <label class="form-label" for="suburb">Colonia:</label>
+                            <input class="form-control" type="text" name="suburb" id="suburb" required min="1" max="50">
+                        </div>
+                        <div class="col col-4 d-grid gap-2 mx-auto">
+                            <label class="form-label" for="latitude">Latitud:</label>
+                            <input class="form-control" class="form-control" type="number" name="latitude" id="latitude" required min="1" max="99999999">
+                        </div>
+                        <div class="col col-4 d-grid gap-2 mx-auto">
+                            <label class="form-label" for="longitude">Longitud:</label>
+                            <input class="form-control" type="number" name="longitude" id="longitude" required min="1" max="25">
+                        </div>
+                    </div>
+                    <div class="row mx-auto">
+                        <div class="col col-6 d-grid gap-2 mx-auto">
+                            <label class="form-label" for="model_id">Modelo de monitor:</label>
+                            <select class="form-control" name="model_id" id="model_id" required>
+                                <option  value='0' selected disabled>Modelo de monitor</option>
+                                @each(model in models)
+                                  <option  value='{{ model.id }}'>{{ model.name }}</option>
+                                @endeach
+                            </select>
+                        </div>
+                        <div class="col col-6 d-grid gap-2 mx-auto">
+                            <label class="form-label" for="active">Actividad:</label>
+                            <select class="form-control" name="active" id="active" required>
+                                <option  value='1' selected >Activo</option>
+                                <option  value='0'  >Inactivo</option>
+                            </select>
+                        </div> 
+                    </div>
+                    <label  class="form-label" >Patrocinadores:</label><br>
+                    <div>
+                        @each(sponsor in sponsors)
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" name='checkSponsor' type="checkbox"  value={{ sponsor.id }}>
+                                <label class="form-check-label" for="inlineCheckbox1">{{ sponsor.name }}</label>
+                            </div>
+                        @endeach   
+                    </div> 
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-outline-primary" value="Crear" id="btnCreateStation" name="btnCreateStation" data-bs-dismiss="modal">
+                    <button class="btn btn-outline-primary" id="btnCancelStation" name="btnCancelStation" data-bs-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--MODAL EDITAR DE ESTACION-->
+<div class="container-fluid">
+    <div class="modal fade" id="StationEditModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Editar Estación</h2>
+                </div>
+                <div class="modal-body">
+                    <div class="row mx-auto">
+                        <div class="col col-6 d-grid gap-2 mx-auto">
+                            <label class="form-label" for="slugEdit">ID:</label>
+                            <input class="form-control" type="text" name="slugEdit" id="slugEdit" required min="1" max="25">
+                        </div>
+                        <div class="col col-6 d-grid gap-2 mx-auto">
+                            <label class="form-label" for="nameEdit">Nombre:</label>
+                            <input class="form-control" type="text" name="nameEdit" id="nameEdit" required min="1" max="25">
+                        </div>
+                    </div>
+                    <div class="row mx-auto">
+                        <div class="col col-4 d-grid gap-2 mx-auto">
+                            <label class="form-label" for="suburbEdit">Colonia:</label>
+                            <input class="form-control" type="text" name="suburbEdit" id="suburbEdit" required min="1" max="50">
+                        </div>
+                        <div class="col col-4 d-grid gap-2 mx-auto">
+                            <label class="form-label" for="latitudeEdit">Latitud:</label>
+                            <input class="form-control" class="form-control" type="number" name="latitudeEdit" id="latitudeEdit" required min="1" max="99999999">
+                        </div>
+                        <div class="col col-4 d-grid gap-2 mx-auto">
+                            <label class="form-label" for="longitudeEdit">Longitud:</label>
+                            <input class="form-control" type="number" name="longitudeEdit" id="longitudeEdit" required min="1" max="25">
+                        </div>
+                    </div>
+                    <div class="row mx-auto">
+                        <div class="col col-6 d-grid gap-2 mx-auto">
+                            <label class="form-label" for="model_idEdit">Modelo de monitor:</label>
+                            <select class="form-control" name="model_idEdit" id="model_idEdit" required>
+                                <option  value='0' selected disabled>Modelo de monitor</option>
+                                @each(model in models)
+                                  <option  value='{{ model.id }}'>{{ model.name }}</option>
+                                @endeach
+                            </select>
+                        </div>
+                        <div class="col col-6 d-grid gap-2 mx-auto">
+                            <label class="form-label" for="activeEdit">Actividad:</label>
+                            <select class="form-control" name="activeEdit" id="activeEdit" required>
+                                <option  value='1' selected >Activo</option>
+                                <option  value='0'  >Inactivo</option>
+                            </select>
+                        </div>
+                    </div>
+                    <label  class="form-label" >Patrocinadores:</label><br>
+                    <div >
+                        @each(sponsor in sponsors)
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" name='checkEditSponsor' type="checkbox"  value={{ sponsor.id }}>
+                                <label class="form-check-label" for="inlineCheckbox1">{{ sponsor.name }}</label>
+                            </div>
+                        @endeach   
+                    </div>  
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-outline-primary" value="Editar" id="btnEditStation" name="btnEditStation" data-bs-dismiss="modal">
+                    <button class="btn btn-outline-primary" id="btnCancelStationEdit" name="btnCancelStationEdit" data-bs-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@entryPointScripts('stationFWOP')
+@end

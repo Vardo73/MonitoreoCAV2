@@ -38,7 +38,7 @@ export default class Email{
             })
            // console.log('Correo ENVIADO!!')
         } catch (error) {
-            console.log('ERROR sendMail')
+            console.log('ERROR sendMail DIARIO')
             console.log(error)
         }
     }
@@ -49,13 +49,13 @@ export default class Email{
             const transporter= this.createTrans()
             await transporter.sendMail({
                 from:'"Sistemas" <sistemas@cerca.org.mx>',
-                to:subs,
+                to:subs.toString(),
                 subject:"Promedios diarios",
                 html: await view.render('admin/email',{suburb,date,hour})
             })
            // console.log('Correo ENVIADO!!')
         } catch (error) {
-            console.log('ERROR sendMail')
+            console.log('ERROR sendMail Subs')
             console.log(error)
         }
     }
