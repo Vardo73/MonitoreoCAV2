@@ -9,8 +9,8 @@ let divMapAil=document.getElementById('mapAil')
 let map = new mapboxgl.Map({
     container: divMapAil,
     style: 'mapbox://styles/mapbox/streets-v11',
-    center:[-110.3064,24.1416],
-    zoom:13
+    center:[-110.3595184,24.1392758],
+    zoom:11
 });
 
 

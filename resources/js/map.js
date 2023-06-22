@@ -9,8 +9,8 @@ let divMap=document.getElementById('map')
 let map = new mapboxgl.Map({
     container: divMap,
     style: 'mapbox://styles/mapbox/streets-v11',
-    center:[-110.3064,24.1416],
-    zoom:10.8
+    center:[-110.3531337,24.1689357],
+    zoom:10.5
 });
 
 map.addControl(new mapboxgl.NavigationControl());
@@ -27,7 +27,7 @@ axios({
     //console.log(response.data)
     response.data[0].forEach(async function(marker){
 
-        let popup=new mapboxgl.Popup({ offset: 25 }).setMaxWidth('500')
+        let popup=new mapboxgl.Popup({ offset: 25 }).setMaxWidth('200')
         let coordinates=[marker.longitude,marker.latitude];
         let sponsors=[];
 
@@ -105,7 +105,7 @@ axios({
     });
 
     //Popup Camera
-    let popupC=new mapboxgl.Popup({ offset: 25 }).setMaxWidth('500')
+    let popupC=new mapboxgl.Popup({ offset: 25 }).setMaxWidth('200')
     let coordinatesC=[-110.302941,24.221794];
 
     //Marker
@@ -149,39 +149,37 @@ function Popup(station,pm2,pm10,sponsors){
     }
 
     sponsors.forEach(element => {
-        img+=`<img src="${element}" alt="" >`
+        img+=`<img src="${element}" alt="" width="110">`
     });
 
     html=`
-        <br>
             <div  class="card">
-                <h5 class="card-header" style="text-align:center; background:#0d6efd; color:#FFFFFF; ">Índice de calidad del aire</h5>
+                <div class="card-header" style=" text-align:center; background:#0d6efd; color:#FFFFFF; ">
+                    <h5 style="font-size: 15px;">${station.name}</h5>
+                    <span style="text-align:center; background:#0d6efd; color:#FFFFFF;">Col. ${station.suburb}</span>
+                </div>
                 <div class="card-body">
-                    <table class="table table-bordered" style="margin-left:auto; margin-right:auto; padding-top:8px; padding-left:55px; padding-right:55px;">
-                        <thead>
-                            <tr style="background-color:#white; color:#0d6efd;">
-                                <th style="text-align:center;">${station.name}</th>
-                                <th style="text-align:center;">PM 2.5 &#956;g/m<sup>3</sup></th>
-                                <th style="text-align:center;">PM 10 &#956;g/m<sup>3</sup></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td style="text-align:center;">Colonia: ${station.suburb}</td>
-                                <td style="text-align:center;">${pm2}</td>
-                                <td style="text-align:center;">${pm10}</td>
-                            </tr>
-                            <tr>
-                                <td colspan="3"  style="text-align:center;">Modelo: ${station.nomM}</td>
-                            </tr>
-                        </tbody>
-                        <tfoot>
-                        <tr>
-                        ${td}
-                        </tr>
-                        </tfoot>
-                    </table>
-                    ${img}
+
+                    <div class="row" style="background-color:#white; color:#0d6efd; text-align:center; ">
+                        <div class="col col-6">
+                            <span>PM 2.5 &#956;g/m<sup>3</sup></span>
+                        </div>
+                        <div class="col col-6">
+                        <span>PM 10 &#956;g/m<sup>3</sup></span>
+                        </div>
+                    </div>
+                    <div class="row" style="text-align:center;">
+                        <div class="col col-6">
+                            <span>${pm2}</span>
+                        </div>
+                        <div class="col col-6">
+                        <span>${pm10}</span>
+                        </div>
+                    </div>
+                    <hr/>
+                    <div style="text-align:center; ">
+                        ${img}
+                    </div>
                     ${btn}
                 </div>
             </div>
@@ -191,10 +189,12 @@ function Popup(station,pm2,pm10,sponsors){
 }
 
 function PopupFWOP(station,sponsors){
-    //let url=`/historics/${station.id}`
+    let url=`/historics/fwop/${station.id}`
     let html='';
     let td='';
-    let btn='';
+    let btn=`<div class='d-grid gap-2' style="text-align:center;">
+        <a class='btn btn-primary' href="${url}">Histórico</a>
+        </div>`
     let img='';
 
     sponsors.forEach(element => {
@@ -227,10 +227,11 @@ function PopupFWOP(station,sponsors){
                         </tfoot>
                     </table>
                     ${img}
+                    ${btn}
                 </div>
             </div>
         `
-    return html;
+   // return html;
 }
 
 function PopupInactive(station,sponsors){
@@ -312,5 +313,5 @@ window.onload= function(){
     const myModalLo = document.querySelector('#ModalAlertLocation')
 
     const modal = new bootstrap.Modal(myModalLo) // initialized with defaults
-    modal.show()
+    //modal.show()
 }

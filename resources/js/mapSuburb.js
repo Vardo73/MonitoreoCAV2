@@ -9,7 +9,7 @@ let mapSuburb=document.getElementById('mapSuburb')
 let map = new mapboxgl.Map({
     container: mapSuburb,
     style: 'mapbox://styles/mapbox/streets-v11',
-    center:[-110.3064,24.1416],
+    center:[-110.3611515,24.1243718],
     zoom:10.8
 });
 

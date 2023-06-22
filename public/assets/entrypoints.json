@@ -2,102 +2,107 @@
   "entrypoints": {
     "app": {
       "js": [
-        "/assets/app.87b666bb.js"
+        "http://localhost:8080/assets/app.js"
       ]
     },
     "pollutant": {
       "js": [
-        "/assets/pollutant.f9b4c2db.js"
+        "http://localhost:8080/assets/pollutant.js"
       ]
     },
     "model": {
       "js": [
-        "/assets/model.6a9fc39b.js"
+        "http://localhost:8080/assets/model.js"
       ]
     },
     "station": {
       "js": [
-        "/assets/station.5f8adda6.js"
+        "http://localhost:8080/assets/station.js"
       ]
     },
     "reports": {
       "js": [
-        "/assets/reports.1342f8c4.js"
+        "http://localhost:8080/assets/reports.js"
       ]
     },
     "reportData": {
       "js": [
-        "/assets/reportData.0e22a289.js"
+        "http://localhost:8080/assets/reportData.js"
       ]
     },
     "reportMonth": {
       "js": [
-        "/assets/reportMonth.5871d571.js"
+        "http://localhost:8080/assets/reportMonth.js"
       ]
     },
     "reportYear": {
       "js": [
-        "/assets/reportYear.4afcb00c.js"
+        "http://localhost:8080/assets/reportYear.js"
       ]
     },
     "map": {
       "js": [
-        "/assets/map.590e1797.js"
+        "http://localhost:8080/assets/map.js"
       ]
     },
     "mapAil": {
       "js": [
-        "/assets/mapAil.0b48c808.js"
+        "http://localhost:8080/assets/mapAil.js"
       ]
     },
     "historics": {
       "js": [
-        "/assets/historics.f0574293.js"
+        "http://localhost:8080/assets/historics.js"
+      ]
+    },
+    "historics_fwop": {
+      "js": [
+        "http://localhost:8080/assets/historics_fwop.js"
       ]
     },
     "json": {
       "js": [
-        "/assets/json.44ea10dd.js"
+        "http://localhost:8080/assets/json.js"
       ]
     },
     "ailment": {
       "js": [
-        "/assets/ailment.3bac359b.js"
+        "http://localhost:8080/assets/ailment.js"
       ]
     },
     "location": {
       "js": [
-        "/assets/location.74866a28.js"
+        "http://localhost:8080/assets/location.js"
       ]
     },
     "sponsor": {
       "js": [
-        "/assets/sponsor.af0fc72e.js"
+        "http://localhost:8080/assets/sponsor.js"
       ]
     },
     "suburb": {
       "js": [
-        "/assets/suburb.a89e71c9.js"
+        "http://localhost:8080/assets/suburb.js"
       ]
     },
     "fab": {
       "js": [
-        "/assets/fab.d7139400.js"
+        "http://localhost:8080/assets/fab.js"
       ]
     },
     "calendar": {
       "js": [
-        "/assets/calendar.61d3f982.js"
+        "http://localhost:8080/assets/calendar.js"
       ]
     },
     "mapSuburb": {
       "js": [
-        "/assets/mapSuburb.a6e6c4a2.js"
+        "http://localhost:8080/assets/mapSuburb.js"
       ]
     },
     "stationFWOP": {
       "js": [
-        "/assets/stationFWOP.22ab243e.js"
+        "http://localhost:8080/assets/stationFWOP.js"
       ]
     }
   }

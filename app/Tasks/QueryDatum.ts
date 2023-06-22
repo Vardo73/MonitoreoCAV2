@@ -53,7 +53,14 @@ export default class QueryDatum extends BaseTask {
 		const logic= new Logic();
 		const stations=await Database
 		.from('stations')
-		.select('*')
+		.join('models', (query) => {
+			query
+			.on('stations.model_id', '=', 'models.id')
+		})
+		.select('stations.id')
+		.select('stations.slug')
+		.select('stations.name ')
+		.select('stations.apikey')
 		.whereRaw('stations.active=? ',[true])
 		.andWhereILike('models.name','%purple%')
 		.orWhereILike('models.name', '%Purple%')

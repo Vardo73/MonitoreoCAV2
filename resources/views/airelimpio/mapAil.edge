@@ -3,7 +3,7 @@
 @section('mapAil')
 <style>
     body { margin: 0; padding: 0; }
-    #mapAil { position: absolute;  width: 100%; height: 83%;}
+    #mapAil { position: absolute;  width: 100%; height: 100%; z-index: 1}
         
     .marker{
         border-right: 1px solid white;
@@ -24,21 +24,20 @@
         max-width: 500px;
     }
     @media only screen and (max-width: 680px) {
-    .mapboxgl-popup-content {
-        max-width: 200px;
+        .mapboxgl-popup-content {
+            max-width: 200px;
+        }
+        .mapboxgl-popup-content div {
+            padding:0em;
+        }
+        .mapboxgl-popup-content p {
+            margin: 0.5em 0.5em;
+        }
     }
-    .mapboxgl-popup-content div {
-        padding:0em;
-    }
-    .mapboxgl-popup-content p {
-        margin: 0.5em 0.5em;
-    }
-
 </style>
-@include('navbarpublic')
+@include('side-bar')
 <div id='mapAil'></div>
 
-@include('airelimpio/fab')
-@include('footer')
+
 @entryPointScripts('mapAil')
 @end
