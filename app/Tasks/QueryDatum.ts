@@ -66,6 +66,7 @@ export default class QueryDatum extends BaseTask {
 		.orWhereILike('models.name', '%Purple%')
 		.orWhereILike('models.name', '%PURPLE%')
 
+
 		try {
 			if(stations.length>0){
 				while(i<stations.length){

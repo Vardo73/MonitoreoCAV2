@@ -50,10 +50,9 @@ export default class Email{
             await transporter.sendMail({
                 from:'"Sistemas" <sistemas@cerca.org.mx>',
                 to:subs.toString(),
-                subject:"Promedios diarios",
-                html: await view.render('admin/email',{suburb,date,hour})
+                subject:"Alerta!! Lecturas altas en monitoreo del aire",
+                html: await view.render('admin/emailSub',{suburb,date,hour})
             })
-           // console.log('Correo ENVIADO!!')
         } catch (error) {
             console.log('ERROR sendMail Subs')
             console.log(error)
