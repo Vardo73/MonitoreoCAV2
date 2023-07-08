@@ -20,7 +20,7 @@ Route.get('/sponsor', 'SponsorsController.show').as('sponsor').middleware('auth'
 Route.get('/calendar', 'DataController.calendar').as('calendar').middleware('auth')
 
 Route.get('/historics/:station_id', 'StationsController.historics').as('historics')
-Route.get('/historics/fwop/:station_id', 'StationsController.historicsFWOP').as('historicsfwop')
+Route.get('/historics_fwop/:station_id', 'StationsController.historicsFWOP').as('historicsfwop')
 Route.get('/mapa-salud', 'LocationsController.showMap').as('mapAilments')
 Route.get('/mapa-calonia', 'SuburbsController.showMap').as('mapSuburb')
 

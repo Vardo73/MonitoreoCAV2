@@ -231,7 +231,7 @@ function PopupFWOP(station,sponsors){
                 </div>
             </div>
         `
-   // return html;
+    return html;
 }
 
 function PopupInactive(station,sponsors){

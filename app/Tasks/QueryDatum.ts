@@ -6,18 +6,6 @@ import Axios from 'axios'
 import Datum from 'App/Models/Datum'
 import Logic from 'App/Methods/Logic'
 
-/* Datos generales del monitor
-https://www.purpleair.com/json?key=7X87EFT46TOH2OL9&show=39465*/
-
-
-/*Datos Capturados por el monitor
-https://api.thingspeak.com/channels/1724088/feeds.json?api_key=S3U30XZQJ3UHQY24&average=60&timezone=America/Mazatlan&start=2022-10-27%2000:00:00&end=2022-10-27%2023:00:00&round=2
-
-	
-https://api.thingspeak.com/channels/1724128/feeds.json?api_key=Q0YJ8J67XQ9EJZ9U
-&average=60&timezone=America/Mazatlan&round=2&results=1
-*/
-
 
 export default class QueryDatum extends BaseTask {
 	public static get schedule() {

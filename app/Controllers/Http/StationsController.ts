@@ -341,7 +341,6 @@ export default class StationsController {
     public async historicsFWOP({view,request}:HttpContextContract){
         try {
             const slug=request.param('station_id');
-            let datum:any[]=[]
             let data:any[]=[]
 
             const stations=await Database
@@ -357,45 +356,18 @@ export default class StationsController {
             .andWhereILike('models.name','%fwop%')
             .orWhereILike('models.name', '%FWOP%')
 
-            //let date=moment().format('2022-10-25')
-            /*let date=moment().format('YYYY-MM-DD')
-
-            let p=0;
-            while (p<5) {
-                let bd={
-                    created_at:''
-                }
-                let dataF:any[]=[bd,bd,bd,bd,bd,bd,bd,bd,bd,bd,bd,bd,bd,bd,bd,bd,bd,bd,bd,bd,bd,bd,bd,bd]
-                
-                data=await Database.from('data')
-                .select('data.average_pm2')
-                .select('data.average_pm10')
-                .select('data.created_at')
-                .where('data.created_at','like','%'+date+'%')
-                .andWhereRaw('data.station_id=? ',[slug])
-                .orderBy([{ column: 'created_at', order: 'asc' }])
             
-                let i=0;
-                while (i<data.length) {
-                    let fec=data[i].created_at;
-                    let h=moment(fec).format('HH')
+            data=await Database.from('data')
+            .select('data.average_pm2')
+            .select('data.average_pm10')
+            .select('data.created_at')
+            .andWhereRaw('data.station_id=? ',[slug])
+            .orderBy([{ column: 'created_at', order: 'asc' }])
+            .limit(35);
 
-                    data[i].created_at=moment(data[i].created_at).format('DD/MMM')
-                    bd.created_at= data[i].created_at
-                    data[i].hour=h;
-                    h=parseFloat(h).toString()
-                    dataF[h]=data[i]
-                    i++;
-                }
-
-                if (data.length>0) {
-                    datum.push(dataF)
-                }
-                date=moment(date).subtract(1, 'days').format('YYYY-MM-DD')
-                p++;
-            }*/
             
-            return view.render('airelimpio/historics_fwop',{stations,slug,datum});
+            
+            return view.render('airelimpio/historicsFwop',{stations,slug,data});
         } catch (error) {  
             console.log(error)
         }
@@ -436,16 +408,24 @@ export default class StationsController {
     }
 
     public async ApiStation(){
-        const stations=await Database
-        .from('stations')
-        .select('stations.slug as id')
-        .select('stations.name ')
-        //.select('stations.channel')
+        
+		const stations=await Database
+		.from('stations')
+		.join('models', (query) => {
+			query
+			.on('stations.model_id', '=', 'models.id')
+		})
+		.select('stations.slug as id')
+		.select('stations.name')
+		.select('stations.apikey')
         .select('stations.apikey')
         .select('stations.longitude')
         .select('stations.latitude')
         .select('stations.suburb')
-        .whereRaw('stations.active=? ',[true])
+		.whereRaw('stations.active=? ',[true])
+		.andWhereILike('models.name','%purple%')
+		.orWhereILike('models.name', '%Purple%')
+		.orWhereILike('models.name', '%PURPLE%')
 
         return stations;
     }
