@@ -161,6 +161,7 @@ export default class SuburbsController {
             .select('suburb_pollutants.suburb_id')
             .select('suburb_pollutants.pollutant_id ')
             .select('pollutants.name')
+            .select('pollutants.description')
             .whereRaw('suburb_pollutants.suburb_id=?',[suburb_id])
         
                 

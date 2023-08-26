@@ -24,11 +24,12 @@ Route.get('/historics_fwop/:station_id', 'StationsController.historicsFWOP').as(
 Route.get('/mapa-salud', 'LocationsController.showMap').as('mapAilments')
 Route.get('/mapa-calonia', 'SuburbsController.showMap').as('mapSuburb')
 
-//API 
+//APP MOVIL 
 Route.group(() => {
-  Route.get('/frontc3rk41r3/datosmoviles', 'DataController.API')
-  Route.get('/free/bot/stations', 'StationsController.ApiStation')
-}).prefix('/api')
+  Route.post('/data_day', 'DataController.dataHAppMovil')
+  Route.get('/stations', 'StationsController.AppMovilStation')
+  Route.post('/data_month', 'DataController.dataMAppMovil')
+}).prefix('/appmovil')
 
 //Controller User
 Route.group(() => {

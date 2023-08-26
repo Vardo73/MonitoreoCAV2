@@ -96,13 +96,13 @@ document.getElementById('btnCreateStation')
 
 //Obtener los botones de Eliminar y Edit
 window.onload= function(){
-    let btnDelete=document.querySelectorAll('.btnDelete')
+    /*let btnDelete=document.querySelectorAll('.btnDelete')
     btnDelete.forEach(element=>{
         element.addEventListener('click',()=>{
             let id=parseInt(element.getAttribute('name'))
             deleteStation(id)
         })
-    })
+    })*/
 
     let btnEdit=document.querySelectorAll('.btnEdit')
     btnEdit.forEach(element=>{
@@ -139,7 +139,7 @@ function checkedActive(id,bool){
 }
 
 //Eliminar Estación
-function deleteStation(id){
+/*function deleteStation(id){
     if(id!=0){
         Swal.fire({
             title: 'Está seguro de eliminar este elemento? Se borrarán los datos optenidos por ese monitor.',
@@ -157,7 +157,7 @@ function deleteStation(id){
             }
         })
     }
-}
+}*/
 
 //Mostrar Estacion en el formulario Edit
 function showStation(id){

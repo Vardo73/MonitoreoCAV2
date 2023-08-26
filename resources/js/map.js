@@ -33,6 +33,7 @@ axios({
 
         //Marker
         const div = document.createElement('div');
+        div.setAttribute("title", marker.name);
         div.className = 'contPin';
         const el = document.createElement('div');
         div.appendChild(el);
@@ -50,7 +51,7 @@ axios({
         });
 
 
-        if(marker.active && marker.nomM.toLowerCase()=='purple-air'){
+        if(marker.nomM.toLowerCase()=='purple-air'){
             let url=`https://api.purpleair.com/v1/sensors/${marker.slug}`
             //console.log(url)
             axios.get(url,{headers: {'Content-Type': 'application/json',
@@ -86,15 +87,10 @@ axios({
                 }
             });
         } 
-        else if(marker.active && marker.nomM.toLowerCase()=='fwop'){
+        else if(marker.nomM.toLowerCase()=='fwop'){
             let pop=PopupFWOP(marker,sponsors)
             popup.setHTML(pop);
             el.classList.add('markerGood') ;
-        }else{
-            let pop=PopupInactive(marker,sponsors)
-            popup.setHTML(pop);
-
-            el.classList.add('markerInactive') ;
         }
         // Add a symbol layer
         // create the marker
@@ -189,7 +185,7 @@ function Popup(station,pm2,pm10,sponsors){
 }
 
 function PopupFWOP(station,sponsors){
-    let url=`/historics/fwop/${station.id}`
+    let url=`/historics_fwop/${station.id}`
     let html='';
     let td='';
     let btn=`<div class='d-grid gap-2' style="text-align:center;">
@@ -234,48 +230,6 @@ function PopupFWOP(station,sponsors){
     return html;
 }
 
-function PopupInactive(station,sponsors){
-    let html='';
-    let td='';
-    let img='';
-    td='<td style="text-align:center;color:red;" >Desconectado temporalmente</td>';
-
-    sponsors.forEach(element => {
-        img+=`<img src="${element}" alt="" >`
-    });
-
-    html=`
-        <br>
-            <div  class="card">
-                <h5 class="card-header" style="text-align:center; background:#0d6efd; color:#FFFFFF; ">Índice de calidad del aire</h5>
-                <div class="card-body">
-                    <table class="table table-bordered" style="margin-left:auto; margin-right:auto; padding-top:8px; padding-left:55px; padding-right:55px;">
-                        <thead>
-                            <tr style="background-color:#white; color:#0d6efd;">
-                                <th style="text-align:center;">${station.name}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td style="text-align:center;">Colonia: ${station.suburb}</td>
-                            </tr>
-                            <tr>
-                                <td style="text-align:center;">Modelo: ${station.nomM}</td>
-                            </tr>
-                        </tbody>
-                        <tfoot>
-                        <tr>
-                        ${td}
-                        </tr>
-                        </tfoot>
-                    </table>
-                    ${img}
-                </div>
-            </div>
-        `
-    
-    return html;
-}
 
 function PopupCamera(){
     let url=`https://mega.nz/folder/qVEA2b7Y#RlxgdoTHhKW_msCaIDxq_A`
@@ -314,4 +268,5 @@ window.onload= function(){
 
     const modal = new bootstrap.Modal(myModalLo) // initialized with defaults
     //modal.show()
+
 }

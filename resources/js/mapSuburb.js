@@ -59,8 +59,8 @@ function Popup(suburb,data){
 
     data.forEach(async element => {
         div+=`
-            <div class="inline"> 
-                <span class="badge rounded-pill bg-warning text-dark">${element.name}</span>
+            <div class="inline" title="${element.description}"> 
+                <span class="badge rounded-pill bg-warning text-dark "  >${element.name}</span>
             </div>
             `
     });

@@ -295,7 +295,7 @@ export default class StationsController {
             .orWhereILike('models.name', '%Purple%')
             .orWhereILike('models.name', '%PURPLE%')
 
-            //let date=moment().format('2022-10-25')
+            //let date=moment().format('2023-5-15')
             let date=moment().format('YYYY-MM-DD')
 
             let p=0;
@@ -385,11 +385,11 @@ export default class StationsController {
             .select('stations.name ')
             .select('stations.apikey')
             .select('stations.longitude')
-            .select('stations.latitude')
-            .select('stations.active')
+            .select('stations.latitude')    
             .select('models.name as nomM')
             .select('models.id as idM')
             .select('stations.suburb')
+            .whereRaw('stations.active=? ',[true])
 
         
         let sponsors=await Database
@@ -407,7 +407,7 @@ export default class StationsController {
         return [stations,sponsors];
     }
 
-    public async ApiStation(){
+    public async AppMovilStation(){
         
 		const stations=await Database
 		.from('stations')
@@ -430,7 +430,7 @@ export default class StationsController {
         return stations;
     }
 
-    public async delete({request}:HttpContextContract){
+    /*public async delete({request}:HttpContextContract){
         const id=request.input('id');
         try {
             const station=await Station.findOrFail(id);
@@ -450,7 +450,7 @@ export default class StationsController {
             console.log(error);
             return error
         }
-    }
+    }*/
     
     public async active({request}:HttpContextContract){
         const id=request.input('id');
